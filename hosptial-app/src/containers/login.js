@@ -7,6 +7,7 @@ import Navigation from "../compoents/navigation";
 import "../compoents/css/login.css";
 const userSchema = Joi.object({
 
+  //Set Item
   //Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
   email: Joi.string()
     .email({ tlds: { allow: false } })
