@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,800&display=swap');
+ :root
+ {
+     --color-primary: #7380ec;
+     --color-danger: #ff7782;
+     --color-success: #41f1b6;
+     --color-warning: #ffbb55;
+     --color-white: #fff;
+     --color-info-dark: #7d8da1;
+     --color-info-light: #dce1eb;
+     --color-dark: #363949;
+     --color-light: rgba(132, 139, 200, 0.18);
+     --color-primary-varient: #111e88;
+     --color--backgroung: #f6f6f9;
+     --color--dark--varient: #677483;
+ 
+     --cord-border-radius: 10px;
+     --border-radius-1: 0.4rem;
+     --border-radius-2: 0.8rem; 
+     --border-radius-3: 1.2rem;
+ 
+     --card-padding: 1.8rem;
+     --padding-1: 1.2rem;
+ 
+     box-shadow: 0 2rem 3rem var(--color-light);
+
+     --offcanvas-witdh:230px;
+     --top-navbarheight:49px;
+ }
+ *
+ 
+  /* html {
+    font-size: 14px; 
+ } */
+ 
+ .login body{
+   background-color: #7380ec;
+ }
+
+ .login {
+    margin-top: 150px;
+    font-family: poppins,sans-serif;
+   
+ }
+ .login .card{
+    background-color: white;
+     border-radius: 4%;
+     box-shadow: 0 2rem 3rem var(--color-light);
+     
+ }
+ .login .card-title{
+    font-weight: 600;
+    text-align: center;
+ }
+ .login .from-group label{
+    font-weight: 400;
+ }
+ .login .group{
+   text-align: center;
+ }
+ .login .from-group button{
+    width:80% ;
+    padding-right: 20px;
+     font-weight:300;
+
+     
+     /* opacity: 0.35; */
+
+
+       /* display: block;
+  margin: 1rem 0;
+  padding: 0.35rem 0.5rem;
+  background-color: #217dc9;
+  color: #1a202c;
+  border: none;
+  border-radius: 3px;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer; */
+
+     
+ }
+ .login .link{
+  
+    text-align:center ; 
+    font-weight: 400;
+ }
+ .login .linked{
+   text-decoration: none;
+ }
+ .login Form{
+   color: red;
+
+ }
+ .login label{
+   color: black;
+ }
+ .login img{
+ 
+  width: 30%;
+   height: 30%;
+  border-radius:50%;
+ }
+ .login .image{
+  text-align: center;
+ }
+

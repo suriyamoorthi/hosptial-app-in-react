@@ -1,0 +1,47 @@
+.myprofile .card {
+    margin-top: 100px;
+    margin-bottom: 100PX;
+    border-radius: 10px;
+    border-color: rgb(240, 227, 227);
+    box-shadow: 0 1rem 2rem var( --color--dark--varient);
+    overflow: hidden;
+
+
+}
+.myprofile .card-title{
+    font-size: 24px;
+    font-weight: 500px;
+    color: blue;
+    text-align: center;
+}
+.myprofile label {
+    font-size: 16px;
+    font-weight: 500px;
+    color: black;
+}
+
+.myprofile .card h4 {
+    font-size: 25px;
+    font-weight: 600;
+    text-align: center;
+    color: blue;
+}
+
+/* .myprofile .button {
+    text-align: center;
+    width: 90%;
+
+} */
+
+.myprofile Form {
+    color: red;
+}
+.myprofile hr{
+    color:black;
+}
+.myprofile button{
+    width: 40%;
+   margin-left: 30%;
+   
+  }
+ 

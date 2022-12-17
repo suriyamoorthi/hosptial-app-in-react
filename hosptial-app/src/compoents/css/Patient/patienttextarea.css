@@ -1,0 +1,24 @@
+.patienttextarea .card {
+
+    /* background-color: rgb(192, 192, 210); */
+    margin-top: 100px;
+    margin-bottom: 100PX;
+    border-radius: 10px;
+    border-color: rgb(240, 227, 227);
+    box-shadow: 0 1rem 2rem var(--color--dark--varient);
+    overflow: hidden;
+
+
+
+}
+
+.patienttextarea textarea{
+    height: 200px;
+  
+}
+
+.patienttextarea label{
+    font-size: 18px;
+    font-weight: 500;
+    color: blue;
+}

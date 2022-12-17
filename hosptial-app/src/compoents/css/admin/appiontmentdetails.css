@@ -1,0 +1,27 @@
+.appiontmentdetails .card
+{
+   
+  
+    overflow: auto;
+    box-shadow: 0 2rem 3rem var(--color--dark--varient);
+    border-radius: 10px;  
+} 
+.appiontmentdetails h5
+{
+   
+font-size: 25px;
+font-weight: 600;
+margin-left: 1%;
+color: blue;
+}
+ 
+
+
+.appiontmentdetails .table th 
+{
+   padding: 15px;
+   
+}
+.appiontmentdetails .table td{
+   padding: 15px;
+}

@@ -1,0 +1,19 @@
+.section6 .last{
+    margin-top: 66px;
+}
+.ap-text h5{
+    font-weight: 300;
+}
+.ap-text h3{
+    font-weight: 600;
+}
+.section6 footer{
+    background-color:#323232;
+     color:aliceblue;
+}
+.section6 .icon i{
+    font-size: 25px;
+}
+.section6 .copyright{
+    background-color: rgba(0, 0, 0, 0.05);
+}

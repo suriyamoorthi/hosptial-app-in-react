@@ -1,0 +1,27 @@
+.patientpaymentt3 .card
+{
+   
+  
+    overflow: auto;
+    box-shadow: 0 2rem 3rem var(--color--dark--varient);
+    border-radius: 10px;  
+} 
+.patientpaymentt3 h5
+{
+   
+font-size: 25px;
+font-weight: 600;
+margin-left: 1%;
+color: blue;
+}
+ 
+
+
+.patientpaymentt3 .table th 
+{
+   padding: 15px;
+   
+}
+.patientpaymentt3 .table td{
+   padding: 15px;
+}

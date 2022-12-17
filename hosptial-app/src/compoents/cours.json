@@ -1,0 +1,33 @@
+
+
+
+ [
+        {
+    
+            "title": "Total Patient For day",
+            "number": "3,345",
+            "icon": "fa-solid fa-wheelchair"
+    
+    
+        },
+    
+        {
+            "title": "Total Inpatient For day",
+            "number": "3,345",
+            "icon": "fa-solid fa-person-arrow-down-to-line"
+    
+        },
+        {
+            "title": "Total Outpatient For day",
+            "number": "3,345",
+            "icon": "fa-solid fa-person-arrow-up-from-line"
+        },
+        {
+            "title": "Total Appionment For day",
+            "number": "3,345",
+            "icon": "fa-solid fa-address-card"
+        }
+    
+    
+    
+    ]

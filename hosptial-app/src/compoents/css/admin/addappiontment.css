@@ -1,0 +1,48 @@
+/* .addappiontment{
+    background-color: rgb(192, 192, 210);
+} */
+
+
+.addappiontment .card {
+    /* background-color: rgb(192, 192, 210); */
+    margin-top: 100px;
+    margin-bottom: 100PX;
+    border-radius: 10px;
+    border-color: rgb(240, 227, 227);
+    box-shadow: 0 1rem 2rem var(--color--dark--varient);
+    overflow: hidden;
+
+
+}
+
+.addappiontment label {
+    font-size: 16px;
+    font-weight: 500;
+    color: black;
+}
+
+.addappiontment .card h4 {
+    font-size: 25px;
+    font-weight: 600;
+    text-align: center;
+    color: blue;
+}
+
+.addappiontment .button {
+    text-align: center;
+    width: 90%;
+
+}
+
+ .addappiontment Form {
+    color: red;
+}
+.addappiontment hr{
+    color:black;
+} 
+.addappiontment button {
+    width: 40%;
+    margin-left: 30%;
+
+
+}

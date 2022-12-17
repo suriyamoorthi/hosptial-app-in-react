@@ -1,0 +1,42 @@
+.admintable .card
+{
+   
+    overflow: auto;
+    box-shadow: 0 2rem 3rem var(--color-light);
+      
+} 
+.admintable h5
+{
+font-size: 25px;
+margin-left: 1%;
+color: blue;
+}
+ .admintable .d-flex
+{
+   
+   margin-top: 10px;
+   margin-bottom: 10px;
+   margin-left: 50%;
+}
+
+.admintable .bar .card
+{
+   margin-top:10px ;
+}
+.admintable .card
+{
+  box-shadow: 0 2rem 3rem var(--color-light);
+  border-radius: var(--cord-border-radius);
+}
+.admintable .table th 
+{
+   padding: 15px;
+   
+}
+.admintable .table td{
+   padding: 15px;
+}
+.admintable a{
+   padding: 15px;
+   font-size: 14px;
+}

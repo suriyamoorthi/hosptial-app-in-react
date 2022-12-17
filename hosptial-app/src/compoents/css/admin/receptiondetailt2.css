@@ -1,0 +1,47 @@
+.receptiondetailt2 .card
+{
+   /* margin-top: 100px; */
+    overflow: auto;
+    box-shadow: 0 2rem 3rem var(--color--dark--varient);
+    border-radius: 10px;  
+} 
+.receptiondetailt2 h5
+{
+    /* text-align: center; */
+font-size: 25px;
+font-weight: 600;
+margin-left: 1%;
+color: blue;
+}
+ .receptiondetailt2 .d-flex
+{
+   
+   margin-top: 10px;
+   margin-bottom: 10px;
+   margin-left: 50%;
+}
+
+.receptiondetailt2 .bar .card
+{
+   margin-top:10px ;
+}
+/* .receptiondetailt2 .card
+{
+  box-shadow: 0 2rem 3rem var(--color-light);
+  border-radius: var(--cord-border-radius);
+} */
+.receptiondetailt2 .table th 
+{
+   padding: 15px;
+   
+}
+.receptiondetailt2 .table td{
+   padding: 15px;
+}
+.receptiondetailt2 .pagination a{
+    padding: 15px;
+}
+.receptiondetailt2 .table a{
+   text-decoration: none;
+   
+  }

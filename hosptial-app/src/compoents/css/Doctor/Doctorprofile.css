@@ -1,0 +1,48 @@
+/* .addappiontment{
+    background-color: rgb(192, 192, 210);
+} */
+
+
+.doctorprofile .card {
+    /* background-color: rgb(192, 192, 210); */
+    margin-top: 100px;
+    margin-bottom: 100PX;
+    border-radius: 10px;
+    border-color: rgb(240, 227, 227);
+    box-shadow: 0 1rem 2rem var(--color--dark--varient);
+    overflow: hidden;
+
+
+}
+
+.doctorprofile label {
+    font-size: 16px;
+    font-weight: 500;
+    color: black;
+}
+
+.doctorprofile .card h4 {
+    font-size: 25px;
+    font-weight: 600;
+    text-align: center;
+    color: blue;
+}
+
+.doctorprofile .button {
+    text-align: center;
+    width: 90%;
+
+}
+
+ .doctorprofile Form {
+    color: red;
+}
+.doctorprofile hr{
+    color:black;
+} 
+.doctorprofile button {
+    width: 40%;
+    margin-left: 30%;
+
+
+}

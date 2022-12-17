@@ -1,0 +1,58 @@
+.presceiptiontable .card
+{
+   /* margin-top: 100px; */
+    overflow: auto;
+    box-shadow: 0 2rem 3rem var(--color--dark--varient);
+    border-radius: 10px;  
+} 
+.presceiptiontable h5
+{
+    /* text-align: center; */
+font-size: 25px;
+font-weight: 600;
+margin-left: 1%;
+color: blue;
+}
+ .presceiptiontable .d-flex
+{
+   
+   margin-top: 10px;
+   margin-bottom: 10px;
+   margin-left: 50%;
+}
+
+.presceiptiontable .bar .card
+{
+   margin-top:10px ;
+}
+/* .presceiptiontable .card
+{
+  box-shadow: 0 2rem 3rem var(--color-light);
+  border-radius: var(--cord-border-radius);
+} */
+.presceiptiontable .table th 
+{
+   padding: 15px;
+   
+}
+.presceiptiontable .table td{
+   padding: 15px;
+}
+.presceiptiontable .pagination a{
+    padding: 15px;
+}
+.presceiptiontable .table a{
+   text-decoration: none;
+   
+  }
+  .presceiptiontable .button {
+    text-align: center;
+    width: 90%;
+
+}
+
+ 
+.presceiptiontable button {
+    width: 40%;
+    margin-left: 30%;
+}

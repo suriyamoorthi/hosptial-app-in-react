@@ -1,0 +1,47 @@
+.doctordable .card
+{
+   /* margin-top: 100px; */
+    overflow: auto;
+    box-shadow: 0 2rem 3rem var(--color--dark--varient);
+    border-radius: 10px;  
+} 
+.doctordable h5
+{
+    /* text-align: center; */
+font-size: 25px;
+font-weight: 600;
+margin-left: 1%;
+color: blue;
+}
+ .doctordable .d-flex
+{
+   
+   margin-top: 10px;
+   margin-bottom: 10px;
+   margin-left: 50%;
+}
+
+.doctordable .bar .card
+{
+   margin-top:10px ;
+}
+/* .doctordable .card
+{
+  box-shadow: 0 2rem 3rem var(--color-light);
+  border-radius: var(--cord-border-radius);
+} */
+.doctordable .table th 
+{
+   padding: 15px;
+   
+}
+.doctordable .table td{
+   padding: 15px;
+}
+.doctordable .pagination a{
+    padding: 15px;
+}
+.doctordable .table a{
+   text-decoration: none;
+   
+  }

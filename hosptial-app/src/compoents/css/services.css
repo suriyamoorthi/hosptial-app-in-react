@@ -1,0 +1,36 @@
+.section5 {
+    margin-top:66px ;
+}
+ .service-icon i{
+    position: absolute;
+    font-size:45px;
+    padding-top:2px;
+    color:#207fdd;
+    /* height:50px;
+    width:50px; */
+}
+.service-text{
+    padding-left:70px;
+    padding-bottom: 30px;
+}
+.service-text h4{
+    font-size: 25px;
+    font-weight: 600;
+}
+.service-text p{
+    font-weight: 500;
+}
+.title-block{
+    text-align: center;
+} 
+.title-block h3{
+    margin-top: 66px;
+    font-size: 40px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+.title-block h4{
+    font-size: 23px;
+    font-weight: 600;
+   margin-bottom: 30px;
+}

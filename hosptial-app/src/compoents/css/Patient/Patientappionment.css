@@ -1,0 +1,34 @@
+.patientappionment .name{
+    font-size: 100px;
+    margin-left: 1%;
+    color: blue;
+
+}
+
+.patientappionment .card{
+    margin-top: 100px;
+    margin-bottom: 100PX;
+    border-radius: 10px;
+    border-color: rgb(240, 227, 227);
+    box-shadow: 0 1rem 2rem var(--color--dark--varient);
+    overflow: hidden;
+
+   
+}
+.patientappionment label{
+    font-weight: 500;
+    color: black;
+}
+.patientappionment .card h4{
+    font-weight:700;
+     text-align: center;
+     color: blue;
+}
+ .patientappionment .buttion{
+    text-align: center;
+    width:90% ;
+  
+}
+.patientappionment Form{
+    color: red;
+}

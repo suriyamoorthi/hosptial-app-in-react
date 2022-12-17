@@ -1,0 +1,47 @@
+.alldoctor .card
+{
+   /* margin-top: 100px; */
+    overflow: auto;
+    box-shadow: 0 2rem 3rem var(--color--dark--varient);
+    border-radius: 10px;  
+} 
+.alldoctor h5
+{
+    /* text-align: center; */
+font-size: 25px;
+font-weight: 600;
+margin-left: 1%;
+color: blue;
+}
+ .alldoctor .d-flex
+{
+   
+   margin-top: 10px;
+   margin-bottom: 10px;
+   margin-left: 50%;
+}
+
+.alldoctor .bar .card
+{
+   margin-top:10px ;
+}
+/* .alldoctor .card
+{
+  box-shadow: 0 2rem 3rem var(--color-light);
+  border-radius: var(--cord-border-radius);
+} */
+.alldoctor .table th 
+{
+   padding: 15px;
+   
+}
+.alldoctor .table td{
+   padding: 15px;
+}
+.alldoctor .pagination a{
+    padding: 15px;
+}
+.alldoctor .table a{
+   text-decoration: none;
+   
+  }

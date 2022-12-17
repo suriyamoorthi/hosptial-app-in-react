@@ -1,0 +1,25 @@
+.section4 .card{
+    margin-top: 66px;
+    border-radius: 10px;
+    /* border-radius:4% ; */
+     /* background-color: white; */
+      border-color: rgb(240, 227, 227);
+      width: 70%;
+     margin-left: 10%;
+}
+.section4 label{
+    font-weight: 500;
+    color: black;
+}
+.section4 .card h4{
+    font-weight:700;
+     text-align: center;
+}
+ .section4 .buttion{
+    text-align: center;
+    width:90% ;
+  
+}
+.section4 Form{
+    color: red;
+}

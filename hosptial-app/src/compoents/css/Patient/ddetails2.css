@@ -1,0 +1,47 @@
+.ddetails2 .card
+{
+   /* margin-top: 100px; */
+    overflow: auto;
+    box-shadow: 0 2rem 3rem var(--color--dark--varient);
+    border-radius: 10px;  
+} 
+.ddetails2 h5
+{
+    /* text-align: center; */
+font-size: 25px;
+font-weight: 600;
+margin-left: 1%;
+color: blue;
+}
+ .ddetails2 .d-flex
+{
+   
+   margin-top: 10px;
+   margin-bottom: 10px;
+   margin-left: 50%;
+}
+
+.ddetails2 .bar .card
+{
+   margin-top:10px ;
+}
+/* .ddetails2 .card
+{
+  box-shadow: 0 2rem 3rem var(--color-light);
+  border-radius: var(--cord-border-radius);
+} */
+.ddetails2 .table th 
+{
+   padding: 15px;
+   
+}
+.ddetails2 .table td{
+   padding: 15px;
+}
+.ddetails2 .pagination a{
+    padding: 15px;
+}
+.ddetails2 .table a{
+   text-decoration: none;
+   
+  }

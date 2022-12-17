@@ -1,0 +1,47 @@
+.allpatienttable .card
+{
+   /* margin-top: 100px; */
+    overflow: auto;
+    box-shadow: 0 2rem 3rem var(--color--dark--varient);
+    border-radius: 10px;  
+} 
+.allpatienttable h5
+{
+    /* text-align: center; */
+font-size: 25px;
+font-weight: 600;
+margin-left: 1%;
+color: blue;
+}
+ .allpatienttable .d-flex
+{
+   
+   margin-top: 10px;
+   margin-bottom: 10px;
+   margin-left: 50%;
+}
+
+.allpatienttable .bar .card
+{
+   margin-top:10px ;
+}
+/* .allpatienttable .card
+{
+  box-shadow: 0 2rem 3rem var(--color-light);
+  border-radius: var(--cord-border-radius);
+} */
+.allpatienttable .table th 
+{
+   padding: 15px;
+   
+}
+.allpatienttable .table td{
+   padding: 15px;
+}
+.allpatienttable .pagination a{
+    padding: 15px;
+}
+.allpatienttable .table a{
+   text-decoration: none;
+   
+  }

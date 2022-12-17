@@ -1,0 +1,27 @@
+.patientvisitt2 .card
+{
+   
+  
+    overflow: auto;
+    box-shadow: 0 2rem 3rem var(--color--dark--varient);
+    border-radius: 10px;  
+} 
+.patientvisitt2 h5
+{
+   
+font-size: 25px;
+font-weight: 600;
+margin-left: 1%;
+color: blue;
+}
+ 
+
+
+.patientvisitt2 .table th 
+{
+   padding: 15px;
+   
+}
+.patientvisitt2 .table td{
+   padding: 15px;
+}

@@ -1,0 +1,43 @@
+.assigndoctor .card {
+    /* background-color: rgb(192, 192, 210); */
+    margin-top: 100px;
+    margin-bottom: 100PX;
+    border-radius: 10px;
+    border-color: rgb(240, 227, 227);
+    box-shadow: 0 1rem 2rem var(--color--dark--varient);
+    overflow: hidden;
+
+
+}
+.assigndoctor .buttion{
+    text-align: center;
+    width:90% ;
+  
+}
+
+.assigndoctor label {
+    font-size: 16px;
+    font-weight:500;
+    /* color: black; */
+}
+
+.assigndoctor .card h5 {
+    font-size: 25px;
+    font-weight: 600;
+    text-align: center;
+    color: blue;
+}
+
+.assigndoctor .button {
+    text-align: center;
+    width: 90%;
+
+}
+
+ 
+.assigndoctor button {
+    width: 40%;
+    margin-left: 30%;
+
+
+}
