@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Formik, Field, ErrorMessage, Form } from "formik";
 
-import {prifileSchema } from "../Myprfilevalidation";
+import { prifileSchema } from "../Myprfilevalidation";
 import { INTIAL_PROFILEVALUES } from "../Myprfilevalidation";
 import { validate } from "../Myprfilevalidation";
+import { getProfiledetails, patientProfileUpdate } from "../../Services/Profiles.service";
 
 
 import Sidenavpatient from "./Sidenavpatient";
@@ -12,12 +13,39 @@ import "../css/Patient/Patientmyprofile.css"
 
 
 function Patientmyprofile() {
+    const GetSeesionData = async () => {
 
+        var registerData = await getProfiledetails();
+        console.log("DATAVALUES", registerData);
 
-    const handleSubmit = (values) => {
+        //   if(data[0].Firstname)
+        //   {
+        //     INTIAL_FORM.Firstname =  data[0].Firstname;
+        //   }
+        INTIAL_PROFILEVALUES.Firstname = registerData[0].Firstname;
+        INTIAL_PROFILEVALUES.Lastname = registerData[0].Lastname;
+        INTIAL_PROFILEVALUES.Email = registerData[0].Email;
+        INTIAL_PROFILEVALUES.Gender = registerData[0].Gender;
+        INTIAL_PROFILEVALUES.Phonenumber = registerData[0].Phonenumber;
+        INTIAL_PROFILEVALUES.Date = registerData[0].Date;
+        console.log("NNNNNN",INTIAL_PROFILEVALUES.Date );
+        INTIAL_PROFILEVALUES.Address = registerData[0].Address;
+        // INTIAL_PROFILEVALUES.File = registerData[0].File;
+    };
+
+    const handleSubmit = async (values) => {
         console.log("sumbitted", values)
         const { error } = prifileSchema.validate(values);
         if (!error) {
+            try {
+                const { data } = await patientProfileUpdate(values);
+                console.log("PROFILE DATA", data);
+                alert(data.Message);
+
+            }
+            catch {
+
+            }
             console.log("PATIENT APPIONMENT")
             console.log("sumbitted", values)
 
@@ -29,10 +57,15 @@ function Patientmyprofile() {
 
 
     };
+    useEffect(() => {
+        console.log("useEffect")
+        GetSeesionData();
+
+    }, []);
     return (
 
         <>
-            <Sidenavpatient/>
+            <Sidenavpatient />
             <main >
                 <div className="patientmyprofile">
                     <div className="container">
@@ -44,7 +77,7 @@ function Patientmyprofile() {
                                         <div className="card-title"> Profile</div>
                                         <hr />
                                         <Formik
-                                            initialValues={ INTIAL_PROFILEVALUES}
+                                            initialValues={INTIAL_PROFILEVALUES}
                                             validate={validate}
                                             onSubmit={handleSubmit}
                                         >
@@ -55,104 +88,75 @@ function Patientmyprofile() {
                                                         <div className="row">
                                                             <div className="col-sm-6">
                                                                 <div className="form-group mb-3">
-                                                                    <label htmlFor="firstname" className="form-label">First Name
+                                                                    <label htmlFor="Firstname" className="form-label">First Name
                                                                         <span className="text-primary">*</span>
                                                                     </label>
                                                                     <Field
                                                                         className="form-control"
-                                                                        name="firstname"
+                                                                        name="Firstname"
                                                                         placeholder="Enter Your Firstname"
                                                                     />
-                                                                    <ErrorMessage className="text-danger" name="firstname" />
+                                                                    <ErrorMessage className="text-danger" name="Firstname" />
                                                                 </div>
                                                             </div>
 
                                                             <div className="col-sm-6">
                                                                 <div className="form-group mb-3">
-                                                                    <label htmlFor="lastname" className="form-label">Last Name
+                                                                    <label htmlFor="Lastname" className="form-label">Last Name
                                                                         <span className="text-primary">*</span>
                                                                     </label>
                                                                     <Field
                                                                         className="form-control"
-                                                                        name="lastname"
+                                                                        name="Lastname"
                                                                         placeholder="Enter Your Last name"
                                                                     />
-                                                                    <ErrorMessage className="text-danger" name="lastname" />
+                                                                    <ErrorMessage className="text-danger" name="Lastname" />
                                                                 </div>
                                                             </div>
                                                         </div>
 
-                                                        <div className="row">
-                                                            <div className="col-sm-6">
-                                                                <div classname="form-group mb-3">
-                                                                    <label htmlFor="age" className="form-label" >Age
-                                                                        <span className="text-primary">*</span></label>
-                                                                    <Field
-                                                                        className="form-control"
-                                                                        name="age"
-                                                                        type="number"
-                                                                        placeholder="Enter Your Age"
-                                                                    />
-                                                                    <ErrorMessage className="text-danger" name="age" />
 
-                                                                </div>
-                                                            </div>
-
-                                                            <div className="col-sm-6">
-                                                                <div className="form-group mb-3">
-                                                                    <label htmlFor="phonenumber" className="form-label">Phone Number
-                                                                        <span className="text-primary">*</span> </label>
-                                                                    <Field
-                                                                        className="form-control"
-                                                                        name="phonenumber"
-                                                                        type="tel"
-                                                                        placeholder="Enter Your Phonenumber"
-                                                                    />
-                                                                    <ErrorMessage className="text-danger" name="phonenumber" />
-                                                                </div>
-                                                            </div>
-                                                        </div>
 
                                                         <div className="row">
                                                             <div className="col-sm-6">
                                                                 <div className="form-group mb-3">
-                                                                    <label htmlFor="email" className="form-label">Email
+                                                                    <label htmlFor="Email" className="form-label">Email
                                                                         <span className="text-primary">*</span>
                                                                     </label>
                                                                     <Field
                                                                         className="form-control"
-                                                                        name="email"
+                                                                        name="Email"
                                                                         type="email"
                                                                         placeholder="Enter Your Email"
                                                                     />
-                                                                    <ErrorMessage className="text-danger" name="email" />
+                                                                    <ErrorMessage className="text-danger" name="Email" />
                                                                 </div>
                                                             </div>
 
-                                                            <div className="col-sm-6">
+                                                            {/* <div className="col-sm-6">
                                                                 <div className="from-group mb-3">
-                                                                    <label htmlFor="password" className="form-label">Password
+                                                                    <label htmlFor="Password" className="form-label">Password
                                                                         <span className="text-primary">*</span>
                                                                     </label>
                                                                     <Field
                                                                         className="form-control"
-                                                                        name="password"
+                                                                        name="Password"
                                                                         type="password"
                                                                         placeholder="Enter Your Password"
                                                                     />
-                                                                    <ErrorMessage className="text-danger" name="password" />
+                                                                    <ErrorMessage className="text-danger" name="Password" />
                                                                 </div>
-                                                            </div>
+                                                            </div> */}
                                                         </div>
                                                         <div className="row ">
 
-                                                            <label htmlFor="gender" className="form-label">Gender
+                                                            <label htmlFor="Gender" className="form-label">Gender
                                                                 <span className="text-primary">*</span></label>
 
                                                             <div className="col-sm-6 ">
                                                                 <div className="form-group mb-3">
 
-                                                                    <Field className="form-check-input" type="radio" name="gender" value="male" />
+                                                                    <Field className="form-check-input" type="radio" name="Gender" value="male" />
                                                                     <label className="form-check-label ms-2" htmlFor="male">
                                                                         Male
                                                                     </label>
@@ -161,58 +165,72 @@ function Patientmyprofile() {
                                                             </div>
                                                             <div className="col-sm-6 ">
                                                                 <div className="form-group mb-3">
-                                                                    <Field className="form-check-input" type="radio" name="gender" value="female" />
+                                                                    <Field className="form-check-input" type="radio" name="Gender" value="female" />
                                                                     <label className="form-check-label ms-2" htmlFor="female">
                                                                         Female
                                                                     </label>
                                                                 </div>
                                                             </div>
                                                         </div>
-
                                                         <div className="row">
                                                             <div className="col-sm-6">
                                                                 <div className="form-group mb-3">
-                                                                    <label htmlFor="date" className="form-label"> Date
+                                                                    <label htmlFor="Phonenumber" className="form-label">Phone Number
+                                                                        <span className="text-primary">*</span> </label>
+                                                                    <Field
+                                                                        className="form-control"
+                                                                        name="Phonenumber"
+                                                                        type="tel"
+                                                                        placeholder="Enter Your Phonenumber"
+                                                                    />
+                                                                    <ErrorMessage className="text-danger" name="Phonenumber" />
+                                                                </div>
+                                                            </div>
+                                                            <div className="col-sm-6">
+                                                                <div className="form-group mb-3">
+                                                                    <label htmlFor="Date" className="form-label"> Date
                                                                         <span className="text-primary">*</span>
                                                                     </label>
                                                                     <Field
                                                                         className="form-control"
-                                                                        name="date"
+                                                                        name="Date"
                                                                         type="date"
                                                                         placeholder="Enter Your Date"
                                                                     />
-                                                                    <ErrorMessage className="text-danger" name="date" />
+                                                                    <ErrorMessage className="text-danger" name="Date" />
                                                                 </div>
                                                             </div>
+                                                        </div>
 
-                                                            <div className="col-sm-6">
+                                                        <div className="row">
 
-                                                                <div className="form-group mb-3">
 
-                                                                    <label htmlFor="formfile" className="form-label"> File</label>
-                                                                    <Field
-                                                                        className="form-control"
-                                                                        type="file"
-                                                                        name="formfile" />
-                                                                    <ErrorMessage className="text-danger" name="formfile" />
+                                                            <div className="form-group mb-3">
 
-                                                                </div>
+                                                                <label htmlFor="File" className="form-label"> File</label>
+                                                                <Field
+                                                                    className="form-control"
+                                                                    type="file"
+                                                                    name="File" />
+                                                                <ErrorMessage className="text-danger" name="File" />
+
                                                             </div>
+
                                                         </div>
 
 
 
 
                                                         <div className="address">
-                                                            <label htmlFor="address" className="form-label"> Address
+                                                            <label htmlFor="Address" className="form-label"> Address
                                                                 <span className="text-primary">*</span></label>
                                                             <div className="form-floating mb-3">
                                                                 <Field
                                                                     className="form-control"
-                                                                    name="address"
+                                                                    name="Address"
                                                                     placeholder="Enter Your address"
                                                                 />
-                                                                <ErrorMessage className="text-danger" name="address" />
+                                                                <ErrorMessage className="text-danger" name="Address" />
                                                                 <label htmlFor="floatingInput"> Enter your address</label>
                                                             </div>
                                                         </div>

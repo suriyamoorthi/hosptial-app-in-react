@@ -53,7 +53,7 @@ function Sidenavpatient() {
                                     <h3>Overview</h3>
                                 </Link> */}
 
-                                <Link to="/Patientappionment">
+                                <Link to="/Patientappionment" className="active">
                                 <i class="fa-solid fa-hospital-user" ></i>
                                     <h3>Appionment</h3>
                                 </Link>
@@ -67,18 +67,18 @@ function Sidenavpatient() {
                                     <h3>Doctor List</h3>
                                 </Link>
 
-                                <Link to="/Receptionmyprofile">
+                                <Link to="/Patientmyprofile">
                                     <i className="fa-solid fa-eye"></i>
                                     <h3>My Profile</h3>
                                 </Link>
 
 
-                                <Link to="">
+                                <Link to="/PatientResetpassword">
                                     <i className="fa-solid fa-passport"></i>
                                     <h3>Change Password</h3>
                                 </Link>
 
-                                <Link to="" >
+                                <Link to="" style={{marginTop: "200px"}}>
                                     <i className="fa-solid fa-right-from-bracket"></i>
                                     <h3>Logout</h3>
                                 </Link>

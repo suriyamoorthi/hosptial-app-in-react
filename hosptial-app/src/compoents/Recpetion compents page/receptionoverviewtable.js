@@ -1,39 +1,41 @@
 import React, { useEffect, useState } from "react";
+import { HashLink as Link } from "react-router-hash-link";
+import { getCurrentDayAppionmentPatientList12 } from "../../Services/User.service";
 
 
 import "../css/Reception/receptionoverviewtable.css"
 
 
 function Receptionoverviewtable() {
-
-    const [admintable, setAdmintable] = useState([]);
+    const [isLoading, setIsloding] = useState(false);
+    const [admintable, setAdmintable12] = useState([]);
 
     //GET USER
-    const getAdmintable = async () => {
+    const User = async () => {
         // setIsloding(true);
         try {
-            let response = await fetch(" https://www.mecallapi.com/api/users");
-
-            if (!response.ok) {
-                throw new Error("Request failed");
-            }
-            response = await response.json();
-            // setIsloding(false);
-            setAdmintable(response);
+            const { data } = await getCurrentDayAppionmentPatientList12();
+            setAdmintable12(data);
 
         }
-        catch (err) {
-            console.error(err.message);
+        catch (error) {
+            alert(error.Message);
+
         }
 
-
-    };
+    }
 
     useEffect(() => {
+        try {
+            console.log("CURRENTDAY APPIONMENT USER");
+            User();
+        }
+        catch {
+            console.log("entrryry")
+        }
+        //   currentAppionmetUser();
 
-        getAdmintable();
-
-    }, [])
+    }, []);
 
 
 
@@ -46,7 +48,7 @@ function Receptionoverviewtable() {
 
             <div className="card mb-4 pb-3">
                 <div className="card-body">
-                    <h5 className="card-title"> Current Day Appoinment Patient List</h5>
+                    <h5 className="card-title"> Current Day Appoinment Patient List123</h5>
                     <hr />
                     <form className="d-flex" role="search">
                         <input
@@ -74,22 +76,30 @@ function Receptionoverviewtable() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {admintable.map((user) => {
+                                {isLoading && (
+                                    // <div className=" justify-content-center">
+                                        <button className="btn btn-primary " type="button" disabled>
+                                            <span className="spinner-border spinner-border-sm text-center" role="status" aria-hidden="true"></span>
+                                            Loading...
+                                        </button>
+                                    // </div>
+                                )}
+                                {admintable.map((u) => {
                                     return (
-                                        <tr key={user.id}>
-                                            <td>{user.id}</td>
-                                            <td>
-                                                <img src={user.avatar}
-                                                    width="50"
-                                                    className="avatar" />
+                                        <tr >
+
+
+                                            <td>{u.Firstname}</td>
+
+                                            <td><Link to="/Assigndoctor">{u.Lastname}</Link>
+                                                {/* <img src={user.avatar}
+                                                width="50"
+                                                className="avatar" /> */}
                                             </td>
+                                            <td>{u.Phonenumber}</td>
+                                            <td>{u.Email}</td>
 
-                                            <td>{user.fname}</td>
-
-                                            <td>{user.lname}</td>
-
-                                            <td>{user.username}</td>
-                                            <td>{user.lname}</td>
+                                            <td>{u.Date}</td>
                                         </tr>
                                     )
                                 })}

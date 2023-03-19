@@ -1,5 +1,8 @@
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
+import  Admintableget from "../compoents/sampleprogram/fromvalidation";
+
+
 
 
 import index from "../containers/indexpage";
@@ -42,6 +45,9 @@ import Receptionallpatient from "../containers/Recpetion module/Receptionpatient
 import Assigndoctor from "./Recpetion compents page/Assigndoctor";
 import Appionmentreception from "./Recpetion compents page/Appionmentrecption";
 import Receptionmyprofile from "./Recpetion compents page/Receptionmyprofile";
+import Admintable from "./Recpetion compents page/adminptable";
+import RecpetionResetpassword from "../compoents/Recpetion compents page/Recptionrestpasssword.js";
+
 
 //PATIENT
 
@@ -52,16 +58,20 @@ import Patientvisitdatails from "./Patient compoent/Patientvisitdetails";
 import Patientdoctorlist from "./Patient compoent/Patientdoctorlist";
 import Patientdoctordetails from "./Patient compoent/Patientdoctordetails";
 import Patientmyprofile from "./Patient compoent/Patientmyprofile";
+import PatientResetpassword from "./Patient compoent/PatientChangepassword";
 
 
 
 function Routing() {
+
+    
     return (
         <Switch>
             <Route path="/" component={index} exact />
             <Route path="/index">
                 <Redirect to="/" />
             </Route>
+            <Route path="/Admintableget" component={Admintableget} />
 
             <Route path="/login" component={login} />
             <Route path="/forgotpassword" component={forgotpassword} />
@@ -100,6 +110,8 @@ function Routing() {
             <Route path="/Assigndoctor" component={Assigndoctor} />
             <Route path="/Appionmentreception" component={Appionmentreception} />
             <Route path="/Receptionmyprofile" component={Receptionmyprofile} />
+            <Route path="/Admintable" component={Admintable} />
+            <Route path="/RecpetionResetpassword" component={RecpetionResetpassword}/>
 
             {/* //PATIENT */}
 
@@ -110,6 +122,7 @@ function Routing() {
             <Route path="/Patientdoctorlist" component={Patientdoctorlist} />
             <Route path="/Patientdoctordetails" component={Patientdoctordetails} />
             <Route path="/Patientmyprofile" component={Patientmyprofile} />
+            <Route path="/PatientResetpassword" component={PatientResetpassword}/>
 
 
 

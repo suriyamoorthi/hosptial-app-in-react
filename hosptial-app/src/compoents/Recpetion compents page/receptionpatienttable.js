@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { HashLink as Link } from "react-router-hash-link";
+import { PatientListRecptionModuleUser } from "../../Services/User.service";
 
 
 import "../css/Reception/receptionpatienttable.css"
@@ -8,19 +9,15 @@ import "../css/Reception/receptionpatienttable.css"
 
 function Receptionpatienttable() {
     const [admintable, setAdmintable] = useState([]);
+    const [search, setSearch] = useState(" ");
 
     //GET USER
-    const getAdmintable = async () => {
+    const PatientListUser = async () => {
         // setIsloding(true);
         try {
-            let response = await fetch(" https://www.mecallapi.com/api/users");
-
-            if (!response.ok) {
-                throw new Error("Request failed");
-            }
-            response = await response.json();
+           const {data}=await PatientListRecptionModuleUser()
             // setIsloding(false);
-            setAdmintable(response);
+            setAdmintable(data);
 
         }
         catch (err) {
@@ -32,7 +29,7 @@ function Receptionpatienttable() {
 
     useEffect(() => {
 
-        getAdmintable();
+        PatientListUser();
 
     }, [])
     return (
@@ -71,23 +68,50 @@ function Receptionpatienttable() {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {admintable.map((user) => {
+                                            {/* {admintable.filter((val) => {
+                                                if (val == "search") {
+                                                    console.log("sfsfsfsf");
+                                                    return val;
+                                                }
+                                                else if (val.Firstname.toLowerCase().includes(search.toLowerCase())
+                                                ) {
+                                                    console.log("cccscdfdf");
+                                                    return val;
+                                                }
+                                                //   else{
+                                                //       search([...admintable])
+                                                //       return val
+                                                //   }
+
+
+                                            }) */}
+                                            
+                                            
+                                           {admintable.map((u) => {
                                                 return(
-                                                <tr key={user.id}>
-                                                    <td>{user.id}</td>
-                                                   
+                                                    <tr>
+                                                        {/* <tr key={u.Firstname}></tr> */}
+                                                        <td>{u.Firstname}</td>
 
-                                                    <td><Link to="/Assigndoctor">{user.fname}</Link></td>
+                                                    <td>{u.Lastname}</td>
 
-                                                    <td>{user.lname}</td>
 
-                                                    <td>{user.username}</td>
-                                                    <td>{user.lname}</td>
+                                                    <td><Link to="/Assigndoctor">{u.Phonenumber}</Link></td>
+                                                    {/* <td>
+                                                    <img src={u.Emai}
+                                                        width="50"
+                                                        className="avatar" />
+                                                </td> */}
+                                                    <td>{u.Email}</td>
+                                                    <td>{u.Date}</td>
+                                                    <td>{u.City}</td>
+
 
                                                 </tr>
 
                                              ) }
                                             )}
+                                            
                                         </tbody>
 
                                     </table>

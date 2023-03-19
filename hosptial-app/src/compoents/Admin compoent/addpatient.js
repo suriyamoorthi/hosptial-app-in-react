@@ -113,15 +113,29 @@ function Addpatient() {
                                                         <div className="row">
                                                             <div className="col-sm-6">
                                                                 <div className="form-group mb-3">
-                                                                    <label htmlFor="patientname" className="form-label">
+                                                                    <label htmlFor="Patientname" className="form-label">
                                                                         Patient Name<span className="text-primary">*</span>
                                                                     </label>
                                                                     <Field
                                                                         className="form-control"
-                                                                        name="patientname"
+                                                                        name="Patientname"
                                                                         placeholder="Enter the your Patient name"
                                                                     />
-                                                                    <ErrorMessage className="text-dnager" name="patientname" />
+                                                                    <ErrorMessage className="text-dnager" name="Patientname" />
+                                                                </div>
+                                                            </div>
+
+                                                            <div className="col-sm-6">
+                                                                <div className="form-group mb-3">
+                                                                    <label htmlFor="Patientname" className="form-label">
+                                                                        Patient Name<span className="text-primary">*</span>
+                                                                    </label>
+                                                                    <Field
+                                                                        className="form-control"
+                                                                        name="Patientname"
+                                                                        placeholder="Enter the your Patient name"
+                                                                    />
+                                                                    <ErrorMessage className="text-dnager" name="Patientname" />
                                                                 </div>
                                                             </div>
 

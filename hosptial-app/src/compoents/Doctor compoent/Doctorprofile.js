@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,usehistory } from "react";
 
 import Sidenavdoctor from "./Sidenavdoctor";
 
@@ -25,6 +25,7 @@ const FORM_VLAUES = {
 
 
 function Doctorprofile() {
+    const histroy=usehistory();
 
     const [user, setUser] = useState(FORM_VLAUES);
     const [error, setError] = useState(FORM_VLAUES);
