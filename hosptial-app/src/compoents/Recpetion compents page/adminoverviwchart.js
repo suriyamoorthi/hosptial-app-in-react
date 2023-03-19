@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { getCurrentDayAppionmentPatientList } from "../../Services/User.service";
 
 
 
@@ -18,43 +19,43 @@ const first = {
 function Admintable1() {
     const [isLoading, setIsloding] = useState(false);
     const [admintable, setAdmintable] = useState([]);
-    const [user, setUser] = useState({ first });
+    // const [user, setUser] = useState({ first });
     const [search, setSearch] = useState("");
 
-    // const handleChange = ({ target: { name, value } }) => {
-    //     setUser({ ...user, [name]: value });
+   //GET USER
+    // currentAppionmetUser =async()=>{
+    //     setIsloding(true);
+    //     try{
+    //         const {currentAppionmetdata} =await getCurrentDayAppionmentPatientList();
+    //         setAdmintable(currentAppionmetdata);
+
+    //     }
+    //     catch(error){
+    //         alert(error.Message);
+
+    //     }
+
     // };
 
-
-    // const handleSubmit = (evt) => {
-    //     evt.preventDefault();
-    //     if (user.id) {
-    //         updateUser();
-    //     }
-    //     else {
-    //         createUser();
-    //     }
-
-    // };
     //GET USER
-    const getAdmintable = async () => {
-        setIsloding(true);
-        try {
-            let response = await fetch(" https://www.mecallapi.com/api/users");
+    // const getAdmintable = async () => {
+    //     setIsloding(true);
+    //     try {
+    //         let response = await fetch(" https://www.mecallapi.com/api/users");
 
-            if (!response.ok) {
-                throw new Error("Request failed");
-            }
-            response = await response.json();
-            setIsloding(false);
-            setAdmintable(response);
-        }
-        catch (err) {
-            console.error(err.message);
-        }
+    //         if (!response.ok) {
+    //             throw new Error("Request failed");
+    //         }
+    //         response = await response.json();
+    //         setIsloding(false);
+    //         setAdmintable(response);
+    //     }
+    //     catch (err) {
+    //         console.error(err.message);
+    //     }
 
 
-    };
+    // };
 
     //CREATE USER
     // const createUser = async () => {
@@ -136,7 +137,7 @@ function Admintable1() {
 
     useEffect(() => {
         console.log("useEffect")
-        getAdmintable();
+    //   currentAppionmetUser();
     }, []);
 
 
@@ -147,7 +148,7 @@ function Admintable1() {
                     <div className="col-sm-7">
                         <div className="card h-100 mb-3">
                             <div className="card-body">
-                                <h5 className="card-title">Current Day Appoinment Patient List</h5>
+                                <h5 className="card-title">Current Day Appoinment Patient List127</h5>
                                 <hr />
                                
                                     <input type="text"
@@ -185,20 +186,20 @@ function Admintable1() {
 
                                             {admintable.map((u) => {
                                                 return (
-                                                    <tr key={u.id}>
+                                                    <tr key={u.Firstname}>
 
 
-                                                        <td>{u.id}</td>
+                                                        <td>{u.Firstname}</td>
 
-                                                        <td>
-                                                            <img src={u.avatar}
+                                                        <td>{u.Lastname}
+                                                            {/* <img src={u.avatar}
                                                                 width="50"
-                                                                className="avatar" />
+                                                                className="avatar" /> */}
                                                         </td>
-                                                        <td>{u.fname}</td>
-                                                        <td>{u.lname}</td>
+                                                        <td>{u.Phonenumber}</td>
+                                                        <td>{u.Email}</td>
 
-                                                        <td>{u.username}</td>
+                                                        <td>{u.Date}</td>
                                                         {/* <td>
                                                             <i className="fa-solid fa-pen-to-square text-primary fs-4 " onClick={() => setUser({ ...u, password: "", email: u.username })}
                                                             ></i>

@@ -2,49 +2,64 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import Joi from "joi";
 import React from "react";
 import Sidebaradmin from "./sidebaradmin";
+import { addReceptionForm } from "../../Services/AdmimmodulesForms.service";
 
 import "../css/admin/addreception.css";
 
+
 const userSchema = Joi.object({
-    receptionname: Joi.string().min(6).max(6).required().messages({
-        'string.empty': `"Reception name" should be a required`,
-        'string.min': ` "Reception name" must minmum 6 character`,
-        'string.max': ` "Reception name" must maximum 6 character`,
+    Receptionfirstname: Joi.string().min(6).max(6).required().messages({
+        'string.empty': `"Reception firstname" should be a required`,
+        'string.min': ` "Reception firstname" must minmum 6 character`,
+        'string.max': ` "Reception firstname" must maximum 6 character`,
 
     }),
-    dateofbirth: Joi.date().min("2001-01-01").required().messages({
-        'string.empty': `"Date of Birth" should be a required`,
+    Receptionlastname: Joi.string().min(6).max(6).required().messages({
+        'string.empty': `"Reception lastname" should be a required`,
+        'string.min': ` "Reception lastname" must minmum 6 character`,
+        'string.max': ` "Reception lastname" must maximum 6 character`,
 
     }),
-    age: Joi.number().messages({
-        'number.empty': `"Age" should be a required`,
+    Email: Joi.string()
+    .email({ tlds: { allow: false } })
+    .required()
+    .messages({
+        'string.empty': `"Email" should be a required`,
+        'string.email': `"Email" should be a vaildemail`,
 
     }),
-    phonenumber: Joi.string().regex(/^[0-9]{10}$/).messages({
+
+    Password: Joi.string().min(6).max(10).required()
+    .messages({
+      'string.empty': `"Password" should be a required`,
+      'string.min': ` "Password" must minmum 6 character`,
+      'string.max': ` "Password" must maximum 10 character`,
+    }),
+    Confirmpassword: Joi.any().equal(Joi.ref('Password')).messages
+    ({
+      "any.required": `"" is a required field`,
+      'any.only': 'confirm password does not match'
+    }),
+
+    Phonenumber: Joi.string().regex(/^[0-9]{10}$/).messages({
         'string.empty': `"phone number" should be a required`,
         'string.pattern.base': `Phone number must have 10 digits.`
     }).required(),
 
+    Dateofbirth: Joi.date().min("2001-01-01").required().messages({
+        'string.empty': `"Date of Birth" should be a required`,
 
+    }),
+   
 
+    Gender: Joi.string().required(),
 
-    email: Joi.string()
-        .email({ tlds: { allow: false } })
-        .required()
-        .messages({
-            'string.empty': `"Email" should be a required`,
-            'string.email': `"Email" should be a vaildemail`,
-
-        }),
-
-    gender: Joi.string().required(),
-
-    address: Joi.string().messages({
+    Address: Joi.string().messages({
         'string.empty': `"address" should be a required`,
     }),
 
-    formfile: Joi.string().label('image').messages({
-        'string.empty':`"File"should be a required`,
+    File: Joi.string().label('image').messages({
+        'string.empty': `"File"should be a required`,
     }),
 
     toggle: Joi.boolean().default(false),
@@ -52,14 +67,16 @@ const userSchema = Joi.object({
 
 
 const INTIAL_FORM = {
-    receptionname: "",
-    dateofbirth: "",
-    age: "",
-    phonenumber: "",
-    email: "",
-    gender: "male",
-    address: "",
-    formfile: "",
+    Receptionfirstname: "",
+    Receptionlastname: "",
+    Email:"",
+    Password:"",
+    Confirmpassword:"",
+    Phonenumber: "",
+    Dateofbirth: "",
+    Gender: "male",
+    Address: "",
+    File: "",
     toggle: "",
 
 };
@@ -68,7 +85,7 @@ function Addreception() {
     const validate = (values) => {
         console.log("sumbitted12", values)
         const errors = {};
-        console.log(errors);
+        console.log("ERROR",errors);
         const { error } = userSchema.validate(values);
         if (error) {
             const [err] = error.details;
@@ -77,16 +94,29 @@ function Addreception() {
         return errors;
 
     };
-    const handleSubmit = (values) => {
+    const handleSubmit = async(values) => {
         console.log("sumbitted", values)
         const { error } = userSchema.validate(values);
         if (!error) {
-            console.log("ADDRECPTION")
+            try{ 
+                const receptionData =await addReceptionForm(values);
+                console.log("RECEPTIONDATA",receptionData);
+
+              const errorMessage = receptionData.data.Message;
+              alert(errorMessage);
+
+            }
+            catch{
+
+            }
+
+
+            // console.log("ADDRECPTION")
 
         }
 
 
-        // alert(`add-${values}`)
+        
 
 
 
@@ -117,90 +147,122 @@ function Addreception() {
                                                         <div className="row">
                                                             <div className="col-sm-6">
                                                                 <div className="form-group mb-3">
-                                                                    <label htmlFor="receptionname" className="form-label">
-                                                                        Reception Name<span className="text-primary">*</span>
+                                                                    <label htmlFor="Receptionfirstname" className="form-label">
+                                                                        Reception FirstName<span className="text-primary">*</span>
                                                                     </label>
                                                                     <Field
                                                                         className="form-control"
-                                                                        name="receptionname"
-                                                                        placeholder="Enter the your Reception name"
+                                                                        name="Receptionfirstname"
+                                                                        placeholder="Enter the your Reception Firstname"
                                                                     />
-                                                                    <ErrorMessage className="sec1" name="receptionname" />
+                                                                    <ErrorMessage className="sec1" name="Receptionfirstname" />
                                                                 </div>
                                                             </div>
 
                                                             <div className="col-sm-6">
                                                                 <div className="form-group mb-3">
 
-                                                                    <label htmlFor="dateofbirth" className="form-label">Date Of Birth
+                                                                    <label htmlFor="Receptionlastname" className="form-label">Reception Lastname
                                                                         <span className="text-primary">*</span></label>
                                                                     <Field
-                                                                        type="date"
-                                                                        name="dateofbirth"
+
+                                                                        name="Receptionlastname"
                                                                         className="form-control"
+                                                                        placeholder="Enter the your Reception Lastname"
 
                                                                     />
-                                                                    <ErrorMessage className="sec1" name="dateofbirth" />
+                                                                    <ErrorMessage className="sec1" name="Receptionlastname" />
                                                                 </div>
                                                             </div>
                                                         </div>
-
                                                         <div className="row">
                                                             <div className="col-sm-6">
                                                                 <div className="form-group mb-3">
-                                                                    <label htmlFor="age" className="form-label">
-                                                                        Age<span className="text-primary">*</span>
+                                                                    <label htmlFor="Email" className="form-label">
+                                                                        Email<span className="text-primary">*</span>
                                                                     </label>
                                                                     <Field
                                                                         className="form-control"
-                                                                        name="age"
-                                                                        type="number"
-                                                                        placeholder="Enter the your age"
+                                                                        name="Email"
+                                                                        type="email"
+                                                                        placeholder="Enter the your Email"
                                                                     />
-                                                                    <ErrorMessage className="sec1" name="age" />
+                                                                    <ErrorMessage className="text-primary" name="Email" />
                                                                 </div>
                                                             </div>
+
+                                                            <div className="col-sm-6 ">
+                                                            <div className="form-group mb-3">
+                                                                <label htmlFor="Password" className="form-label">
+                                                                    Password<span className="text-primary">*</span>
+                                                                </label>
+                                                                <Field
+                                                                    className="form-control"
+                                                                    type="password"
+                                                                    name="Password"
+                                                                    placeholder="Enter the Password"
+                                                                />
+                                                                <ErrorMessage className="text-primary" name="Password" />
+                                                            </div>
+                                                        </div>
+                                                        </div>
+
+                                                        <div className="row">
+                                                        <div className="col-sm-6 ">
+                                                            <div className="form-group mb-3">
+                                                                <label htmlFor="Confirmpassword" className="form-label">
+                                                                    Confirm Password<span className="text-primary">*</span>
+                                                                </label>
+                                                                <Field
+                                                                    className="form-control"
+                                                                    type="password"
+                                                                    name="Confirmpassword"
+                                                                    placeholder="Enter the last name"
+                                                                />
+                                                                <ErrorMessage className="text-primary" name="Confirmpassword" />
+                                                            </div>
+                                                        </div>
 
 
                                                             <div className="col-sm-6">
                                                                 <div className="form-group mb-3">
-                                                                    <label htmlFor="phonenumber" className="form-label">
+                                                                    <label htmlFor="Phonenumber" className="form-label">
                                                                         Phone Number<span className="text-primary">*</span>
                                                                     </label>
                                                                     <Field
                                                                         className="form-control"
                                                                         type="tel"
-                                                                        name="phonenumber"
+                                                                        name="Phonenumber"
                                                                         placeholder="Enter the phonenumber"
                                                                     />
-                                                                    <ErrorMessage className="sec1" name="phonenumber" />
+                                                                    <ErrorMessage className="sec1" name="Phonenumber" />
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div className="row">
                                                             <div className="col-sm-6">
                                                                 <div className="form-group mb-3">
-                                                                    <label htmlFor="email" className="form-label">
-                                                                        Email<span className="text-primary">*</span>
-                                                                    </label>
+
+                                                                    <label htmlFor="Dateofbirth" className="form-label">Date Of Birth
+                                                                        <span className="text-primary">*</span></label>
                                                                     <Field
+                                                                        type="date"
+                                                                        name="Dateofbirth"
                                                                         className="form-control"
-                                                                        name="email"
-                                                                        type="email"
-                                                                        placeholder="Enter the your email"
+
                                                                     />
-                                                                    <ErrorMessage className="text-primary" name="email" />
+                                                                    <ErrorMessage className="sec1" name="Dateofbirth" />
                                                                 </div>
                                                             </div>
 
                                                             <div className="col-sm-6">
                                                                 <div className="from-group mb-3 ">
-                                                                    <label htmlFor="gender" className="form-label">Gender
+                                                                    <label htmlFor="Gender" className="form-label">Gender
                                                                         <span className="text-primary">*</span></label>
                                                                     <Field
                                                                         className="form-select"
                                                                         component="select"
-                                                                        name="gender"
+                                                                        name="Gender"
                                                                         aria-label="Default select example"
                                                                     // multiple={true}
                                                                     >
@@ -215,26 +277,26 @@ function Addreception() {
                                                         </div>
 
                                                         <div className="address">
-                                                            <label htmlFor="address" className="form-label"> Address
+                                                            <label htmlFor="Address" className="form-label"> Address
                                                                 <span className="text-primary">*</span></label>
                                                             <div className="form-floating mb-3">
                                                                 <Field
                                                                     className="form-control"
-                                                                    name="address"
-                                                                    placeholder="Enter Your address"
+                                                                    name="Address"
+                                                                    placeholder="Enter Your Address"
                                                                 />
-                                                                <ErrorMessage className="sec1" name="address" />
+                                                                <ErrorMessage className="sec1" name="Address" />
                                                                 <label htmlFor="floatingInput"> Enter your address</label>
                                                             </div>
                                                         </div>
-                                                        
+
                                                         <div className="mb-4">
-                                                            <label htmlFor="formfile" className="form-label"> File</label>
+                                                            <label htmlFor="File" className="form-label"> File</label>
                                                             <Field
                                                                 className="form-control"
                                                                 type="file"
-                                                                name="formfile" />
-                                                            <ErrorMessage className="text-danger" name="formfile" />
+                                                                name="File" />
+                                                            <ErrorMessage className="text-danger" name="File" />
                                                         </div>
                                                         <hr />
                                                         <div className="footer">

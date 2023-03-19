@@ -1,25 +1,28 @@
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import Joi from "joi";
 import React from "react";
-import Navigation from "./navigation";
+import { useHistory } from "react-router-dom";
+
+import { register } from "../Services/auth.services";
+
 
 
 import "../compoents/css/appionment.css";
 
 
 const userSchema = Joi.object({
-    fname: Joi.string().min(6).max(6).required().messages({
+    Firstname: Joi.string().min(6).max(6).required().messages({
         'string.empty': `"First name" should be a required`,
         'string.min': ` "First name" must minmum 6 character`,
         'string.max': ` "First name" must maximum 6 character`,
 
     }),
-    lname: Joi.string().min(6).max(12).required().messages({
+    Lastname: Joi.string().min(6).max(12).required().messages({
         'string.empty': `"Last name" should be a required`,
         'string.min': ` "Last name" must minmum 6 character`,
         'string.max': ` "Last name" must maximum 12 character`,
     }),
-    email: Joi.string()
+    Email: Joi.string()
         .email({ tlds: { allow: false } })
         .required()
         .messages({
@@ -27,37 +30,37 @@ const userSchema = Joi.object({
             'string.email': `"Email" should be a vaildemail`,
 
         }),
-    password: Joi.string().alphanum().min(6).max(10).required().messages({
+    Password: Joi.string().alphanum().min(6).max(10).required().messages({
         'string.empty': `"Password" should be a required`,
         'string.min': ` "Password" must minmum 6 character`,
         'string.max': ` "Password" must maximum 12 character`,
     }),
+    Confirmpassword: Joi.ref('Password'),
 
 
-    gender: Joi.string().required(),
-
-
-    phonenumber: Joi.string().regex(/^[0-9]{10}$/).messages({
+    Phonenumber: Joi.string().regex(/^[0-9]{10}$/).messages({
         'string.empty': `"phonenumber" should be a required`,
         'string.pattern.base': `Phone number must have 10 digits.`
     }).required(),
-    
 
-    date: Joi.date().min("2001-01-01").required().messages({
-        'string.empty': `"Date" should be a required`,
-
-    }),
+    Gender: Joi.string().required(),
 
 
-    address: Joi.string().messages({
+    // date: Joi.date().min("2001-01-01").required().messages({
+    //     'string.empty': `"Date" should be a required`,
+
+    // }),
+
+
+    Address: Joi.string().messages({
         'string.empty': `"address" should be a required`,
     }),
 
-    city: Joi.string().messages({
+    City: Joi.string().messages({
         'string.empty': `"Date" should be a required`,
 
     }),
-    pincode: Joi.string().length(6).required().messages({
+    Pincode: Joi.string().length(6).required().messages({
         'string.empty': `"pincode" should be a required`,
         'string.length': `pincode must have 6 digits.`,
 
@@ -72,26 +75,29 @@ const userSchema = Joi.object({
 });
 
 const INTIAL_FORM = {
-    fname: "",
-    lname: "",
-    email: "",
-    password: "",
-    gender: "male",
-    phonenumber: "",
-    date: "",
-    address: "",
-    city: "",
-    pincode: "",
+    Firstname: "",
+    Lastname: "",
+    Email: "",
+    Password: "",
+    Confirmpassword: "",
+    Phonenumber: "",
+    Gender: "male",
+    // date: "",
+    Address: "",
+    City: "",
+    Pincode: "",
     toggle: "",
 
 };
 
-function appionment() {
+function Appionment() {
+
+    const histroy = useHistory();
 
     const validate = (values) => {
         console.log("sumbitted12", values)
         const errors = {};
-        console.log("Error",errors)
+        console.log("Error", errors)
         const { error } = userSchema.validate(values);
         if (error) {
             const [err] = error.details;
@@ -100,17 +106,36 @@ function appionment() {
         return errors;
 
     };
-    const handleSubmit = (values) => {
+
+    const handleSubmit = async (values) => {
         console.log("sumbitted", values)
         const { error } = userSchema.validate(values);
         if (!error) {
-            console.log("DOCTOR")
-            console.log("sumbitted", values)
+            try {
 
+                const appionmentData = await register(values);
+                console.log("DATAVALUES", appionmentData);
+                const error1 = appionmentData.data.Statuscode;
+                if( error1==200){
+                    alert(appionmentData.data.Message);
+                    histroy.push("/login");
+                }
+                else{
+                    alert(appionmentData.data.Message);
+                 
+                }
+
+
+            }
+
+
+            catch (err) {
+                console.error("Catch", err.Message);
+                // alert(data.Message);
+
+            }
         }
 
-
-        // alert(`add-${values}`)
 
 
 
@@ -124,7 +149,7 @@ function appionment() {
                         <div className="col-sm-6">
                             <div className="card">
                                 <div className="card-body">
-                                    <h4 className="card-title"> Appointment From </h4>
+                                    <h4 className="card-title"> Appointment Regisation From </h4>
                                     <hr />
                                     <Formik
                                         initialValues={INTIAL_FORM}
@@ -138,28 +163,28 @@ function appionment() {
                                                     <div className="row ">
                                                         <div className="col-sm-6 ">
                                                             <div className="form-group mb-3">
-                                                                <label htmlFor="fname" className="form-label">
+                                                                <label htmlFor="Firstname" className="form-label">
                                                                     First Name<span className="text-primary">*</span>
                                                                 </label>
                                                                 <Field
                                                                     className="form-control"
-                                                                    name="fname"
+                                                                    name="Firstname"
                                                                     placeholder="Enter the your First name"
                                                                 />
-                                                                <ErrorMessage className="sec1" name="fname" />
+                                                                <ErrorMessage className="sec1" name="Firstname" />
                                                             </div>
                                                         </div>
                                                         <div className="col-sm-6 ">
                                                             <div className="form-group mb-3">
-                                                                <label htmlFor="lname" className="form-label">
+                                                                <label htmlFor="Lastname" className="form-label">
                                                                     Last Name<span className="text-primary">*</span>
                                                                 </label>
                                                                 <Field
                                                                     className="form-control"
-                                                                    name="lname"
+                                                                    name="Lastname"
                                                                     placeholder="Enter the your last name"
                                                                 />
-                                                                <ErrorMessage className="text-danger" name="lname" />
+                                                                <ErrorMessage className="text-danger" name="Lastname" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -169,58 +194,94 @@ function appionment() {
                                                     <div className="row ">
                                                         <div className="col-sm-6 ">
                                                             <div className="form-group mb-3">
-                                                                <label htmlFor="email" className="form-label">
+                                                                <label htmlFor="Email" className="form-label">
                                                                     Email<span className="text-primary">*</span>
                                                                 </label>
                                                                 <Field
                                                                     className="form-control"
-                                                                    name="email"
+                                                                    name="Email"
                                                                     type="email"
                                                                     placeholder="Enter the your email"
                                                                 />
-                                                                <ErrorMessage className="text-primary" name="email" />
+                                                                <ErrorMessage className="text-primary" name="Email" />
                                                             </div>
                                                         </div>
 
-                                                        {/* CONFIRM EMAIL */}
+                                                        {/* Password */}
 
                                                         <div className="col-sm-6 ">
                                                             <div className="form-group mb-3">
-                                                                <label htmlFor="password" className="form-label">
+                                                                <label htmlFor="Password" className="form-label">
                                                                     Password<span className="text-primary">*</span>
                                                                 </label>
                                                                 <Field
                                                                     className="form-control"
                                                                     type="password"
-                                                                    name="password"
-                                                                    placeholder="Enter the last name"
+                                                                    name="Password"
+                                                                    placeholder="Enter the Your Password"
                                                                 />
-                                                                <ErrorMessage className="text-primary" name="password" />
+                                                                <ErrorMessage className="text-primary" name="Password" />
                                                             </div>
                                                         </div>
                                                     </div>
 
 
+                                                    {/*Confirm Password */}
+                                                    <div className="row ">
+                                                        <div className="col-sm-6 ">
+                                                            <div className="form-group mb-3">
+                                                                <label htmlFor="Confirmpassword" className="form-label">
+                                                                    Confirm Password<span className="text-primary">*</span>
+                                                                </label>
+                                                                <Field
+                                                                    className="form-control"
+                                                                    type="password"
+                                                                    name="Confirmpassword"
+                                                                    placeholder="Enter the Your Confirmpassword"
+                                                                />
+                                                                <ErrorMessage className="text-primary" name="Confirmpassword" />
+                                                            </div>
+                                                        </div>
+                                                        {/* phonenumber */}
+
+
+                                                        <div className="col-sm-6 ">
+                                                            <div className="form-group mb-3">
+                                                                <label htmlFor="Phonenumber" className="form-label">
+                                                                    Phone Number<span className="text-primary">*</span>
+                                                                </label>
+                                                                <Field
+                                                                    className="form-control"
+                                                                    type="tel"
+                                                                    name="Phonenumber"
+                                                                    placeholder="Enter the your Phonenumber"
+                                                                />
+                                                                <ErrorMessage className="sec1" name="Phonenumber" />
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
                                                     {/* GENDER */}
 
                                                     <div className="row ">
 
-                                                        <label htmlFor="gender" className="form-label">Gender
+                                                        <label htmlFor="Gender" className="form-label">Gender
                                                             <span className="text-primary">*</span></label>
 
-                                                        <div className="col-sm-6 col-md-4">
-                                                            <div className="form-group">
+                                                        <div className="col-sm-6 ">
+                                                            <div className="form-group mb-3">
 
-                                                                <Field className="form-check-input" type="radio" name="gender" value="male" />
+                                                                <Field className="form-check-input" type="radio" name="Gender" value="male" />
                                                                 <label className="form-check-label ms-2" htmlFor="male">
                                                                     Male
                                                                 </label>
 
                                                             </div>
                                                         </div>
-                                                        <div className="col-sm-6 col-md-4">
-                                                            <div className="form-group">
-                                                                <Field className="form-check-input" type="radio" name="gender" value="female" />
+                                                        <div className="col-sm-6 ">
+                                                            <div className="form-group mb-3">
+                                                                <Field className="form-check-input" type="radio" name="Gender" value="female" />
                                                                 <label className="form-check-label ms-2" htmlFor="female">
                                                                     Female
                                                                 </label>
@@ -228,22 +289,7 @@ function appionment() {
                                                         </div>
                                                     </div>
 
-                                                    {/* phonenumber */}
-
-                                                    <div className="form-group mb-3">
-                                                        <label htmlFor="phonenumber" className="form-label">
-                                                            Phone Number<span className="text-primary">*</span>
-                                                        </label>
-                                                        <Field
-                                                            className="form-control"
-                                                            type="tel"
-                                                            name="phonenumber"
-                                                            placeholder="Enter the phonenumber"
-                                                        />
-                                                        <ErrorMessage className="sec1" name="phonenumber" />
-                                                    </div>
-
-                                                    <div className="form-group">
+                                                    {/* <div className="form-group">
 
                                                         <label htmlFor="date" class="form-label">Date
                                                             <span className="text-primary">*</span></label>
@@ -255,20 +301,20 @@ function appionment() {
 
                                                         />
                                                         <ErrorMessage className="sec1" name="date" />
-                                                    </div>
+                                                    </div> */}
 
 
                                                     {/* Address */}
                                                     <div className="address">
-                                                        <label htmlFor="address" className="form-label"> Address
+                                                        <label htmlFor="Address" className="form-label"> Address
                                                             <span className="text-primary">*</span></label>
                                                         <div className="form-floating mb-3">
                                                             <Field
                                                                 className="form-control"
-                                                                name="address"
-                                                                placeholder="Enter Your address"
+                                                                name="Address"
+                                                                placeholder="Enter Your Address"
                                                             />
-                                                            <ErrorMessage className="sec1" name="address" />
+                                                            <ErrorMessage className="sec1" name="Address" />
                                                             <label htmlFor="floatingInput"> Enter your address</label>
                                                         </div>
                                                     </div>
@@ -276,30 +322,30 @@ function appionment() {
                                                     <div className="row ">
                                                         <div className="col-sm-6 ">
                                                             <div className="form-group mb-3">
-                                                                <label htmlFor="city" className="form-label">
+                                                                <label htmlFor="City" className="form-label">
                                                                     City<span className="text-primary">*</span>
                                                                 </label>
                                                                 <Field
                                                                     className="form-control"
-                                                                    name="city"
-                                                                    placeholder="Enter the your city"
+                                                                    name="City"
+                                                                    placeholder="Enter the your City"
                                                                 />
-                                                                <ErrorMessage className="text-primary" name="city" />
+                                                                <ErrorMessage className="text-primary" name="City" />
                                                             </div>
                                                         </div>
 
                                                         <div className="col-sm-6 ">
                                                             <div className="form-group mb-3">
-                                                                <label htmlFor="pincode" className="form-label">
+                                                                <label htmlFor="Pincode" className="form-label">
                                                                     Pincode<span className="text-primary">*</span>
                                                                 </label>
                                                                 <Field
                                                                     className="form-control"
                                                                     type="pincode"
-                                                                    name="pincode"
-                                                                    placeholder="Enter the your pincode"
+                                                                    name="Pincode"
+                                                                    placeholder="Enter the your Pincode"
                                                                 />
-                                                                <ErrorMessage className="sec1" name="pincode" />
+                                                                <ErrorMessage className="sec1" name="Pincode" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -374,4 +420,4 @@ function appionment() {
 
 }
 
-export default appionment;
+export default Appionment;

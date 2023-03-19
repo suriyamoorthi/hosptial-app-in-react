@@ -2,13 +2,14 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import Joi from "joi";
 import React from "react";
 import { HashLink as Link } from "react-router-hash-link";
-import Navigation from "../compoents/navigation";
+import { userLogin } from "../Services/auth.services";
+import { useHistory } from "react-router-dom";
 
 import "../compoents/css/login.css";
 const userSchema = Joi.object({
 
   //Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
-  email: Joi.string()
+  Email: Joi.string()
     .email({ tlds: { allow: false } })
     .required()
     .messages({
@@ -16,7 +17,7 @@ const userSchema = Joi.object({
       'string.email': `"Email" should be a vaildemail`,
 
     }),
-  password: Joi.string().min(6).max(10).required()
+  Password: Joi.string().min(6).max(10).required()
     .messages({
       'string.empty': `"Password" should be a required`,
       'string.min': ` "Password" must minmum 6 character`,
@@ -27,24 +28,19 @@ const userSchema = Joi.object({
 
 const INTIAL_FORM = {
 
-  email: "",
-  password: "",
+  Email: "",
+  Password: "",
   toggle: "",
 
 };
-function login() {
+function Login() {
+  const history = useHistory();
 
-
-
-
-  const validate = (value) => {
-    // const errors = {};
-    // const valid = userSchema.validate(value);
-    // console.log(valid);
-    console.log("sumbitted12", value)
+  const validate = (values) => {
+    console.log("sumbitted12", values)
     const errors = {};
     console.log("errors", errors);
-    const { error } = userSchema.validate(value);
+    const { error } = userSchema.validate(values);
     if (error) {
       const [err] = error.details;
 
@@ -54,22 +50,56 @@ function login() {
     return errors;
 
   };
-  const handleSubmit = (value) => {
-    console.log("sumbitted", value)
-    const { error } = userSchema.validate(value);
+  const handleSubmit = async (values) => {
+    console.log("sumbitted", values)
+    const { error } = userSchema.validate(values);
     // console.log(error);
+
 
     if (!error) {
 
-      //  if(INTIAL_FORM.email === "doctor@gmail.com")
-      //  {
-      //    console.log("Doctor",INTIAL_FORM.email);
+            try {
+             
+              const {data}= await userLogin(values);
+              console.log("USERLOGIN", data);
+              alert(data.Message);
+            
+              const emailValues = JSON.stringify(data.Data);
+             
+              const getvalues = data.Data[0].Usertype;
+          
+              console.log("ADDDD", getvalues);
+              if (getvalues === 1) {
+                window.sessionStorage.setItem("PatientToken",emailValues);
+                alert(data.Message);
+                history.push("/Patientappionment");
 
-      //  }else if(INTIAL_FORM.email === "reception"){
-      //   console.log("reception")
-      //  }
-      console.log("DOCTOR")
+              }
+              else if(getvalues === 2){
+                alert(data.Message);
+                window.sessionStorage.setItem("DoctorToken",emailValues);
+                alert(data.Message);
+                history.push("/overview");
 
+              }
+              else if(getvalues === 3){
+                alert(data.Message);
+                window.sessionStorage.setItem("ReceptionToken",emailValues);
+                alert(data.Message);
+                history.push("/Receptionoverview");
+
+              }
+              else{
+                alert(data.Message);
+              }
+
+              
+
+
+            }
+            catch (err){
+       console.log(error.message);
+            }
 
     } else {
       console.log("error3124235", error)
@@ -92,7 +122,7 @@ function login() {
                 <h5 className="card-title mb-3">LOGIN</h5>
 
                 <div class="image">
-                  <img src="/image/login-icon.jpg" alt="..."  />
+                  <img src="/image/login-icon.jpg" alt="..." />
                 </div>
                 <Formik
                   initialValues={INTIAL_FORM}
@@ -104,28 +134,28 @@ function login() {
                       <Form className="mt-4">
 
                         <div className="form-group mb-3">
-                          <label htmlFor="email" className="form-label">
+                          <label htmlFor="Email" className="form-label">
                             Email<span className="text-primary">*</span>
                           </label>
                           <Field
                             className="form-control"
                             type="email"
-                            name="email"
-                            placeholder="Enter the email"
+                            name="Email"
+                            placeholder="Enter the Email"
                           />
-                          <ErrorMessage className="text-danger" name="email" />
+                          <ErrorMessage className="text-danger" name="Email" />
                         </div>
                         <div className="form-group mb-3">
-                          <label htmlFor="password" className="form-label">
+                          <label htmlFor="Password" className="form-label">
                             Password<span className="text-primary">*</span>
                           </label>
                           <Field
                             className="form-control "
                             type="password"
-                            name="password"
+                            name="Password"
                             placeholder="Enter the last name"
                           />
-                          <ErrorMessage className="text-primary" name="password" />
+                          <ErrorMessage className="text-primary" name="Password" />
                         </div>
                         <div className="footer">
                           <div className="form-group mb-3 ">
@@ -138,6 +168,7 @@ function login() {
                           </div>
                         </div>
 
+                        {/* <label className="text-danger">{result12.data.Message}</label> */}
 
                         <div className="from-group mb-3 " >
                           <div className="group">
@@ -148,7 +179,7 @@ function login() {
                         {/* onClick={ handleSubmit} */}
 
                         <div className="link" >
-                          <Link to="/forgotpassword" className="linked">Forgot Password?</Link>
+                          <Link to="/Resetpassword" className="linked">Forgot Password?</Link>
                         </div>
                       </Form>
                     );
@@ -171,4 +202,4 @@ function login() {
   );
 }
 
-export default login;
+export default Login;

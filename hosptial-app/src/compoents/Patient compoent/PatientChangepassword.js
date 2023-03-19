@@ -1,11 +1,12 @@
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import Joi from "joi";
 import React from "react";
-import { forgot } from "../Services/auth.services";
+import { forgot } from "../../Services/auth.services";
 import { useHistory } from "react-router-dom";
+import Sidenavpatient from "./Sidenavpatient";
 
 
-import "../compoents/css/resetpassword.css";
+// import "../../compoents/css/resetpassword.css";
 
 
 const userSchema = Joi.object({
@@ -38,7 +39,7 @@ const INTIAL_FORM = {
   Confirmpassword: "",
 };
 
-function Resetpassword() {
+function PatientResetpassword() {
   const history = useHistory();
 
 
@@ -78,6 +79,8 @@ function Resetpassword() {
 
   };
   return (
+    <>
+    <Sidenavpatient/>
     <div className="resetpassword">
       <div className="container">
 
@@ -155,8 +158,10 @@ function Resetpassword() {
 
       </div>
     </div >
+   
+    </>
   );
 }
 
 
-export default Resetpassword;
+export default PatientResetpassword;

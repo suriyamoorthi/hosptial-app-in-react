@@ -1,6 +1,7 @@
-import React,{useEffect , useState} from "react";
+import React, { useEffect, useState } from "react";
 import { HashLink as Link } from "react-router-hash-link";
 import Sidenavpatient from "./Sidenavpatient";
+import { DoctorListPatientModuleUser } from "../../Services/User.service";
 
 
 import "../css/Patient/Patientvisthistory.css";
@@ -9,117 +10,105 @@ import "../css/Patient/Patientvisthistory.css";
 function Patientdoctorlist() {
     const [isLoading, setIsloding] = useState(false);
     const [admintable, setAdmintable] = useState([]);
-  
 
 
     //GET USER
-    const getAdmintable = async () => {
-        setIsloding(true);
+    const DoctorListData = async () => {
         try {
-            let response = await fetch(" https://www.mecallapi.com/api/users");
-
-            if (!response.ok) {
-                throw new Error("Request failed");
-            }
-            response = await response.json();
-            setIsloding(false);
-            setAdmintable(response);
+            const { data } = await DoctorListPatientModuleUser();
+            setAdmintable(data);
+            console.log("DOCTOR MODULE LIST", data);
         }
-        catch (err) {
-            console.error(err.message);
+        catch (error) {
+            alert(error.Message);
+
         }
 
-
-    };
-
-
-
+    }
 
 
     useEffect(() => {
         console.log("useEffect")
-        getAdmintable();
+        DoctorListData();
 
 
 
     }, []);
     return (
-<>
-<Sidenavpatient/>
-        <main className="Patientvisityhistory">
-            <div className="container-fluid"style={{marginTop:"100px",marginBottom:"50px"}}>
-                <div className="row">
-                    <div className="col-sm-12">
-                        <div className="card">
-                            <div className="card-body">
-                                <h5 className="card-title">Doctor List</h5>
-                                <hr />
-                                <form className="d-flex" role="search">
-                                    <input className="form-control me-2 "
-                                        type="text"
-                                        placeholder="Search"
+        <>
+            <Sidenavpatient />
+            <main className="Patientvisityhistory">
+                <div className="container-fluid" style={{ marginTop: "100px", marginBottom: "50px" }}>
+                    <div className="row">
+                        <div className="col-sm-12">
+                            <div className="card">
+                                <div className="card-body">
+                                    <h5 className="card-title">Doctor List</h5>
+                                    <hr />
+                                    <form className="d-flex" role="search">
+                                        <input className="form-control me-2 "
+                                            type="text"
+                                            placeholder="Search"
 
-                                    />
-                                    <button className="btn btn-outline-success" type="submit">Search</button>
-                                </form>
-                                <div className="table">
-                                    <table className="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>Doctor ID</th>
-                                                <th>Doctor Name</th>
-                                                <th>Exprience</th>
-                                                <th>Lasit Visty</th>
-                                                <th>Specialization</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
+                                        />
+                                        <button className="btn btn-outline-success" type="submit">Search</button>
+                                    </form>
+                                    <div className="table">
+                                        <table className="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Doctor ID</th>
+                                                    <th>Doctor Name</th>
+                                                    <th>Exprience</th>
+                                                    <th>Lasit Visty</th>
+                                                    <th>Specialization</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
 
-                                            {isLoading && (
-                                                <div className=" justify-content-center">
-                                                    <button className="btn btn-primary " type="button" disabled>
-                                                        <span className="spinner-border spinner-border-sm text-center" role="status" aria-hidden="true"></span>
-                                                        Loading...
-                                                    </button>
-                                                </div>
-                                            )}
+                                                {isLoading && (
+                                                    <div className=" justify-content-center">
+                                                        <button className="btn btn-primary " type="button" disabled>
+                                                            <span className="spinner-border spinner-border-sm text-center" role="status" aria-hidden="true"></span>
+                                                            Loading...
+                                                        </button>
+                                                    </div>
+                                                )}
 
-                                            {admintable.map((u) => {
-                                                return (
-                                                    <tr key={u.id}>
+                                                {admintable.map((u) => {
+                                                    return (
+                                                        <tr>
+ {/* key={u.id} */}
 
-
-                                                        <td>{u.id}</td>
-
-
-                                                        <td><Link to="/Patientdoctordetails">{u.fname}</Link></td>
-                                                        <td>
-                                                            <img src={u.avatar}
-                                                                width="50"
-                                                                className="avatar" />
-                                                        </td>
-                                                        <td>{u.lname}</td>
-
-                                                        <td>{u.username}</td>
+                                                            <td>{u.Doctorfirstname}</td>
 
 
-                                                    </tr>
-                                                );
-                                            })}
+                                                            <td><Link to="/Patientdoctordetails">{u.Doctorlastname}</Link></td>
+                                                            <td>
+                                                            {u.Exprience}
+                                                            </td>
+                                                            <td>{u.Department}</td>
 
-                                        </tbody>
-                                    </table>
+                                                            <td>{u.Dateofbirth}</td>
+
+
+                                                        </tr>
+                                                    );
+                                                })}
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+
                                 </div>
-
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
 
-        </main>
-</>
+            </main>
+        </>
     )
 }
 
