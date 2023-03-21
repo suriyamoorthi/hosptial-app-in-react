@@ -127,6 +127,7 @@ function Patientmyprofile() {
                                                                         className="form-control"
                                                                         name="Email"
                                                                         type="email"
+                                                                        readOnly={true}
                                                                         placeholder="Enter Your Email"
                                                                     />
                                                                     <ErrorMessage className="text-danger" name="Email" />
