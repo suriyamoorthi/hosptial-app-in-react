@@ -10,6 +10,7 @@ function Adminnav() {
     const [isOpen2, setIsopen2] = useState(false);
     const [isOpen3, setIsopen3] = useState(false);
     const [isOpen4, setIsopen4] = useState(false);
+    const [isOpen5, setIsopen5] = useState(false);
 
 
     // const handleChange = ({ }) => {
@@ -64,6 +65,23 @@ function Adminnav() {
                                     <i className="fa-solid fa-layer-group"></i>
                                     <h3>Overview</h3>
                                 </Link>
+                                <a className="link sidebaradmin-link" onClick={() => setIsopen4(!isOpen4)}>
+                                    <i className="fa-solid fa-user-doctor"></i>
+                                    <h3>Admin</h3>
+                                    <span className=" icon ms-auto mb-2">
+                                        <span className="fa-solid fa-chevron-down"></span>
+                                    </span>
+                                </a>
+                                {isOpen4 && <div className="collapseible" >
+
+                                    <Link to="/AddAdmin">
+                                        <h3>Add Admin</h3>
+                                    </Link>
+                                    <Link to="/alldoctor">
+                                        <h3>All Admin</h3>
+                                    </Link>
+
+                                </div>}
 
 
                                 <a className="link sidebaradmin-link" onClick={() => setIsopen(!isOpen)}>
@@ -143,14 +161,14 @@ function Adminnav() {
 
                                 </div>}
 
-                                <a className="link sidebaradmin-link" onClick={() => setIsopen4(!isOpen4)}>
+                                <a className="link sidebaradmin-link" onClick={() => setIsopen5(!isOpen5)}>
                                     <i className="fa-solid fa-indian-rupee-sign"></i>
                                     <h3> Payments</h3>
                                     <div className=" icon ms-auto mb-2">
                                         <span className="fa-solid fa-chevron-down"></span>
                                     </div>
                                 </a>
-                                {isOpen4 && <div className="collapseible" >
+                                {isOpen5 && <div className="collapseible" >
 
                                     <Link to="#">
                                         <h3>Add Payments</h3>

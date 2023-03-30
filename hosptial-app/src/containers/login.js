@@ -8,6 +8,7 @@ import { useHistory } from "react-router-dom";
 import "../compoents/css/login.css";
 const userSchema = Joi.object({
 
+  //Set Item
   //Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
   Email: Joi.string()
     .email({ tlds: { allow: false } })
@@ -62,7 +63,7 @@ function Login() {
              
               const {data}= await userLogin(values);
               console.log("USERLOGIN", data);
-              alert(data.Message);
+          
             
               const emailValues = JSON.stringify(data.Data);
              
@@ -76,14 +77,14 @@ function Login() {
 
               }
               else if(getvalues === 2){
-                alert(data.Message);
+               
                 window.sessionStorage.setItem("DoctorToken",emailValues);
                 alert(data.Message);
                 history.push("/overview");
 
               }
               else if(getvalues === 3){
-                alert(data.Message);
+              
                 window.sessionStorage.setItem("ReceptionToken",emailValues);
                 alert(data.Message);
                 history.push("/Receptionoverview");

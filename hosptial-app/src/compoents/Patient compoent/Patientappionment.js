@@ -151,6 +151,7 @@ function Patientappionment() {
                                                                 <Field
                                                                     className="form-control"
                                                                     name="Email"
+                                                                    readOnly={true}
                                                                     type="email"
                                                                     placeholder="Enter Your Email"
                                                                 />

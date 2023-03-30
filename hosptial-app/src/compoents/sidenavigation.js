@@ -1,8 +1,8 @@
 import { HashLink as Link } from "react-router-hash-link";
 import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Collapse from 'react-bootstrap/Collapse';
-import Balls from './sampleprogram/collapseexmaple';
+// import Button from 'react-bootstrap/Button';
+// import Collapse from 'react-bootstrap/Collapse';
+// import Balls from './sampleprogram/collapseexmaple';
 
 import "../compoents/css/sidenav.css";
 

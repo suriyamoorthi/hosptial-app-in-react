@@ -123,8 +123,9 @@ function Receptionmyprofile() {
 
     };
 
-    const handleSubmit = async (values) => {
-        console.log("sumbitted", values)
+    const handleSubmit = async (values,{resetForm}) => {
+        console.log("sumbitted", values);
+        resetForm({ value: "" });
         const { error } = prifileSchema.validate(values);
         if (!error) {
             try {
