@@ -14,6 +14,7 @@ import sidenav from "../compoents/sidenavigation";
 //ADMIN PAGE
 
 import sidebaradmin from "./Admin compoent/sidebaradmin";
+import AddAdmin from "./Admin compoent/addAdmin";
 import addreception from "./Admin compoent/addreception";
 import allreception from "./Admin compoent/allreception";
 import receptiondetails from "./Admin compoent/recptiondetails";
@@ -79,6 +80,7 @@ function Routing() {
             <Route path="/sidenav" component={sidenav} />
 
             <Route path="/sidebaradmin" component={sidebaradmin} />
+            <Route path="/AddAdmin" component={AddAdmin}/>
             <Route path="/addreception" component={addreception} />
             <Route path="/allreception" component={allreception} />
             <Route path="/receptiondetails" component={receptiondetails} />

@@ -45,3 +45,9 @@ color: blue;
    text-decoration: none;
    
   }
+
+.receptionoverviewtable .buttonClick{
+   border:none; 
+ background-color: transparent;
+   cursor: pointer;
+  }

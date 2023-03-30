@@ -10,6 +10,8 @@ import "../css/Patient/Patientvisthistory.css";
 function Patientdoctorlist() {
     const [isLoading, setIsloding] = useState(false);
     const [admintable, setAdmintable] = useState([]);
+    const [search, setSearch] = useState('');
+    console.log("SERACH", search);
 
 
     //GET USER
@@ -46,12 +48,16 @@ function Patientdoctorlist() {
                                     <h5 className="card-title">Doctor List</h5>
                                     <hr />
                                     <form className="d-flex" role="search">
-                                        <input className="form-control me-2 "
-                                            type="text"
+                                        <input
+                                            className="form-control me-2 "
+                                            type="search"
                                             placeholder="Search"
+                                            aria-label="Search"
+                                            onChange={(e) => { setSearch(e.target.value) }}
+
 
                                         />
-                                        <button className="btn btn-outline-success" type="submit">Search</button>
+                                        {/* <button className="btn btn-outline-success" type="submit">Search</button> */}
                                     </form>
                                     <div className="table">
                                         <table className="table table-striped">
@@ -75,26 +81,35 @@ function Patientdoctorlist() {
                                                     </div>
                                                 )}
 
-                                                {admintable.map((u) => {
-                                                    return (
-                                                        <tr>
- {/* key={u.id} */}
+                                                {admintable
+                                                    .filter((u) => {
+                                                        return search.toLowerCase() === ''
+                                                            ? u
+                                                            : u.Doctorfirstname.toLowerCase().includes(search);
 
-                                                            <td>{u.Doctorfirstname}</td>
+                                                    })
+                                                    .map((u) => {
+                                                        return (
+                                                            <tr key={u._id}>
+                                                                <td>{u._id}</td>
+
+                                                                <td>{u.
+                                                                    Doctorfirstname
+                                                                }</td>
 
 
-                                                            <td><Link to="/Patientdoctordetails">{u.Doctorlastname}</Link></td>
-                                                            <td>
-                                                            {u.Exprience}
-                                                            </td>
-                                                            <td>{u.Department}</td>
+                                                                <td><Link to="/Patientdoctordetails">{u.Doctorlastname}</Link></td>
+                                                                <td>
+                                                                    {u.Exprience}
+                                                                </td>
+                                                                <td>{u.Department}</td>
 
-                                                            <td>{u.Dateofbirth}</td>
+                                                                <td>{u.Dateofbirth}</td>
 
 
-                                                        </tr>
-                                                    );
-                                                })}
+                                                            </tr>
+                                                        );
+                                                    })}
 
                                             </tbody>
                                         </table>

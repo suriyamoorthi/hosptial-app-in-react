@@ -24,4 +24,5 @@ export const getCurrentDayAppionmentPatientList12 =(currentDayAppionmentUser)=>a
 export const  PatientListRecptionModuleUser=(PatientList)=>axios.get(`${AUTH_API_URL}/PatientListRecptionModuleT`,PatientList);
 export const  DoctorListPatientModuleUser=(DoctorList)=>axios.get(`${AUTH_API_URL}/DoctorListPatientModule`,DoctorList);
 
-export const assgnDoctor=(assgnDoctorDatas)=>axios.get(`${AUTH_API_URL}/AssignDoctor`,assgnDoctorDatas)
+export const assginDoctorlist=(assgnDoctorDatas)=>axios.get(`${AUTH_API_URL}/AssignDoctor`,assgnDoctorDatas);
+export const assginDoctorForPostUser =(PostUser12)=>axios.post(`${AUTH_API_URL}/patientVatilas12`,PostUser12);

@@ -10,16 +10,16 @@ import "../css/Patient/Patientvisthistory.css";
 
 function Patientvisityhistory() {
     const [isLoading, setIsloding] = useState(false);
+    const [search, setSearch] = useState('');
     const [admintable, setAdmintable] = useState([]);
 
     const fetchUser = async () => {
         setIsloding(true);
         try {
-            // let currentDate = new Date().toJSON().slice(0, 10);
-            // console.log(currentDate); // "2022-06-17"
+           
             const { data } = await getPatientvisityhistory();
-            setIsloding(false);
             setAdmintable(data);
+            setIsloding(false);
         }
         catch (error) {
             alert(error.message);
@@ -53,13 +53,17 @@ function Patientvisityhistory() {
                                     <h5 className="card-title"> Patient Visity History</h5>
                                     <hr />
                                     <form className="d-flex" role="search">
-                                        <input className="form-control me-2 "
-                                            type="text"
-                                            placeholder="Search"
+                                    <input
+                                        className="form-control me-2 "
+                                        type="search"
+                                        placeholder="Search"
+                                        aria-label="Search"
+                                        onChange={(e) => { setSearch(e.target.value) }}
 
-                                        />
-                                        <button className="btn btn-outline-success" type="submit">Search</button>
-                                    </form>
+
+                                    />
+                                    {/* <button className="btn btn-outline-success" type="submit">Search</button> */}
+                                </form>
                                     <div className="table">
                                         <table className="table table-striped">
                                             <thead>
@@ -82,12 +86,18 @@ function Patientvisityhistory() {
                                                     </div>
                                                 )}
 
-                                                {admintable.map((u) => {
+                                                {admintable.filter((u) => {
+                                                    return search.toLowerCase() === ''
+                                                        ? u
+                                                        : u.Firstname.toLowerCase().includes(search);
+
+                                                })
+                                                .map((u) => {
                                                     return (
-                                                        <tr key={u.Firstname}>
+                                                        <tr key={u._id}>
+                                                        <td>{u._id}</td>
 
-
-                                                            <td>{u.Lastname}</td>
+                                                            <td>{u.Firstname}</td>
 
 
                                                             <td><Link to="/Patientvisitdatails">{u.Phonenumber}</Link></td>

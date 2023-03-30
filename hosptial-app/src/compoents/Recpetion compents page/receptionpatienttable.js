@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { HashLink as Link } from "react-router-hash-link";
 import { PatientListRecptionModuleUser } from "../../Services/User.service";
+import { useHistory } from "react-router-dom";
 
 
 import "../css/Reception/receptionpatienttable.css"
@@ -8,16 +9,30 @@ import "../css/Reception/receptionpatienttable.css"
 
 
 function Receptionpatienttable() {
+
     const [admintable, setAdmintable] = useState([]);
-    const [search, setSearch] = useState(" ");
+    const [search, setSearch] = useState('');
+    console.log("SERACH", search);
+    console.log("SERACHadmintable", admintable);
+
+    // USE HISTORY
+
+   
+
+
 
     //GET USER
+
+
+
+
     const PatientListUser = async () => {
         // setIsloding(true);
         try {
-           const {data}=await PatientListRecptionModuleUser()
+            const { data } = await PatientListRecptionModuleUser()
             // setIsloding(false);
             setAdmintable(data);
+
 
         }
         catch (err) {
@@ -35,7 +50,7 @@ function Receptionpatienttable() {
     return (
 
         <main className="receptionpatienttable">
-            <div className="container-fluid" style={{marginTop:"50px",marginBottom:"50px"}}>
+            <div className="container-fluid" style={{ marginTop: "50px", marginBottom: "50px" }}>
                 <div className="row">
                     <div className="col-sm-12">
                         <div className="card">
@@ -48,11 +63,11 @@ function Receptionpatienttable() {
                                         type="search"
                                         placeholder="Search"
                                         aria-label="Search"
-                                    // onChange={(e) => { setSearch(e.target.value) }}
+                                        onChange={(e) => { setSearch(e.target.value) }}
 
 
                                     />
-                                    <button className="btn btn-outline-success" type="submit">Search</button>
+                                    {/* <button className="btn btn-outline-success" type="submit">Search</button> */}
                                 </form>
 
                                 <div className="table">
@@ -68,50 +83,56 @@ function Receptionpatienttable() {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {/* {admintable.filter((val) => {
-                                                if (val == "search") {
-                                                    console.log("sfsfsfsf");
-                                                    return val;
+
+                                            {admintable
+                                                .filter((u) => {
+                                                    return search.toLowerCase() === ''
+                                                        ? u
+                                                        : u.Firstname.toLowerCase().includes(search);
+
+                                                })
+
+                                                .map((u) => {
+                                                    return (
+                                                        <tr key={u._id}>
+                                                            <td>{u._id}</td>
+                                                            <td>{u.Firstname}</td>
+
+                                                            <td>{u.Lastname}</td>
+
+
+                                                            {/* <button> <td><Link to="/Assigndoctor">{u.Phonenumber}</Link></td></button> */}
+
+                                                            {/* <td> <button className="buttonClick" onClick={()=> handleTableRowClick(u)}><Link>{u.Phonenumber}</Link></button></td> */}
+                                                            <td>{u.Phonenumber}</td>
+                                                            <td>{u.Email}</td>
+                                                            <td>{u.Date}</td>
+                                                            <td>{u.City}</td>
+
+
+                                                        </tr>
+
+                                                    )
                                                 }
-                                                else if (val.Firstname.toLowerCase().includes(search.toLowerCase())
-                                                ) {
-                                                    console.log("cccscdfdf");
-                                                    return val;
-                                                }
-                                                //   else{
-                                                //       search([...admintable])
-                                                //       return val
-                                                //   }
+                                                )}{
+                                                //    admintable.filter((val) => {
+                                                //         if (val == "search") {
+                                                //             console.log("sfsfsfsf");
+                                                //             return val;
+                                                //         }
+                                                //         else if (val.Firstname.toLowerCase().includes(search.toLowerCase())
+                                                //         ) {
+
+                                                //             return val;
+                                                //         }
+                                                //           else{
+
+                                                //           }
 
 
-                                            }) */}
-                                            
-                                            
-                                           {admintable.map((u) => {
-                                                return(
-                                                    <tr>
-                                                        {/* <tr key={u.Firstname}></tr> */}
-                                                        <td>{u.Firstname}</td>
+                                                //     })
+                                            }
 
-                                                    <td>{u.Lastname}</td>
-
-
-                                                    <td><Link to="/Assigndoctor">{u.Phonenumber}</Link></td>
-                                                    {/* <td>
-                                                    <img src={u.Emai}
-                                                        width="50"
-                                                        className="avatar" />
-                                                </td> */}
-                                                    <td>{u.Email}</td>
-                                                    <td>{u.Date}</td>
-                                                    <td>{u.City}</td>
-
-
-                                                </tr>
-
-                                             ) }
-                                            )}
-                                            
                                         </tbody>
 
                                     </table>
