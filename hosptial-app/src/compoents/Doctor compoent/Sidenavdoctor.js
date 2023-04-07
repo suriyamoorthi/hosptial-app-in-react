@@ -64,12 +64,12 @@ function Sidenavdoctor() {
                                 </Link>
 
 
-                                <Link to="">
+                                <Link to="/DoctorChangePassword">
                                     <i className="fa-solid fa-passport"></i>
                                     <h3>Change Password</h3>
                                 </Link>
 
-                                <Link to="" >
+                                <Link to="" style={{marginTop: "300px"}}>
                                     <i className="fa-solid fa-right-from-bracket"></i>
                                     <h3>Logout</h3>
                                 </Link>

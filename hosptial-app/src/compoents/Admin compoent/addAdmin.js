@@ -2,7 +2,7 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import Joi from "joi";
 import React from "react";
 import Sidebaradmin from "./sidebaradmin";
-import { addDoctorForm } from "../../Services/AdmimmodulesForms.service";
+import { addAdminForm } from "../../Services/AdmimmodulesForms.service";
 
 import "../css/admin/adddoctor.css";
 
@@ -18,17 +18,9 @@ const userSchema = Joi.object({
         'string.min': ` "Admin lastname" must minmum 6 character`,
         'string.max': ` "Admin Lastname" must maximum 6 character`,
 
-    }), 
-     Department: Joi.string().required().messages({
-        'string.empty': `Alleast select one "Department" `,
-        
-    }),
-    Exprience: Joi.number().integer().messages({
-        'number.empty': `"Exprience" should be a required`,
     }),
 
 
-   
     Email: Joi.string()
         .email({ tlds: { allow: false } })
         .required()
@@ -44,10 +36,10 @@ const userSchema = Joi.object({
         'string.max': ` "Password" must maximum 12 character`,
     }),
     Confirmpassword: Joi.any().equal(Joi.ref('Password')).messages
-    ({
-      "any.required": `"" is a required field`,
-      'any.only': 'confirm password does not match'
-    }),
+        ({
+            "any.required": `"" is a required field`,
+            'any.only': 'confirm password does not match'
+        }),
 
     Phonenumber: Joi.string().regex(/^[0-9]{10}$/).messages({
         'string.empty': `"phonenumber" should be a required`,
@@ -56,7 +48,9 @@ const userSchema = Joi.object({
 
 
     Gender: Joi.string().required(),
-
+    Age: Joi.number().integer().messages({
+        'number.empty': `"Age" should be a required`,
+    }),
     Dateofbirth: Joi.date().min("2001-01-01").required().messages({
         'string.empty': `"Date of Birth" should be a required`,
 
@@ -82,8 +76,8 @@ const INTIAL_FORM = {
     Confirmpassword: "",
     Phonenumber: "",
     Gender: "male",
+    Age: "",
     Dateofbirth: "",
-    Doctordetails: "",
     File: "",
     Address: "",
     toggle: "",
@@ -104,20 +98,20 @@ function AddAdmin() {
         return errors;
 
     };
-    const handleSubmit =async (values) => {
-        console.log("sumbitted", values)
+    const handleSubmit = async (values, { resetForm }) => {
+        console.log("sumbitted", values);
+        resetForm({ value: " " });
         const { error } = userSchema.validate(values);
         if (!error) {
-          try{
-            const doctorData = await addDoctorForm(values);
-            console.log("DOCTORDATA",doctorData);
+            try {
+                const { data } = await addAdminForm(values);
+                console.log("DOCTORDATA", data);
+                alert(data.Message);
 
-            const errorMessage = doctorData.data.Message;
-            alert(errorMessage);
-          }
-          catch{
-            
-          }
+            }
+            catch {
+
+            }
         }
 
 
@@ -165,7 +159,7 @@ function AddAdmin() {
                                                             </div>
                                                             <div className="col-sm-6">
                                                                 <div className="form-group mb-3">
-                                                                    <label htmlFor="Adminlastname" className="form-lable">
+                                                                    <label htmlFor="Adminlastname" className="form-label">
                                                                         Admin Lastname<span className="text-primary">*</span>
                                                                     </label>
                                                                     <Field
@@ -179,7 +173,7 @@ function AddAdmin() {
 
                                                         </div>
 
-                                                       
+
 
                                                         <div className="row">
                                                             <div className="col-sm-6">
@@ -243,28 +237,48 @@ function AddAdmin() {
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <div className="row ">
+
+                                                            <label htmlFor="Gender" className="form-label">Gender
+                                                                <span className="text-primary">*</span></label>
+
+                                                            <div className="col-sm-6 ">
+                                                                <div className="form-group mb-3">
+
+                                                                    <Field className="form-check-input" type="radio" name="Gender" value="male" />
+                                                                    <label className="form-check-label ms-2" htmlFor="male">
+                                                                        Male
+                                                                    </label>
+
+                                                                </div>
+                                                            </div>
+                                                            <div className="col-sm-6 ">
+                                                                <div className="form-group mb-3">
+                                                                    <Field className="form-check-input" type="radio" name="Gender" value="female" />
+                                                                    <label className="form-check-label ms-2" htmlFor="female">
+                                                                        Female
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                         <div className="row">
                                                             <div className="col-sm-6">
-                                                                <div className="from-group mb-3 ">
-                                                                    <label htmlFor="Gender" className="form-label">Gender
-                                                                        <span className="text-primary">*</span></label>
+                                                                <div className="form-group mb-3">
+                                                                    <label htmlFor="Age" className="form-label">
+                                                                        Age<span className="text-primary">*</span>
+                                                                    </label>
                                                                     <Field
-                                                                        className="form-select"
-                                                                        component="select"
-                                                                        name="Gender"
-                                                                        aria-label="Default select example"
-                                                                    // multiple={true}
-                                                                    >
-                                                                        <option value="Male">Male</option>
-                                                                        <option value="Female">Female</option>
-                                                                        <option value="Other">Other</option>
-                                                                    </Field>
-
+                                                                        className="form-control"
+                                                                        type="number"
+                                                                        name="Age"
+                                                                        placeholder="Enter your Age"
+                                                                    />
+                                                                    <ErrorMessage className="text-dnager" name="Age" />
                                                                 </div>
                                                             </div>
                                                             <div className="col-sm-6">
                                                                 <div className="form-group mb-3">
-                                                                    <label htmlFor="Dateofbirth" className="form-lable">
+                                                                    <label htmlFor="Dateofbirth" className="form-label">
                                                                         Date Of Birth<span className="text-primary">*</span>
                                                                     </label>
                                                                     <Field
@@ -286,24 +300,24 @@ function AddAdmin() {
                                                                 name="File" />
                                                             <ErrorMessage className="text-danger" name="File" />
                                                         </div>
-                                                           
-                                                            <div className="col-sm-12">
-                                                                <div className="form-group mb-3">
-                                                                    <label htmlFor="Address" className="form-label"> Address
-                                                                        <span className="text-primary">*</span></label>
-                                                                    <div className="form-floating mb-3">
-                                                                        <Field
-                                                                            className="form-control"
-                                                                            name="Address"
-                                                                            placeholder="Enter Your Address"
-                                                                        />
-                                                                        <ErrorMessage className="sec1" name="Address" />
-                                                                        <label htmlFor="floatingInput"> Enter your address</label>
-                                                                    </div>
+
+                                                        <div className="col-sm-12">
+                                                            <div className="form-group mb-3">
+                                                                <label htmlFor="Address" className="form-label"> Address
+                                                                    <span className="text-primary">*</span></label>
+                                                                <div className="form-floating mb-3">
+                                                                    <Field
+                                                                        className="form-control"
+                                                                        name="Address"
+                                                                        placeholder="Enter Your Address"
+                                                                    />
+                                                                    <ErrorMessage className="sec1" name="Address" />
+                                                                    <label htmlFor="floatingInput"> Enter your address</label>
                                                                 </div>
                                                             </div>
-                                                       
-                                                       
+                                                        </div>
+
+
 
                                                         <hr />
                                                         <div className="footer">

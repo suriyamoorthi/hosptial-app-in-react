@@ -18,6 +18,7 @@ function Patientvisityhistory() {
         try {
            
             const { data } = await getPatientvisityhistory();
+            console.log("data on",data);
             setAdmintable(data);
             setIsloding(false);
         }
@@ -96,17 +97,11 @@ function Patientvisityhistory() {
                                                     return (
                                                         <tr key={u._id}>
                                                         <td>{u._id}</td>
+                                                        <td><Link to="/Patientvisitdatails">{u.Fullname}</Link></td>
 
-                                                            <td>{u.Firstname}</td>
+                                                            <td>{u.Doctorfullname}</td>
 
-
-                                                            <td><Link to="/Patientvisitdatails">{u.Phonenumber}</Link></td>
-                                                            {/* <td>
-                                                            <img src={u.Emai}
-                                                                width="50"
-                                                                className="avatar" />
-                                                        </td> */}
-                                                            <td>{u.Email}</td>
+                                                            <td>{u.Date}</td>
 
                                                             <td>{u.City}</td>
 

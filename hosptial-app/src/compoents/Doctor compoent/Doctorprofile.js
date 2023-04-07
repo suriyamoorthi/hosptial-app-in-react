@@ -1,440 +1,403 @@
-import React, { useState,usehistory } from "react";
+import { useEffect } from "react";
+import { Formik, Field, ErrorMessage, Form } from "formik";
+import Joi from "joi";
 
 import Sidenavdoctor from "./Sidenavdoctor";
+import { DoctorprofileUpdate } from "../../Services/Profiles.service";
+import { getDoctorProfiledetails } from "../../Services/Profiles.service";
 
 
-import "../css/Doctor/Doctorprofile.css"
-const MALIL_FORMAT = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
+import "../css/Doctor/Doctorprofile.css";
 
 
 const FORM_VLAUES = {
 
-    firstname: "",
-    lastname: "",
-    age: "",
-    phonenumber: "",
-    email: "",
-    password: "",
-    gender: "male",
-    dateofbirth: "",
-    file: "",
-    address: "",
+    Doctorfirstname: "",
+    Doctorlastname: "",
+    Email: "",
+    Age:"",
+    // Department: "",
+    // Exprience:"",
+    Gender: "male",
+    Phonenumber: "",
+    Dateofbirth: "",
+    File: "",
+    Doctordetails:"",
+    Address: "",
 
 
 }
+const prifileSchema = Joi.object({
+    Doctorfirstname: Joi.string().min(6).max(6).required().messages({
+        'string.empty': `"First name" should be a required`,
+        'string.min': ` "First name" must minmum 6 character`,
+        'string.max': ` "First name" must maximum 6 character`,
+
+    }),
+    Doctorlastname: Joi.string().min(6).max(12).required().messages({
+        'string.empty': `" Doctor lastname" should be a required`,
+        'string.min': ` " Doctor lastname" must minmum 6 character`,
+        'string.max': ` " Doctor lastname" must maximum 12 character`,
+    }),
+
+
+    Email: Joi.string()
+        .email({ tlds: { allow: false } })
+        .required()
+        .messages({
+            'string.empty': `"Email" should be a required`,
+            'string.email': `"Email" should be a vaildemail`,
+
+        }),
+    Age: Joi.number().integer().messages({
+        'number.empty': `"Age" should be a required`,
+    }),
+    // Department: Joi.string().required().messages({
+    //     'string.empty': `"Department" should be a required`,
+
+    // }),
+
+
+    Gender: Joi.string().required(),
+
+
+    Phonenumber: Joi.string().regex(/^[0-9]{10}$/).messages({
+        'string.empty': `"phonenumber" should be a required`,
+        'string.pattern.base': `Phone number must have 10 digits.`
+    }).required(),
+
+    Dateofbirth: Joi.date().required().messages({
+        'string.empty': `"Date" should be a required`,
+
+    }),
+
+    File: Joi.string().label('image').messages({
+        'string.empty': `"File"should be a required`,
+    }),
+
+    Doctordetails: Joi.string().messages({
+        'string.empty': `" Doctordetails" should be a required`,
+    }),
+    Address: Joi.string().messages({
+        'string.empty': `"Address" should be a required`,
+    }),
+
+
+
+});
+
+const validate = (values) => {
+    console.log("sumbitted12", values)
+    const errors = {};
+    console.log("Error", errors)
+    const { error } = prifileSchema.validate(values);
+    if (error) {
+        const [err] = error.details;
+        errors[err.context.key] = err.message;
+    }
+    return errors;
+
+};
 
 
 function Doctorprofile() {
-    const histroy=usehistory();
 
-    const [user, setUser] = useState(FORM_VLAUES);
-    const [error, setError] = useState(FORM_VLAUES);
-    const [touched, setTouched] = useState(FORM_VLAUES);
+    const GetSeesionDoctorData = async () => {
 
+        var data = await getDoctorProfiledetails();
+        console.log("DATAVALUES", data);
 
-const validation =()=>{
+        //   if(data[0].Firstname)
+        //   {
+        //     INTIAL_FORM.Firstname =  data[0].Firstname;
+        //   }
+       FORM_VLAUES.Doctorfirstname = data[0].Doctorfirstname;
+       FORM_VLAUES.Doctorlastname = data[0].Doctorlastname;
+       FORM_VLAUES.Email = data[0].Email;
+       FORM_VLAUES.Age = data[0].Age;
+       FORM_VLAUES.Gender = data[0].Gender;
+       FORM_VLAUES.Phonenumber = data[0].Phonenumber;
+       FORM_VLAUES.Dateofbirth = data[0].Dateofbirth;
+       FORM_VLAUES.Doctordetails = data[0].Doctordetails;
+       FORM_VLAUES.Address = data[0].Address;
+        // INTIAL_VALUES.File = data[0].File;
+
+    };
+ 
+    const handleSubmit = async (values,{resetForm}) => {
+        console.log("sumbitted", values);
+        resetForm({ value: "" });
+        const { error } = prifileSchema.validate(values);
+        if (!error) {
+            try {
+                const { data } = await DoctorprofileUpdate(values);
+                console.log("PROFILE DATA", data);
+                alert(data.Message);
+    
+            }
+            catch {
+    
+            }
+            console.log("PATIENT APPIONMENT")
+            console.log("sumbitted", values)
+    
+        }
+    
+    
        
-        if(error.firstname.length <=0){
-        return false;
-       }
-       else if (error.lastname.length <=0){
-        return false;
-       }
-       else if (error.age.length <=0){
-        return false;
-       }
-       else if (error.phonenumber.length <=0){
-        return false;
-       }
-       else if(error.email.length <=0){
-        return false;
-      }
-       else if (error.password.length <=0){
-        return false;
-       }
-       else if (error.gender.length <=0){
-        return false;
-       }
-       else if(error.file.length <=0){
-        return false;
-       }
-       else if(error.address.length <=0){
-        return false;
-       }
-}
-
-
-
-
-    const handleBlur = ({ target: { name } }) => {
-        setTouched({ ...touched, [name]: true })
+    
+    
+    
     };
 
-    const handleChange = ({ target: { name, value } }) => {
-        const err = { ...error };
-
-        switch (name) {
-
-            case "firstname": {
-                if (!value) {
-                    err.firstname = "First Name should be require";
-                }
-                else {
-                    err.firstname = " ";
-                }
-                break;
-            }
-
-            case "lastname": {
-                if (!value) {
-                    err.lastname = " Last Name should be require";
-                }
-                else {
-                    err.lastname = "";
-                }
-                break;
-            }
-            case "age": {
-                if (!value) {
-                    err.age = " Age should be require";
-                }
-                else {
-                    err.age = ""
-                }
-                break;
-            }
-
-            case "phonenumber": {
-                if (!value) {
-                    err.phonenumber = " Phonenumber should be require";
-
-                }
-                else if (value.length < 10) {
-                    err.phonenumber = " Phonenumber must have 10 digits";
-
-                }
-                else {
-                    err.phonenumber = "";
-                }
-                break;
-            }
-            case "email": {
-                if (!value) {
-                    err.email = "Email is require"
-                }
-                else if (!MALIL_FORMAT.test(value)) {
-                    err.email = " Email is ivalid"
-                }
-                else {
-                    err.email = "";
-                }
-                break;
-            }
-
-            case "password": {
-                if (!value) {
-                    err.password = " Password should be require";
-                }
-                else if (value.length < 6) {
-                    err.password = "Password  minimum 6 characters must ";
-                }
-                else if (value.length > 10) {
-                    err.password = "Password maximum 10 characters must ";
-
-                }
-                else {
-                    err.password = "";
-                }
-                break;
-            }
-            case "dateofbirth": {
-                if (!value) {
-                    err.dateofbirth = "Date Of Birth should be require";
-                }
-                else {
-                    err.dateofbirth = "";
-                }
-                break;
-            }
-
-            case "file": {
-                if (!value) {
-                    err.file = "File should be require";
-                }
-                else {
-                    err.file = "";
-                }
-                break;
-            }
-            case "address": {
-                if (!value) {
-                    err.address = " Address should be require";
-                }
-                else {
-                    err.address = "";
-                }
-                break;
-            }
-
-
-        }
-        setError(err);
-        setUser({ ...user, [name]: value });
-        console.log("ERROR", err);
-        console.log("VALUE", user);
-
-
-    }
-
-    const handleSubmit = () => {
-
-        console.log("VALES1", user);
-        const isTouched = Object.values(touched).every(t => t === true);
-      const  isVaildation = validation();
-
-        if(isTouched && isVaildation){
-            console.log("Setupcompleted");
-
-        }
-    }
-
+    useEffect(()=>{
+        console.log("DOCTOR USeEFFECT");
+        GetSeesionDoctorData();
+    }, []);
 
     return (
         <>
-           <Sidenavdoctor/>
+            <Sidenavdoctor />
             <main className="doctorprofile">
-                <div className="container-fluid">
-                    <div className="row">
-                        <div className="col-sm-2"></div>
-                        <div className="col-sm-8">
-                            <div className="card">
-                                <div className="card-body">
-                                    <h4 className="card-title"> Profile</h4>
-                                    <hr />
-                                    <form onSubmit={handleSubmit}>
-                                        <div className="row">
-                                            <div className="col-sm-6">
-                                                <div className="form-group mb-3">
-                                                    <label htmlFor="firstname" className="form-label">First Name
-                                                        <span className="text-primary">*</span>
-                                                    </label>
-                                                    <input
-                                                        className="form-control"
-                                                        name="firstname"
-                                                        id="firstname"
-                                                        placeholder="Enter Your First Name"
-                                                        value={user.firstname}
-                                                        onChange={handleChange}
-                                                        onBlur={handleBlur}
-                                                    />
-                                                    <span className="text-danger">{error.firstname}</span>
-                                                </div>
-                                            </div>
-
-                                            <div className="col-sm-6">
-                                                <div className="form-group mb-3">
-                                                    <label htmlFor="lastname" className="form-label"> Last Name
-                                                        <span className="text-primary">*</span>
-                                                    </label>
-
-                                                    <input
-                                                        className="form-control"
-                                                        name="lastname"
-                                                        id="lastname"
-                                                        placeholder="Enter Your Last Name"
-                                                        value={user.lastname}
-                                                        onChange={handleChange}
-                                                        onBlur={handleBlur}
-
-                                                    />
-                                                    <span className="text-danger">{error.lastname}</span>
-                                                </div>
-
-                                            </div>
-                                        </div>
-
-                                        <div className="row">
-                                            <div className="col-sm-6">
-                                                <div className="form-group mb-3">
-                                                    <label htmlFor="age" className="form-label">Age
-                                                        <span className="text-primary">*</span>
-                                                    </label>
-                                                    <input
-                                                        className="form-control"
-                                                        name="age"
-                                                        id="age"
-                                                        type="number"
-                                                        placeholder="Enter your age"
-                                                        value={user.age}
-                                                        onChange={handleChange}
-                                                        onBlur={handleBlur}
-
-                                                    />
-                                                    <span className="text-danger" > {error.age}</span>
-                                                </div>
-                                            </div>
-
-                                            <div className="col-sm-6">
-                                                <div className="form-group mb-3">
-                                                    <label htmlFor="phonenumber" className="form-label"> Phonenumber
-                                                        <span className="text-primary">*</span>
-                                                    </label>
-
-                                                    <input
-                                                        className="form-control"
-                                                        name="phonenumber"
-                                                        id="phonenumber"
-                                                        type="number"
-                                                        placeholder="Enter your phonenumber"
-                                                        value={user.phonenumber}
-                                                        onChange={handleChange}
-                                                        onBlur={handleBlur}
-                                                    />
-                                                    <span className="text-danger">{error.phonenumber}</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className="row">
-                                            <div className="col-sm-6">
-                                                <div className="form-group mb-3">
-                                                    <label htmlFor="email" className="form-label">Email
-                                                        <span className="text-primary">*</span>
-                                                    </label>
-                                                    <input
-                                                        className="form-control"
-                                                        name="email"
-                                                        id="email"
-                                                        type="email"
-                                                        placeholder="Enter your Email"
-                                                        value={user.email}
-                                                        onChange={handleChange}
-                                                        onBlur={handleBlur}
-                                                    />
-                                                    <span className="text-danger">{error.email}</span>
-                                                </div>
-                                            </div>
-
-                                            <div className="col-sm-6">
-                                                <div className="form-group mb-3">
-                                                    <label htmlFor="password" className="form-label">Password
-                                                        <span className="text-primary">*</span>
-                                                    </label>
-                                                    <input
-                                                        className="form-control"
-                                                        name="password"
-                                                        id="password"
-                                                        type="password"
-                                                        placeholder="Enter your Password"
-                                                        value={user.password}
-                                                        onChange={handleChange}
-                                                        onBlur={handleBlur}
-                                                    />
-                                                    <span className="text-danger">{error.password}</span>
-                                                </div>
-
-                                            </div>
-                                        </div>
-
-                                        <div className="row">
-                                            <div className="col-sm-6">
-                                                <div className="form-group mb-3">
-                                                    <label htmlFor="gender" className="form-label">Gender
-                                                        <span className="text-primary">*</span>
-                                                    </label>
-                                                    <select
-                                                        className="form-select"
-                                                        name="gender"
-                                                        id="gender"
-                                                        value={user.gender}
-                                                        onChange={handleChange}
-                                                        onBlur={handleBlur}
-                                                    >
-                                                        <option value="1">Male</option>
-                                                        <option value="2">Female</option>
-                                                        <option value="3">Other</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <div className="col-sm-6">
-                                                <div className="form-group mb-3">
-                                                    <label htmlFor="dateofbirth" className="form-label">Date Of Birth
-                                                        <span className="text-primary">*</span>
-                                                    </label>
-                                                    <input
-                                                        className="form-control"
-                                                        name="dateofbirth"
-                                                        id="dateofbirth"
-                                                        type="date"
-                                                        value={user.dateofbirth}
-                                                        onChange={handleChange}
-                                                        onBlur={handleBlur}
-                                                    />
-                                                    <span className="text-danger">{error.dateofbirth}</span>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div className="form-group mb-3">
-                                            <label htmlFor="file" className="form-label">
-                                                File<span className="text-primary">*</span>
-                                            </label>
-                                            <input
-                                                id="file"
-                                                name="file"
-                                                className="form-control"
-                                                type="file"
-                                                placeholder="Enter the file"
-                                                value={user.file}
-
-                                                onChange={handleChange}
-                                                onBlur={handleBlur}
-                                                required
-                                            />
-                                            <span className="text-danger">{error.file}</span>
-
-                                        </div>
-
-                                        <div className="form-group mb-3">
-                                            <label htmlFor="address" className="form-lable">Address
-                                                <span className="text-primary">*</span>
-                                            </label>
-                                            <div className="form-floating mb-3">
-                                                <input
-                                                    className="form-control"
-                                                    name="address"
-                                                    id="address"
-                                                    placeholder="Enter Your Address"
-                                                    value={user.address}
-                                                    onChange={handleChange}
-                                                    onBlur={handleBlur}
-                                                />
-                                                <label htmlFor="address"> Enter your Address</label>
-                                                <span className="text-danger">{error.address}</span>
-                                            </div>
-                                        </div>
-
+              
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-sm-3"></div>
+                            <div className="col-sm-6">
+                                <div className="card">
+                                    <div className="card-body">
+                                        <h4 className="card-title"> Profile</h4>
                                         <hr />
-                                        <div className="from-group mb-3 " >
-                                            <div className="group">
-                                                <button type="submit" className="btn btn-primary"
-                                                >Submit</button>
-                                            </div>
-                                        </div>
-                                    </form>
+                                        <Formik
+                                            initialValues={FORM_VLAUES}
+                                            validate={validate}
+                                            onSubmit={handleSubmit}
+                                        >
 
+                                            {() => {
+                                                return (
+                                                    <Form className="mt-4">
+                                                        <div className="row">
+                                                            <div className="col-sm-6">
+                                                                <div className="form-group mb-3">
+                                                                    <label htmlFor="Doctorfirstname" className="form-label">Doctor Firstname
+                                                                        <span className="text-primary">*</span>
+                                                                    </label>
+                                                                    <Field
+                                                                        className="form-control"
+                                                                        name="Doctorfirstname"
+                                                                        placeholder="Enter Your Doctorfirstname"
+                                                                    />
+                                                                    <ErrorMessage className="text-danger" name="Doctorfirstname" />
+                                                                </div>
+                                                            </div>
+
+                                                            <div className="col-sm-6">
+                                                                <div className="form-group mb-3">
+                                                                    <label htmlFor="Doctorlastname" className="form-label">Doctor Lastname
+                                                                        <span className="text-primary">*</span>
+                                                                    </label>
+                                                                    <Field
+                                                                        className="form-control"
+                                                                        name="Doctorlastname"
+                                                                        placeholder="Enter Your Last name"
+                                                                    />
+                                                                    <ErrorMessage className="text-danger" name="Doctorlastname" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+
+                                                        <div className="row">
+                                                            <div className="col-sm-6">
+                                                                <div className="form-group mb-3">
+                                                                    <label htmlFor="Email" className="form-label">Email
+                                                                        <span className="text-primary">*</span>
+                                                                    </label>
+                                                                    <Field
+                                                                        className="form-control"
+                                                                        name="Email"
+                                                                        type="email"
+                                                                        placeholder="Enter Your Email"
+                                                                    />
+                                                                    <ErrorMessage className="text-danger" name="Email" />
+                                                                </div>
+                                                            </div>
+
+                                                            <div className="col-sm-6">
+                                                                <div className="from-group mb-3">
+                                                                    <label htmlFor="Age" className="form-label">Age
+                                                                        <span className="text-primary">*</span>
+                                                                    </label>
+                                                                    <Field
+                                                                        className="form-control"
+                                                                        name="Age"
+                                                                        type="number"
+                                                                        placeholder="Enter Your Age"
+                                                                    />
+                                                                    <ErrorMessage className="text-danger" name="Age" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        {/* <div className="row">
+                                                            <div className="col-sm-6">
+                                                                <div className="form-group mb-3">
+                                                                    <label htmlFor=" Department" className="form-label"> Department
+                                                                        <span className="text-primary">*</span>
+                                                                    </label>
+                                                                    <Field
+                                                                        className="form-control"
+                                                                        name="Department"
+                                                                        placeholder="Enter Your  Department"
+                                                                    />
+                                                                    <ErrorMessage className="text-danger" name=" Department" />
+                                                                </div>
+                                                            </div>
+
+                                                            <div className="col-sm-6">
+                                                                <div className="from-group mb-3">
+                                                                    <label htmlFor="Age" className="form-label">Age
+                                                                        <span className="text-primary">*</span>
+                                                                    </label>
+                                                                    <Field
+                                                                        className="form-control"
+                                                                        name="Age"
+                                                                        type="number"
+                                                                        placeholder="Enter Your Age"
+                                                                    />
+                                                                    <ErrorMessage className="text-danger" name="Age" />
+                                                                </div>
+                                                            </div>
+                                                        </div> */}
+                                                        <div className="row ">
+
+                                                            <label htmlFor="Gender" className="form-label">Gender
+                                                                <span className="text-primary">*</span></label>
+
+                                                            <div className="col-sm-6 ">
+                                                                <div className="form-group mb-3">
+
+                                                                    <Field className="form-check-input" type="radio" name="Gender" value="male" />
+                                                                    <label className="form-check-label ms-2" htmlFor="male">
+                                                                        Male
+                                                                    </label>
+
+                                                                </div>
+                                                            </div>
+                                                            <div className="col-sm-6 ">
+                                                                <div className="form-group mb-3">
+                                                                    <Field className="form-check-input" type="radio" name="Gender" value="female" />
+                                                                    <label className="form-check-label ms-2" htmlFor="female">
+                                                                        Female
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div className="row">
+                                                            <div className="col-sm-6">
+                                                                <div className="form-group mb-3">
+                                                                    <label htmlFor="Phonenumber" className="form-label">Phone Number
+                                                                        <span className="text-primary">*</span> </label>
+                                                                    <Field
+                                                                        className="form-control"
+                                                                        name="Phonenumber"
+                                                                        type="tel"
+                                                                        placeholder="Enter Your Phonenumber"
+                                                                    />
+                                                                    <ErrorMessage className="text-danger" name="Phonenumber" />
+                                                                </div>
+                                                            </div>
+                                                            <div className="col-sm-6">
+                                                                <div className="form-group mb-3">
+                                                                    <label htmlFor="Dateofbirth" className="form-label"> Dateofbirth
+                                                                        <span className="text-primary">*</span>
+                                                                    </label>
+                                                                    <Field
+                                                                        className="form-control"
+                                                                        name="Dateofbirth"
+                                                                        type="date"
+                                                                        placeholder="Enter Your Dateofbirth"
+                                                                    />
+                                                                    <ErrorMessage className="text-danger" name="Dateofbirth" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="row">
+
+
+                                                            <div className="form-group mb-3">
+
+                                                                <label htmlFor="File" className="form-label"> File</label>
+                                                                <Field
+                                                                    className="form-control"
+                                                                    type="file"
+                                                                    name="File" />
+                                                                <ErrorMessage className="text-danger" name="File" />
+
+                                                            </div>
+
+                                                        </div>
+
+
+                                                        <div className="address">
+                                                            <label htmlFor="Doctordetails" className="form-label">Doctordetails
+                                                                <span className="text-primary">*</span></label>
+                                                            <div className="form-floating mb-3">
+                                                                <Field
+                                                                    className="form-control"
+                                                                    name="Doctordetails"
+                                                                    placeholder="Enter Your  Doctordetails"
+                                                                />
+                                                                <ErrorMessage className="text-danger" name="Doctordetails" />
+                                                                <label htmlFor="floatingInput"> Enter your  Doctordetails</label>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div className="address">
+                                                            <label htmlFor="Address" className="form-label"> Address
+                                                                <span className="text-primary">*</span></label>
+                                                            <div className="form-floating mb-3">
+                                                                <Field
+                                                                    className="form-control"
+                                                                    name="Address"
+                                                                    placeholder="Enter Your address"
+                                                                />
+                                                                <ErrorMessage className="text-danger" name="Address" />
+                                                                <label htmlFor="floatingInput"> Enter your address</label>
+                                                            </div>
+                                                        </div>
+
+                                                        <hr />
+                                                      
+
+                                                        <div className="button">
+                                                            <div className="form-groups mb-3">
+
+                                                                <button type="submit" className="btn btn-primary " >submit</button>
+                                                            </div>
+                                                        </div>
+
+
+
+
+
+                                                    </Form>
+
+                                                )
+                                            }}
+                                        </Formik>
+
+
+                                    </div>
                                 </div>
                             </div>
-
-
-
+                            <div className="col-sm-3"></div>
                         </div>
-
-                        <div className="col-sm-2"></div>
-
                     </div>
-                </div>
+                
             </main>
         </>
     );

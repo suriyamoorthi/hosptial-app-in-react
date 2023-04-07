@@ -17,7 +17,7 @@ function Receptionoverviewtable() {
 
     function handleTableRowClick(u) {
         const query = `?data=${JSON.stringify(u)}`;
-        console.log("query stirng",query);
+        console.log("query stirng", query);
         history.push(`/Assigndoctor${query}`);
 
 
@@ -62,18 +62,18 @@ function Receptionoverviewtable() {
 
             <div className="card mb-4 pb-3">
                 <div className="card-body">
-                    <h5 className="card-title"> Current Day Appoinment Patient List 123</h5>
+                    <h5 className="card-title"> Current Day Appoinment Patient List </h5>
                     <hr />
                     <form className="d-flex" role="search">
-                                    <input
-                                        className="form-control me-2 "
-                                        type="search"
-                                        placeholder="Search"
-                                        aria-label="Search"
-                                        onChange={(e) => { setSearch(e.target.value) }}
-                                    />
-                                    {/* <button className="btn btn-outline-success" type="submit">Search</button> */}
-                                </form>
+                        <input
+                            className="form-control me-2 "
+                            type="search"
+                            placeholder="Search"
+                            aria-label="Search"
+                            onChange={(e) => { setSearch(e.target.value) }}
+                        />
+                        {/* <button className="btn btn-outline-success" type="submit">Search</button> */}
+                    </form>
                     <div className="table">
                         <table className="table  table-striped">
                             <thead>
@@ -96,29 +96,23 @@ function Receptionoverviewtable() {
                                     // </div>
                                 )}
                                 {admintable.filter((u) => {
-                                                    return search.toLowerCase() === ''
-                                                        ? u
-                                                        : u.Firstname.toLowerCase().includes(search);
+                                    return search.toLowerCase() === ''
+                                        ? u
+                                        : u.Fullname.toLowerCase().includes(search);
 
-                                                })
-                                .map((u) => {
-                                    return (
-                                        <tr >
-
-
-                                            <td> <button className="buttonClick" onClick={() => handleTableRowClick(u)}><Link>{u.Firstname}</Link></button></td>
-                                            <td>{u.Lastname}
-                                                {/* <img src={user.avatar}
-                                                width="50"
-                                                className="avatar" /> */}
-                                            </td>
-                                            <td>{u.Phonenumber}</td>
-                                            <td>{u.Email}</td>
-
-                                            <td>{u.Date}</td>
-                                        </tr>
-                                    )
-                                })}
+                                })
+                                    .map((u) => {
+                                        return (
+                                            <tr key={u._id}>
+                                             <td>{u._id}</td>
+                                                <td> <button className="buttonClick" onClick={() => handleTableRowClick(u)}><Link>{u.Fullname}</Link></button></td>
+                                                <td>{u.Age}</td>
+                                                <td>{u.Phonenumber}</td>
+                                                <td>{u.Date}</td>
+                                                <td>{u.Gender}</td>
+                                            </tr>
+                                        )
+                                    })}
                             </tbody>
                         </table>
                     </div>

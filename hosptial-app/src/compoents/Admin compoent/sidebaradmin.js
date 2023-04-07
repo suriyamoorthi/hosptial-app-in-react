@@ -188,7 +188,7 @@ function Adminnav() {
                                 </Link>
 
 
-                                <Link to="/resetpassword">
+                                <Link to="/AdminChangepassword">
                                     <i className="fa-solid fa-passport"></i>
                                     <h3>Change Password</h3>
                                 </Link>

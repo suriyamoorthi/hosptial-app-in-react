@@ -19,7 +19,7 @@ export const getuserdetailfromsession = async () => {
 }
 
 export const postUserappionmentvalidation = (appionmentUser) => axios.post(`${AUTH_API_URL}/appionmentService`, appionmentUser);
-export const getPatientvisityhistory = (visityhistoryUser) => axios.get(`${AUTH_API_URL}`, visityhistoryUser);
+export const getPatientvisityhistory = (visityhistoryUser) => axios.get(`${AUTH_API_URL}/getPatientVisityHistory`, visityhistoryUser);
 export const getCurrentDayAppionmentPatientList12 =(currentDayAppionmentUser)=>axios.get(`${AUTH_API_URL}/getCurrentDayAppionmentPatientList?Date=${currentDate}`,currentDayAppionmentUser);
 export const  PatientListRecptionModuleUser=(PatientList)=>axios.get(`${AUTH_API_URL}/PatientListRecptionModuleT`,PatientList);
 export const  DoctorListPatientModuleUser=(DoctorList)=>axios.get(`${AUTH_API_URL}/DoctorListPatientModule`,DoctorList);
