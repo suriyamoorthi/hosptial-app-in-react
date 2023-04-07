@@ -1,34 +1,120 @@
 import React, { useEffect } from "react";
 import { Formik, Field, ErrorMessage, Form } from "formik";
+import Joi from "joi";
 
-import { prifileSchema } from "../Myprfilevalidation";
-import { INTIAL_PROFILEVALUES } from "../Myprfilevalidation";
-import { validate } from "../Myprfilevalidation";
+// import { prifileSchema } from "../Myprfilevalidation";
+// import { INTIAL_PROFILEVALUES } from "../Myprfilevalidation";
+// import { validate } from "../Myprfilevalidation";
 import { getProfiledetails, patientProfileUpdate } from "../../Services/Profiles.service";
 
 
 import Sidenavpatient from "./Sidenavpatient";
 
 import "../css/Patient/Patientmyprofile.css"
+export const prifileSchema =Joi.object({
+    Firstname: Joi.string().min(6).max(6).required().messages({
+        'string.empty': `"First name" should be a required`,
+        'string.min': ` "First name" must minmum 6 character`,
+        'string.max': ` "First name" must maximum 6 character`,
 
+    }),
+    Lastname: Joi.string().min(6).max(12).required().messages({
+        'string.empty': `"Last name" should be a required`,
+        'string.min': ` "Last name" must minmum 6 character`,
+        'string.max': ` "Last name" must maximum 12 character`,
+    }),
+
+
+    Email: Joi.string()
+        .email({ tlds: { allow: false } })
+        .required()
+        .messages({
+            'string.empty': `"Email" should be a required`,
+            'string.email': `"Email" should be a vaildemail`,
+
+        }),
+     Age: Joi.number().integer().messages({
+        'number.empty': `"Age" should be a required`,
+    }),
+
+
+    Gender: Joi.string().required(),
+
+
+    Phonenumber: Joi.string().regex(/^[0-9]{10}$/).messages({
+        'string.empty': `"phonenumber" should be a required`,
+        'string.pattern.base': `Phone number must have 10 digits.`
+    }).required(),
+   
+    Dateofbirth: Joi.date().min("2001-01-01").required().messages({
+        'string.empty': `"Date" should be a required`,
+
+    }),
+
+    File: Joi.string().label('image').messages({
+        'string.empty': `"File"should be a required`,
+    }),
+
+
+    Address: Joi.string().messages({
+        'string.empty': `"Address" should be a required`,
+    }),
+
+    // formfile: Joi.string().required().label('image'),
+
+    // toggle: Joi.boolean().default(false),
+
+
+
+
+
+    // toggle: Joi.boolean().default(false),
+});
+
+ const INTIAL_PROFILEVALUES ={
+    Firstname: "",
+    Lastname: "",
+    Email: "",
+    Age: "",
+    Gender: "male",
+    Phonenumber: "",
+    Dateofbirth:"",
+    File: "",
+    Address: "",
+    // toggle: "",
+   
+}
+
+
+  const validate = (values) => {
+    console.log("sumbitted12", values)
+    const errors = {};
+    console.log("Error",errors)
+    const { error } =  prifileSchema.validate(values);
+    if (error) {
+        const [err] = error.details;
+        errors[err.context.key] = err.message;
+    }
+    return errors;
+
+};
 
 function Patientmyprofile() {
     const GetSeesionData = async () => {
 
         var registerData = await getProfiledetails();
-        console.log("DATAVALUES", registerData);
+        console.log("DATAVALUES123", registerData);
 
-        //   if(data[0].Firstname)
-        //   {
-        //     INTIAL_FORM.Firstname =  data[0].Firstname;
-        //   }
+
         INTIAL_PROFILEVALUES.Firstname = registerData[0].Firstname;
         INTIAL_PROFILEVALUES.Lastname = registerData[0].Lastname;
         INTIAL_PROFILEVALUES.Email = registerData[0].Email;
+        INTIAL_PROFILEVALUES.Age = registerData[0].Age;
         INTIAL_PROFILEVALUES.Gender = registerData[0].Gender;
         INTIAL_PROFILEVALUES.Phonenumber = registerData[0].Phonenumber;
-        INTIAL_PROFILEVALUES.Date = registerData[0].Date;
-        console.log("NNNNNN",INTIAL_PROFILEVALUES.Date );
+        INTIAL_PROFILEVALUES.Dateofbirth = registerData[0].Dateofbirth;
+
+        console.log("NNNNNN", INTIAL_PROFILEVALUES.Dateofbirth);
         INTIAL_PROFILEVALUES.Address = registerData[0].Address;
         // INTIAL_PROFILEVALUES.File = registerData[0].File;
     };
@@ -134,20 +220,20 @@ function Patientmyprofile() {
                                                                 </div>
                                                             </div>
 
-                                                            {/* <div className="col-sm-6">
+                                                            <div className="col-sm-6">
                                                                 <div className="from-group mb-3">
-                                                                    <label htmlFor="Password" className="form-label">Password
+                                                                    <label htmlFor="Age" className="form-label">Age
                                                                         <span className="text-primary">*</span>
                                                                     </label>
                                                                     <Field
                                                                         className="form-control"
-                                                                        name="Password"
-                                                                        type="password"
-                                                                        placeholder="Enter Your Password"
+                                                                        name="Age"
+                                                                        type="number"
+                                                                        placeholder="Enter Your Age"
                                                                     />
-                                                                    <ErrorMessage className="text-danger" name="Password" />
+                                                                    <ErrorMessage className="text-danger" name="Age" />
                                                                 </div>
-                                                            </div> */}
+                                                            </div>
                                                         </div>
                                                         <div className="row ">
 
@@ -189,16 +275,16 @@ function Patientmyprofile() {
                                                             </div>
                                                             <div className="col-sm-6">
                                                                 <div className="form-group mb-3">
-                                                                    <label htmlFor="Date" className="form-label"> Date
+                                                                    <label htmlFor="Dateofbirth" className="form-label"> Dateofbirth
                                                                         <span className="text-primary">*</span>
                                                                     </label>
                                                                     <Field
+                                                                        name="Dateofbirth"
                                                                         className="form-control"
-                                                                        name="Date"
                                                                         type="date"
-                                                                        placeholder="Enter Your Date"
+
                                                                     />
-                                                                    <ErrorMessage className="text-danger" name="Date" />
+                                                                    <ErrorMessage className="text-danger" name="Dateofbirth" />
                                                                 </div>
                                                             </div>
                                                         </div>

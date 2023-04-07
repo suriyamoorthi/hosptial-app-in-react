@@ -92,20 +92,13 @@ function Patientdoctorlist() {
                                                         return (
                                                             <tr key={u._id}>
                                                                 <td>{u._id}</td>
-
-                                                                <td>{u.
-                                                                    Doctorfirstname
-                                                                }</td>
-
-
-                                                                <td><Link to="/Patientdoctordetails">{u.Doctorlastname}</Link></td>
+                                                                                                                                          
+                                                                <td><Link to="/Patientdoctordetails">{u.Doctorfullname}</Link></td>
                                                                 <td>
                                                                     {u.Exprience}
                                                                 </td>
-                                                                <td>{u.Department}</td>
-
                                                                 <td>{u.Dateofbirth}</td>
-
+                                                                <td>{u.Department}</td>
 
                                                             </tr>
                                                         );

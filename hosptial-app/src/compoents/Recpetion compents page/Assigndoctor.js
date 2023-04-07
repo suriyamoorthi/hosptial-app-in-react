@@ -12,8 +12,9 @@ import "../css/Reception/Assigndoctor.css";
 
 
 const userSchema = Joi.object({
-    Doctorfirstname: Joi.string().required().messages({
+    Doctorfullname: Joi.string().required().messages({
         'string.empty': `" Doctorfirstname" should be a required`,
+        'string.min': ` " Doctorfirstname" Atleast select one name`,
 
     }),
     Temperature: Joi.string().required().messages({
@@ -62,10 +63,10 @@ const userSchema = Joi.object({
     Gender: Joi.string().required(),
 
 
-    // date: Joi.date().min("2001-01-01").required().messages({
-    //     'string.empty': `"Date" should be a required`,
+    Date: Joi.date().required().messages({
+        'string.empty': `"Date" should be a required`,
 
-    // }),
+    }),
 
 
     Address: Joi.string().messages({
@@ -91,7 +92,7 @@ const userSchema = Joi.object({
 });
 
 const INTIAL_FORM = {
-    Doctorfirstname: "",
+    Doctorfullname: "",
     Temperature: "",
     Bp: "",
     Weight: "",
@@ -99,9 +100,10 @@ const INTIAL_FORM = {
     Firstname: "",
     Lastname: "",
     Email: "",
+    Date:"",
     Phonenumber: "",
     Gender: "male",
-    // date: "",
+    Date: "",
     Address: "",
     City: "",
     Pincode: "",
@@ -127,14 +129,11 @@ function Assigndoctor() {
             INTIAL_FORM.Email = parsedData.Email;
             INTIAL_FORM.Gender = parsedData.Gender;
             INTIAL_FORM.Phonenumber = parsedData.Phonenumber;
-            //   INTIAL_FORM.Date = parsedData.Date;
+            INTIAL_FORM.Date = parsedData.Date;
             INTIAL_FORM.Address = parsedData.Address;
             INTIAL_FORM.City = parsedData.City;
             INTIAL_FORM.Pincode = parsedData.Pincode;
-            //     console.log("FORMS_VALUES.Firstname", FORMS_VALUES.Firstname);
-            //  formData(parsedData);
-            // user.Firstname = ""  
-            // console.log("parcing data", parsedData);
+          
             console.log("ok");
         }
         else {
@@ -234,21 +233,21 @@ function Assigndoctor() {
                                                         <div className="col-sm-6"></div>
                                                         <div className="col-sm-6">
                                                             <div className="from-group mb-3 ">
-                                                                <label htmlFor="Doctorfirstname" className="form-label">Doctorfirstname
+                                                                <label htmlFor="Doctorfullname" className="form-label">Doctor Name
                                                                     <span className="text-primary">*</span></label>
                                                                 <Field
                                                                     className="form-select"
                                                                     component="select"
-                                                                    name="Doctorfirstname"
+                                                                    name="Doctorfullname"
                                                                     aria-label="Default select example"
                                                                 // multiple={true}
                                                                 >
                                                                     <option value=" Select a fruit "> -- Choose the Doctor -- </option>
                                                                     {options.map((option) => (
-                                                                        <option value={`${option.Doctorfirstname}${option.Doctorfirstname}`}>{option.Doctorfirstname}</option>
+                                                                        <option value={option.Doctorfullname}>{option.Doctorfullname}</option>
                                                                     ))}
                                                                 </Field>
-                                                                <ErrorMessage className="text-danger" name=" Doctorfirstname" />
+                                                                <ErrorMessage className="text-danger" name=" Doctorfullname" />
 
                                                             </div>
                                                         </div>
@@ -357,6 +356,7 @@ function Assigndoctor() {
                                                                     className="form-control"
                                                                     name="Email"
                                                                     type="email"
+                                                                    readOnly={true}
                                                                     placeholder="Enter the your email"
                                                                 />
                                                                 <ErrorMessage className="text-primary" name="Email" />
@@ -412,16 +412,17 @@ function Assigndoctor() {
 
                                                             <div className="form-group mb-3">
 
-                                                                <label htmlFor="date" class="form-label">Date
+                                                                <label htmlFor="Date" class="form-label">Date
                                                                     <span className="text-primary">*</span></label>
                                                                 <Field
-                                                                    type="date"
-                                                                    name="date"
+                                                                    type="Date"
+                                                                    name="Date"
                                                                     className="form-control"
-                                                                    min="12-10-2022"
+                                                                    // min="12-10-2022"
+                                                                    // placeholder="yyyy-mm-dd"
 
                                                                 />
-                                                                <ErrorMessage className="sec1" name="date" />
+                                                                <ErrorMessage className="sec1" name="Date" />
                                                             </div>
                                                         </div>
                                                         <div className="col-sm-6">

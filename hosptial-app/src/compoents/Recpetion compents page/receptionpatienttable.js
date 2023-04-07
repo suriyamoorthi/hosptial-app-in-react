@@ -96,16 +96,15 @@ function Receptionpatienttable() {
                                                     return (
                                                         <tr key={u._id}>
                                                             <td>{u._id}</td>
-                                                            <td>{u.Firstname}</td>
+                                                            <td>{u.Fullname}</td>
 
-                                                            <td>{u.Lastname}</td>
+                                                            <td>{u.Age}</td>
 
 
                                                             {/* <button> <td><Link to="/Assigndoctor">{u.Phonenumber}</Link></td></button> */}
 
                                                             {/* <td> <button className="buttonClick" onClick={()=> handleTableRowClick(u)}><Link>{u.Phonenumber}</Link></button></td> */}
                                                             <td>{u.Phonenumber}</td>
-                                                            <td>{u.Email}</td>
                                                             <td>{u.Date}</td>
                                                             <td>{u.City}</td>
 

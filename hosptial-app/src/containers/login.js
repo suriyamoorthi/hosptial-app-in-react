@@ -54,8 +54,7 @@ function Login() {
   const handleSubmit = async (values) => {
     console.log("sumbitted", values)
     const { error } = userSchema.validate(values);
-    // console.log(error);
-
+ 
 
     if (!error) {
 
@@ -63,7 +62,7 @@ function Login() {
              
               const {data}= await userLogin(values);
               console.log("USERLOGIN", data);
-          
+              alert(data.Message);
             
               const emailValues = JSON.stringify(data.Data);
              
@@ -72,22 +71,25 @@ function Login() {
               console.log("ADDDD", getvalues);
               if (getvalues === 1) {
                 window.sessionStorage.setItem("PatientToken",emailValues);
-                alert(data.Message);
                 history.push("/Patientappionment");
 
               }
               else if(getvalues === 2){
                
                 window.sessionStorage.setItem("DoctorToken",emailValues);
-                alert(data.Message);
                 history.push("/overview");
 
               }
               else if(getvalues === 3){
               
                 window.sessionStorage.setItem("ReceptionToken",emailValues);
-                alert(data.Message);
                 history.push("/Receptionoverview");
+
+              }
+              else if(getvalues === 4){
+              
+                window.sessionStorage.setItem("AdminToken",emailValues);
+                history.push("/addreception");
 
               }
               else{

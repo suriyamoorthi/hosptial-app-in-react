@@ -28,6 +28,7 @@ import adddoctor from "./Admin compoent/adddoctor";
 import alldoctor from "./Admin compoent/alldoctor";
 import doctordetails from "./Admin compoent/doctordetails";
 import myprofile from "./Admin compoent/Myprofile";
+import AdminChangepassword from "./Admin compoent/AdminChangepassword";
 
 //DOCTOR PAGE
 
@@ -37,6 +38,7 @@ import Patientvisitdatailsdoctor from "./Doctor compoent/Patientvisitdatailsdoct
 import allpatientdoctor from "./Doctor compoent/Allpatientdoctor";
 import dallpatient from "./Doctor compoent/Dallpatient";
 import doctorprofile from "./Doctor compoent/Doctorprofile";
+import DoctorChangePassword from "./Doctor compoent/DoctorChangepassword";
 
 //RECPTION PAGE
 
@@ -46,7 +48,6 @@ import Receptionallpatient from "../containers/Recpetion module/Receptionpatient
 import Assigndoctor from "./Recpetion compents page/Assigndoctor";
 import Appionmentreception from "./Recpetion compents page/Appionmentrecption";
 import Receptionmyprofile from "./Recpetion compents page/Receptionmyprofile";
-import Admintable from "./Recpetion compents page/adminptable";
 import RecpetionResetpassword from "../compoents/Recpetion compents page/Recptionrestpasssword.js";
 
 
@@ -94,6 +95,7 @@ function Routing() {
             <Route path="/alldoctor" component={alldoctor} />
             <Route path="/doctordetails" component={doctordetails} />
             <Route path="/myprofile" component={myprofile} />
+            <Route path="/AdminChangepassword" component={AdminChangepassword} />
 
             {/* //DOCTOR */}
 
@@ -103,6 +105,7 @@ function Routing() {
             <Route path="/allpatientdoctor" component={allpatientdoctor} />
             <Route path="/dallpatient" component={dallpatient} />
             <Route path="/doctorprofile" component={doctorprofile} />
+            <Route path="/DoctorChangePassword" component={DoctorChangePassword}/>
 
             {/* //RECEPTION */}
 
@@ -112,7 +115,6 @@ function Routing() {
             <Route path="/Assigndoctor" component={Assigndoctor} />
             <Route path="/Appionmentreception" component={Appionmentreception} />
             <Route path="/Receptionmyprofile" component={Receptionmyprofile} />
-            <Route path="/Admintable" component={Admintable} />
             <Route path="/RecpetionResetpassword" component={RecpetionResetpassword}/>
 
             {/* //PATIENT */}

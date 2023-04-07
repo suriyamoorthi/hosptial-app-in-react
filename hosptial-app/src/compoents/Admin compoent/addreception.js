@@ -50,9 +50,16 @@ const userSchema = Joi.object({
         'string.empty': `"Date of Birth" should be a required`,
 
     }),
+    Age: Joi.number().messages({
+        'number.empty': `"Age" should be a required`,
+    }),
    
 
-    Gender: Joi.string().required(),
+    Gender: Joi.string().required().messages({
+        'string.empty': `"Gender" should be a required`,
+
+    }),
+    
 
     Address: Joi.string().messages({
         'string.empty': `"address" should be a required`,
@@ -74,6 +81,7 @@ const INTIAL_FORM = {
     Confirmpassword:"",
     Phonenumber: "",
     Dateofbirth: "",
+    Age:"",
     Gender: "male",
     Address: "",
     File: "",
@@ -94,8 +102,9 @@ function Addreception() {
         return errors;
 
     };
-    const handleSubmit = async(values) => {
-        console.log("sumbitted", values)
+    const handleSubmit = async(values,{resetForm}) => {
+        console.log("sumbitted", values);
+        resetForm({value:''});
         const { error } = userSchema.validate(values);
         if (!error) {
             try{ 
@@ -256,25 +265,45 @@ function Addreception() {
                                                             </div>
 
                                                             <div className="col-sm-6">
-                                                                <div className="from-group mb-3 ">
-                                                                    <label htmlFor="Gender" className="form-label">Gender
+                                                                <div className="form-group mb-3">
+
+                                                                    <label htmlFor="Age" className="form-label">Age
                                                                         <span className="text-primary">*</span></label>
                                                                     <Field
-                                                                        className="form-select"
-                                                                        component="select"
-                                                                        name="Gender"
-                                                                        aria-label="Default select example"
-                                                                    // multiple={true}
-                                                                    >
-                                                                        <option value="Male">Male</option>
-                                                                        <option value="Female">Female</option>
-                                                                        <option value="Other">Other</option>
-                                                                    </Field>
+                                                                        type="number"
+                                                                        name="Age"
+                                                                        className="form-control"
+                                                                        placeholder="Enter the Age"
 
+                                                                    />
+                                                                    <ErrorMessage className="sec1" name="Age" />
                                                                 </div>
-
                                                             </div>
                                                         </div>
+                                                        <div className="row ">
+
+<label htmlFor="Gender" className="form-label">Gender
+    <span className="text-primary">*</span></label>
+
+<div className="col-sm-6 ">
+    <div className="form-group mb-3">
+
+        <Field className="form-check-input" type="radio" name="Gender" value="male" />
+        <label className="form-check-label ms-2" htmlFor="male">
+            Male
+        </label>
+
+    </div>
+</div>
+<div className="col-sm-6 ">
+    <div className="form-group mb-3">
+        <Field className="form-check-input" type="radio" name="Gender" value="female" />
+        <label className="form-check-label ms-2" htmlFor="female">
+            Female
+        </label>
+    </div>
+</div>
+</div>
 
                                                         <div className="address">
                                                             <label htmlFor="Address" className="form-label"> Address

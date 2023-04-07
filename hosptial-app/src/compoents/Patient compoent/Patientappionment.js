@@ -16,7 +16,7 @@ const INTIAL_FORM = {
     Firstname: "",
     Lastname: "",
     Email: "",
-    // Password: "",
+    Age: "",
     Gender: "male",
     Phonenumber: "",
     Date: "",
@@ -32,8 +32,8 @@ function Patientappionment() {
     const GetSeesionData = async () => {
 
         var registerData = await getuserdetailfromsession();
-        console.log("DATAVALUES",registerData);
-    
+        console.log("DATAVALUES", registerData);
+
         //   if(data[0].Firstname)
         //   {
         //     INTIAL_FORM.Firstname =  data[0].Firstname;
@@ -41,6 +41,7 @@ function Patientappionment() {
         INTIAL_FORM.Firstname = registerData[0].Firstname;
         INTIAL_FORM.Lastname = registerData[0].Lastname;
         INTIAL_FORM.Email = registerData[0].Email;
+        INTIAL_FORM.Age = registerData[0].Age;
         INTIAL_FORM.Gender = registerData[0].Gender;
         INTIAL_FORM.Phonenumber = registerData[0].Phonenumber;
         // INTIAL_FORM.Date = registerData[0].Date;
@@ -48,9 +49,9 @@ function Patientappionment() {
         INTIAL_FORM.Address = registerData[0].Address;
         INTIAL_FORM.City = registerData[0].City;
         INTIAL_FORM.Pincode = registerData[0].Pincode;
-        
-        
-    
+
+
+
     };
 
     const handleSubmit = async (values) => {
@@ -59,31 +60,31 @@ function Patientappionment() {
         const { error } = userSchema.validate(values);
         if (!error) {
 
-        try{
-            const {data} =await postUserappionmentvalidation(values);
-            console.log("ERRORMESSAGE",data);
-            alert(data.Message);
+            try {
+                const { data } = await postUserappionmentvalidation(values);
+                console.log("ERRORMESSAGE", data);
+                alert(data.Message);
 
-            // const getEmail=data.Data[0].Email;
-            // console.log("GETEMAIL",getEmail);
+                // const getEmail=data.Data[0].Email;
+                // console.log("GETEMAIL",getEmail);
 
-        }
-        catch{
+            }
+            catch {
 
+            }
+            //    const message="APPIONMENT IS SUCCSSFULLY CREATE"
+            //    alert(message);
+            // }
+            // else{
+            //     const notmessage="APPIONMENT NOT SUCCSSFULLY CREATE"
+            //     alert(notmessage);
         }
-        //    const message="APPIONMENT IS SUCCSSFULLY CREATE"
-        //    alert(message);
-        // }
-        // else{
-        //     const notmessage="APPIONMENT NOT SUCCSSFULLY CREATE"
-        //     alert(notmessage);
-        }
-        
+
 
 
     };
 
-    
+
     useEffect(() => {
         console.log("useEffect")
         GetSeesionData();
@@ -159,20 +160,20 @@ function Patientappionment() {
                                                             </div>
                                                         </div>
 
-                                                        {/* <div className="col-sm-6">
-                                                        <div className="form-group mb-3">
-                                                            <label htmlFor="Password" className="form-label">Password
-                                                                <span className="text-primary">*</span>
-                                                            </label>
-                                                            <Field
-                                                                className="form-control"
-                                                                name="Password"
-                                                                type="password"
-                                                                placeholder="Enter Your Password"
-                                                            />
-                                                             <ErrorMessage className="text-danger" name="Password" />
+                                                        <div className="col-sm-6">
+                                                            <div className="form-group mb-3">
+                                                                <label htmlFor="PassworAge" className="form-label">Age
+                                                                    <span className="text-primary">*</span>
+                                                                </label>
+                                                                <Field
+                                                                    className="form-control"
+                                                                    name="Age"
+                                                                    type="number"
+                                                                    placeholder="Enter Your Age"
+                                                                />
+                                                                <ErrorMessage className="text-danger" name="Age" />
+                                                            </div>
                                                         </div>
-                                                    </div> */}
                                                     </div>
 
                                                     <div className="row ">

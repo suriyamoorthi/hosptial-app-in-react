@@ -46,10 +46,13 @@ const userSchema = Joi.object({
     Gender: Joi.string().required(),
 
 
-    // date: Joi.date().min("2001-01-01").required().messages({
-    //     'string.empty': `"Date" should be a required`,
+    Dateofbirth: Joi.date().min("2001-01-01").required().messages({
+        'string.empty': `"Date" should be a required`,
 
-    // }),
+    }),
+   Age: Joi.number().messages({
+        'number.empty': `"Age" should be a required`,
+    }),
 
 
     Address: Joi.string().messages({
@@ -82,7 +85,8 @@ const INTIAL_FORM = {
     Confirmpassword: "",
     Phonenumber: "",
     Gender: "male",
-    // date: "",
+    Dateofbirth: "",
+    Age:"",
     Address: "",
     City: "",
     Pincode: "",
@@ -116,13 +120,13 @@ function Appionment() {
                 const appionmentData = await register(values);
                 console.log("DATAVALUES", appionmentData);
                 const error1 = appionmentData.data.Statuscode;
-                if( error1==200){
+                if (error1 == 200) {
                     alert(appionmentData.data.Message);
                     histroy.push("/login");
                 }
-                else{
+                else {
                     alert(appionmentData.data.Message);
-                 
+
                 }
 
 
@@ -288,21 +292,39 @@ function Appionment() {
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div className="row">
+                                                        <div className="col-sm-6">
+                                                            <div className="form-group mb-3">
 
-                                                    {/* <div className="form-group">
+                                                                <label htmlFor="Dateofbirth" class="form-label">Dateofbirth
+                                                                    <span className="text-primary">*</span></label>
+                                                                <Field
+                                                                    type="Date"
+                                                                    name="Dateofbirth"
+                                                                    className="form-control"
+                                                                    min="12-10-2022"
 
-                                                        <label htmlFor="date" class="form-label">Date
-                                                            <span className="text-primary">*</span></label>
-                                                        <Field
-                                                            type="date"
-                                                            name="date"
-                                                            className="form-control"
-                                                            min="12-10-2022"
+                                                                />
+                                                                <ErrorMessage className="sec1" name="Dateofbirth" />
+                                                            </div>
+                                                        </div>
 
-                                                        />
-                                                        <ErrorMessage className="sec1" name="date" />
-                                                    </div> */}
+                                                        <div className="col-sm-6">
+                                                            <div className="form-group mb-3">
 
+                                                                <label htmlFor="Age" class="form-label">Age
+                                                                    <span className="text-primary">*</span></label>
+                                                                <Field
+                                                                  className="form-control"
+                                                                    type="number"
+                                                                    name="Age"
+                                                                    placeholder="Enter Your Age"
+
+                                                                />
+                                                                <ErrorMessage className="sec1" name="Age" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
                                                     {/* Address */}
                                                     <div className="address">

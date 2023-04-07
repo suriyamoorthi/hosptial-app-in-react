@@ -14,9 +14,6 @@ export const prifileSchema =Joi.object({
         'string.max': ` "Last name" must maximum 12 character`,
     }),
 
-    // age: Joi.number().integer().messages({
-    //     'number.empty': `"Age" should be a required`,
-    // }),
 
     Email: Joi.string()
         .email({ tlds: { allow: false } })
@@ -26,11 +23,9 @@ export const prifileSchema =Joi.object({
             'string.email': `"Email" should be a vaildemail`,
 
         }),
-    // Password: Joi.string().alphanum().min(6).max(10).required().messages({
-    //     'string.empty': `"Password" should be a required`,
-    //     'string.min': ` "Password" must minmum 6 character`,
-    //     'string.max': ` "Password" must maximum 12 character`,
-    // }),
+     age: Joi.number().integer().messages({
+        'number.empty': `"Age" should be a required`,
+    }),
 
 
     Gender: Joi.string().required(),
@@ -70,12 +65,11 @@ export const prifileSchema =Joi.object({
   export const INTIAL_PROFILEVALUES ={
     Firstname: "",
     Lastname: "",
-    // age: "",
     Email: "",
-    // Password: "",
+    Age: "",
     Gender: "male",
     Phonenumber: "",
-    Date: "",
+    Dateofbirth: "",
     File: "",
     Address: "",
     // toggle: "",
