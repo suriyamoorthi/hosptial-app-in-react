@@ -1,7 +1,7 @@
 import axios from "axios";
+import { PROFILE_API_URL } from "../Stringconstant-reusecode";
 
 
-const PROFILE_API_URL = "https://hosptial-app.onrender.com/profile";
 
 export const getProfiledetails =async()=>{
     const profileValues =window.sessionStorage.getItem("PatientToken");
