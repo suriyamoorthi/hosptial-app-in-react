@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-const PROFILE_API_URL = "http://localhost:3001/profile";
+const PROFILE_API_URL = "https://hosptial-app.onrender.com/profile";
 
 export const getProfiledetails =async()=>{
     const profileValues =window.sessionStorage.getItem("PatientToken");

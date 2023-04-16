@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const AUTH_API_URL = "http://localhost:3001/LoginRegister";
+const AUTH_API_URL = "https://hosptial-app.onrender.com/LoginRegister";
 
 export const register = (registeruser) =>axios.post(`${AUTH_API_URL}/registerappionment`,registeruser);
 

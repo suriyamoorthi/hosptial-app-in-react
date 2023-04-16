@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-const AUTH_API_URL ="http://localhost:3001/adminappionment";
+const AUTH_API_URL ="https://hosptial-app.onrender.com/adminappionment";
 
 
 export const addReceptionForm = (recptionUser)=>axios.post(`${AUTH_API_URL}/addreception`,recptionUser);

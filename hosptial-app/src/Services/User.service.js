@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const AUTH_API_URL = "http://localhost:3001/Appionment";
+const AUTH_API_URL = "https://hosptial-app.onrender.com/Appionment";
 const currentDate = new Date().toJSON().slice(0, 10);
         console.log(currentDate); // "2022-06-17"
 
