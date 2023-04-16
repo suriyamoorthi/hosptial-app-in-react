@@ -65,6 +65,7 @@ function Login() {
               alert(data.Message);
             
               const emailValues = JSON.stringify(data.Data);
+              console.log("emailValues", emailValues );
              
               const getvalues = data.Data[0].Usertype;
           
