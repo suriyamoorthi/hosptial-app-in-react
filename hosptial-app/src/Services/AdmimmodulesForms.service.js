@@ -1,11 +1,11 @@
 import axios from "axios";
+import {API_URL_Admin } from "../Stringconstant-reusecode";
 
 
-const AUTH_API_URL ="https://hosptial-app.onrender.com/adminappionment";
 
 
-export const addReceptionForm = (recptionUser)=>axios.post(`${AUTH_API_URL}/addreception`,recptionUser);
+export const addReceptionForm = (recptionUser)=>axios.post(`${API_URL_Admin }/addreception`,recptionUser);
 
-export const addDoctorForm =(doctorUser)=>axios.post(`${AUTH_API_URL}/adddoctor`,doctorUser);
+export const addDoctorForm =(doctorUser)=>axios.post(`${API_URL_Admin }/adddoctor`,doctorUser);
 
-export const addAdminForm =(adminUser)=>axios.post(`${AUTH_API_URL}/addAdmin`,adminUser);
+export const addAdminForm =(adminUser)=>axios.post(`${API_URL_Admin }/addAdmin`,adminUser);
