@@ -7,7 +7,6 @@ const currentDate = new Date().toJSON().slice(0, 10);
 //   console.log(currentDate); // "2022-06-17"
 // 
 
- 
 
 
 export const getuserdetailfromsession = async () => {
