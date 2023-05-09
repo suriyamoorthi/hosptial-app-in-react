@@ -86,8 +86,8 @@ function Allpatienttable() {
 
                                             {admintable.map((user) => {
                                                 return (
-                                                    <tr key={user.id}>
-                                                        <td>{user.id}</td>
+                                                    <tr key={user._id}>
+                                                        <td>{user._id}</td>
                                                         <td><Link to="/dallpatient">{user.Fullname}</Link></td>
                                                         {/* <td>
                                                             <img src={user.avatar}

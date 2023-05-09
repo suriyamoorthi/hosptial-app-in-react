@@ -39,4 +39,4 @@ export const DoctorListPatientModuleUser = (DoctorList) => axios.get(`${API_URL_
 
 export const assginDoctorlist = (assgnDoctorDatas) => axios.get(`${API_URL_APPIONMENT}/AssignDoctor`, assgnDoctorDatas);
 export const assginDoctorForPostUser = (PostUser12) => axios.post(`${API_URL_APPIONMENT}/patientVatilas12`, PostUser12);
-export const allPaitentListDoctorModule = (allpatientList) => axios.get(`${API_URL_APPIONMENT}/doctormoduleallpatient?Doctorfullname=${seesindata}`,allpatientList);
+export const allPaitentListDoctorModule = (allpatientList) => axios.get(`${API_URL_APPIONMENT}/doctormoduleallpatient?Doctorfullname=`,allpatientList);
