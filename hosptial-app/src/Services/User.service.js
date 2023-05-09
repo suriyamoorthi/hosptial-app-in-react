@@ -1,12 +1,29 @@
 import axios from "axios";
 import { API_URL_APPIONMENT } from "../Stringconstant-reusecode";
-import {getDoctorProfiledetails} from "./Profiles.service";
+import { getDoctorProfiledetails } from "./Profiles.service";
 
 
 const currentDate = new Date().toJSON().slice(0, 10);
 //   console.log(currentDate); // "2022-06-17"
 // 
+// const item_value1 = JSON.parse(sessionStorage.getItem("DoctorToken"));
+// const seesindata = item_value1[0].Doctorfullname;
+// console.log("ITEM-VALUE1234", seesindata);
+const doctorsessiondata =()=>{
+    const doctorsessionvalue =sessionStorage.getItem("DoctorToken");
 
+    if(doctorsessionvalue.length >0){
+
+      const sessiondata = JSON.parse(sessionStorage.getItem("DoctorToken"));
+      var Doctorfullnamesession= sessiondata[0].Doctorfullname;
+      return Doctorfullnamesession;
+    }
+    else{
+      return "";
+    }
+    
+    
+}
 
 
 export const getuserdetailfromsession = async () => {
@@ -32,4 +49,5 @@ export const DoctorListPatientModuleUser = (DoctorList) => axios.get(`${API_URL_
 
 export const assginDoctorlist = (assgnDoctorDatas) => axios.get(`${API_URL_APPIONMENT}/AssignDoctor`, assgnDoctorDatas);
 export const assginDoctorForPostUser = (PostUser12) => axios.post(`${API_URL_APPIONMENT}/patientVatilas12`, PostUser12);
-export const allPaitentListDoctorModule = (allpatientList) => axios.get(`${API_URL_APPIONMENT}/doctormoduleallpatient?Doctorfullname=`,allpatientList);
+export const allPaitentListDoctorModule = (allpatientList) => axios.get(`${API_URL_APPIONMENT}/doctormoduleallpatient?Doctorfullname=${doctorsessiondata()}`, allpatientList);
+export const CurrentDayAppionmentDoctorModuleTable=(tableUser)=>axios.get(`${API_URL_APPIONMENT}/doctorModuleCurrentPatientList?Doctorfullname=${doctorsessiondata()}&Date=${currentDate}`,tableUser);

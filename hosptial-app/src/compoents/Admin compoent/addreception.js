@@ -8,17 +8,11 @@ import "../css/admin/addreception.css";
 
 
 const userSchema = Joi.object({
-    Receptionfirstname: Joi.string().min(6).max(6).required().messages({
+    Receptionfirstname: Joi.string().required().messages({
         'string.empty': `"Reception firstname" should be a required`,
-        'string.min': ` "Reception firstname" must minmum 6 character`,
-        'string.max': ` "Reception firstname" must maximum 6 character`,
-
     }),
-    Receptionlastname: Joi.string().min(6).max(6).required().messages({
+    Receptionlastname: Joi.string().required().messages({
         'string.empty': `"Reception lastname" should be a required`,
-        'string.min': ` "Reception lastname" must minmum 6 character`,
-        'string.max': ` "Reception lastname" must maximum 6 character`,
-
     }),
     Email: Joi.string()
     .email({ tlds: { allow: false } })
@@ -335,8 +329,7 @@ function Addreception() {
                                                                     <Field type="checkbox" name="toggle" />
 
                                                                 </label>
-                                                                <label className="form-check-label ms-2" htmlFor="checkbox">Please
-                                                                    Confrom</label>
+                                                                <label className="form-check-label ms-2" htmlFor="checkbox">Remembar me?</label>
                                                             </div>
                                                         </div>
 

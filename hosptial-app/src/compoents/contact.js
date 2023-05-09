@@ -11,11 +11,11 @@ function contact() {
 
 
 
-        <div id="contact">
-            <div className="section6" >
-                <footer calss="last">
+        <div id="contact"style={{marginTop:"66px"}}>
+            <div className="section6"style={{marginTop:"66px"}} >
+                <footer calssNmae="footer">
 
-                    <div className="container-fluid" >
+                    <div className="container-fluid"  >
                         <div className="row p-3 border-bottom">
 
 
@@ -47,9 +47,9 @@ function contact() {
 
                             <div className="col-sm-1"></div>
                             <div className="col-sm-10">
-                                <div className="ap-text  border p-4">
+                                <div className="text  border p-4">
 
-                                    <h5> <i className="bi bi-pencil-square me-3 "></i>Need a Doctor for Check-up?</h5>
+                                    <h5><i class="fa-sharp fa-solid fa-pen-to-square me-3"></i>Need a Doctor for Check-up?</h5>
                                     <h2 className="ps-3">JUST MAKE AN
                                         APPOINTMENT & YOU'RE DONE ! </h2>
                                 </div>
@@ -74,19 +74,19 @@ function contact() {
                                         perspiciatis similique laudantium corporis quod non saepe aliquam.
                                         Obcaecati nihil tempore qui.</p>
                                     <div className="address">
-                                        <p><i className="bi bi-geo-alt me-3"></i>
+                                        <p><i className="fa-solid fa-location-dot me-3"></i>
                                             PO Box 16122 Collins Street<br />
-                                            West Victoria 8007 Australia</p>
+                                               West Victoria 8007 Australia</p>
                                     </div>
 
                                     <div className="phnumber">
-
-                                        <p><i className="bi bi-telephone me-3"></i> 8248910351</p>
+                                    <p><i class="fa-solid fa-phone me-3"></i> 8248910351</p>
+                                        {/* <p><i className="bi bi-telephone me-3"></i> 8248910351</p> */}
                                     </div>
 
                                     <div className="email">
 
-                                        <p> <i className="bi bi-envelope me-3"></i><a herf="#">suriyamoorthie12@gmail.com</a>
+                                        <p> <i class="fa-solid fa-envelope me-3"></i><a herf="">suriyamoorthie12@gmail.com</a>
                                         </p>
                                     </div>
                                 </div>
@@ -109,8 +109,8 @@ function contact() {
                     </div>
                     <div className="copyright">
                         <div className="text-center p-4">
-                            © 2021 Copyright:
-                            <a className="text-reset fw-bold" href="https://mdbootstrap.com/">suriya</a>
+                            © 2022 Copyright:
+                            <a className="text-reset fw-bold" href="">suriya</a>
                         </div>
                     </div>
 

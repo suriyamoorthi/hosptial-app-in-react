@@ -5,19 +5,15 @@ import Sidebaradmin from "./sidebaradmin";
 import "../css/admin/addappiontment.css";
 
 const userSchema = Joi.object({
-    patientname: Joi.string().min(6).max(6).required().messages({
+    patientname: Joi.string().required().messages({
         'string.empty': `" patientname" should be a required`,
-        'string.min': ` " patientname" must minmum 6 character`,
-        'string.max': ` " patientname" must maximum 6 character`,
 
     }),
 
     department: Joi.string().required(),
 
-    doctorname: Joi.string().min(6).max(6).required().messages({
+    doctorname: Joi.string().required().messages({
         'string.empty': `" doctorname" should be a required`,
-        'string.min': ` " doctorname" must minmum 6 character`,
-        'string.max': ` " doctorname" must maximum 6 character`,
 
     }),
     appiontmentdate: Joi.date().min("2001-01-01").required().messages({
@@ -250,8 +246,7 @@ function Addappiontment() {
                                                                     <Field type="checkbox" name="toggle" />
 
                                                                 </label>
-                                                                <label className="form-check-label ms-2" htmlFor="checkbox">Please
-                                                                    Confrom</label>
+                                                                <label className="form-check-label ms-2" htmlFor="checkbox">Remembar me?</label>
                                                             </div>
                                                         </div>
 

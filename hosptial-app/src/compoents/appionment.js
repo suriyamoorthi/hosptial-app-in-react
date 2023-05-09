@@ -2,7 +2,7 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import Joi from "joi";
 import React from "react";
 import { useHistory } from "react-router-dom";
-
+import { HashLink as Link } from "react-router-hash-link";
 import { register } from "../Services/auth.services";
 
 
@@ -11,16 +11,14 @@ import "../compoents/css/appionment.css";
 
 
 const userSchema = Joi.object({
-    Firstname: Joi.string().min(6).max(6).required().messages({
+    Firstname: Joi.string().required().messages({
         'string.empty': `"First name" should be a required`,
-        'string.min': ` "First name" must minmum 6 character`,
-        'string.max': ` "First name" must maximum 6 character`,
+
 
     }),
-    Lastname: Joi.string().min(6).max(12).required().messages({
+    Lastname: Joi.string().required().messages({
         'string.empty': `"Last name" should be a required`,
-        'string.min': ` "Last name" must minmum 6 character`,
-        'string.max': ` "Last name" must maximum 12 character`,
+
     }),
     Email: Joi.string()
         .email({ tlds: { allow: false } })
@@ -50,7 +48,7 @@ const userSchema = Joi.object({
         'string.empty': `"Date" should be a required`,
 
     }),
-   Age: Joi.number().messages({
+    Age: Joi.number().messages({
         'number.empty': `"Age" should be a required`,
     }),
 
@@ -84,7 +82,7 @@ const INTIAL_FORM = {
     Phonenumber: "",
     Gender: "male",
     Dateofbirth: "",
-    Age:"",
+    Age: "",
     Address: "",
     City: "",
     Pincode: "",
@@ -151,7 +149,7 @@ function Appionment() {
                         <div className="col-sm-6">
                             <div className="card">
                                 <div className="card-body">
-                                    <h4 className="card-title"> Appointment Regisation From </h4>
+                                    <h4 className="card-title mb-3" > Appointment Regisation From </h4>
                                     <hr />
                                     <Formik
                                         initialValues={INTIAL_FORM}
@@ -313,7 +311,7 @@ function Appionment() {
                                                                 <label htmlFor="Age" class="form-label">Age
                                                                     <span className="text-primary">*</span></label>
                                                                 <Field
-                                                                  className="form-control"
+                                                                    className="form-control"
                                                                     type="number"
                                                                     name="Age"
                                                                     placeholder="Enter Your Age"
@@ -370,9 +368,9 @@ function Appionment() {
                                                         </div>
                                                     </div>
                                                     <hr />
-                                                    <div className="footer">
-                                                        <div className="form-group mb-3 ">
-                                                            {/* <div id="checkbox-group">Checked1</div> */}
+                                                    {/* <div className="footer1">
+                                                        <div className="form-group mb-1 ">
+                                                            
                                                             <label>
                                                                 <Field type="checkbox" name="toggle" />
 
@@ -381,19 +379,20 @@ function Appionment() {
 
 
 
-                                                            <label className="form-check-label ms-2" htmlFor="checkbox">Please
+                                                            <label className="form-check-label ms-2 " htmlFor="checkbox">Please
                                                                 Confrom</label>
                                                         </div>
+                                                    </div>  */}
+
+
+                                                    <div className="button">
+                                                        <div className="form-groups mb-3">
+
+                                                            <button type="submit" className="btn btn-primary " >submit</button>
+                                                        </div>
                                                     </div>
-
-
-
-
-                                                    <div className="form-group ">
-                                                        <button type="reset" className="btn btn-primary ms-2"
-                                                        >reset</button>
-                                                        {" "}
-                                                        <button type="submit" className="btn btn-primary ms-1" >submit</button>
+                                                    <div className="footer">
+                                                        <p >Already have an account?<Link to="/login" className="link">Login</Link></p>
                                                     </div>
                                                 </Form>
                                             )

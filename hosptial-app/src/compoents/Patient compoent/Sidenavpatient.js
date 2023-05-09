@@ -1,9 +1,14 @@
 import React from "react";
 import { HashLink as Link } from "react-router-hash-link";
 
+
 import "../css/admin/sidbaradmin.css";
 
 function Sidenavpatient() {
+  
+    function handleLogout() {
+        sessionStorage.removeItem("PatientToken");
+      }
     return (
         <div class="sidebaradmin">
             <nav className="navbar navbar-expand-lg navbar-light bg-primary fixed-top">
@@ -53,7 +58,8 @@ function Sidenavpatient() {
                                     <h3>Overview</h3>
                                 </Link> */}
 
-                                <Link to="/Patientappionment" className="active">
+                                {/* <Link to="/Patientappionment" className="active"> */}
+                                <Link to="/Patientappionment" >
                                 <i class="fa-solid fa-hospital-user" ></i>
                                     <h3>Appionment</h3>
                                 </Link>
@@ -78,9 +84,9 @@ function Sidenavpatient() {
                                     <h3>Change Password</h3>
                                 </Link>
 
-                                <Link to="" style={{marginTop: "200px"}}>
+                                <Link to="/index" style={{marginTop: "200px"}}>
                                     <i className="fa-solid fa-right-from-bracket"></i>
-                                    <h3>Logout</h3>
+                                    <h3><a  onClick={handleLogout}>Logout</a></h3>
                                 </Link>
 
 
