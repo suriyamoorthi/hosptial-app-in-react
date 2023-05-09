@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { HashLink as Link } from "react-router-hash-link";
+ import { allPaitentListDoctorModule } from "../../Services/User.service";
+// import { getPatientvisityhistory } from "../../Services/User.service";
+import { getDoctorProfiledetails } from "../../Services/Profiles.service";
 
 
 import "../css/Doctor/Allpatienttable.css"
@@ -8,23 +11,37 @@ function Allpatienttable() {
 
 
     const [admintable, setAdmintable] = useState([]);
+    // const session = useState(window.sessionStorage);
 
     //GET USER
     const getAdmintable = async () => {
         // setIsloding(true);
         try {
-            let response = await fetch(" https://www.mecallapi.com/api/users");
 
-            if (!response.ok) {
-                throw new Error("Request failed");
-            }
-            response = await response.json();
-            // setIsloding(false);
-            setAdmintable(response);
+
+            const { data } = await allPaitentListDoctorModule();
+            console.log("DOCTOR MODULE PATIENT LIST", data);
+            // const sesstiondata = await getDoctorProfiledetails();
+            // console.log("doctorloginSESSIONDATA", sesstiondata);
+
+            // const doctorlogindata = sesstiondata[0].Doctorfullname;
+            // console.log("doctorlogindata", doctorlogindata);
+            // console.log("ITEM-VALUEcalled" );
+
+            //  const localDoctorname= data[0].Doctorfullname;
+            //  console.log("getPatientvisityhistory",localDoctorname);
+            // const item_value1 = JSON.parse(sessionStorage.getItem("DoctorToken"));
+            // const seesindata = item_value1[0].Doctorfullname;
+            // console.log("ITEM-VALUE",seesindata );
+
+
+            setAdmintable(data);
+
+
 
         }
         catch (err) {
-            console.error(err.message);
+            console.log(err.message);
         }
 
 
@@ -42,7 +59,7 @@ function Allpatienttable() {
                     <div className="col-sm-12">
                         <div className="card">
                             <div className="card-body">
-                                <h5 className="card-body"> All Patient List</h5>
+                                <h5 className="card-body"> All Patient List12</h5>
                                 <form className="d-flex" role="search">
                                     <input className="form-control me-2 "
                                         type="text"
@@ -71,13 +88,13 @@ function Allpatienttable() {
                                                 return (
                                                     <tr key={user.id}>
                                                         <td>{user.id}</td>
-                                                        <td><Link to="/dallpatient">{user.fname}</Link></td>
-                                                        <td>
+                                                        <td><Link to="/dallpatient">{user.Fullname}</Link></td>
+                                                        {/* <td>
                                                             <img src={user.avatar}
                                                                 width="50"
                                                                 className="avatar" />
-                                                        </td>
-                                                        <td>{user.lname}</td>
+                                                        </td> */}
+                                                        <td>{user.Doctorfullname}</td>
 
                                                         <td>{user.username}</td>
 

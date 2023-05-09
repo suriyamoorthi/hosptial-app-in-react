@@ -5,9 +5,11 @@ import { PROFILE_API_URL } from "../Stringconstant-reusecode";
 
 export const getProfiledetails =async()=>{
     const profileValues =window.sessionStorage.getItem("PatientToken");
+    console.log("profileValues", profileValues);
     try{
         const sessiondata = await JSON.parse(profileValues);
            console.log(sessiondata);
+           console.log("SESSIONDATA", sessiondata);
            return sessiondata;
     
         }
@@ -31,6 +33,7 @@ export  const getRecptionProfiledetails =async()=>{
 } 
 export  const getDoctorProfiledetails =async()=>{
    const DoctorSessionData= window.sessionStorage.getItem("DoctorToken");
+   // console.log("SESSION DATA",DoctorSessionData);
 
    try{
      const sessionData= await JSON.parse(DoctorSessionData);
