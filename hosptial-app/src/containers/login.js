@@ -54,56 +54,61 @@ function Login() {
   const handleSubmit = async (values) => {
     console.log("sumbitted", values)
     const { error } = userSchema.validate(values);
- 
+
 
     if (!error) {
 
-            try {
-             
-              const {data}= await userLogin(values);
-              console.log("USERLOGIN", data);
-              alert(data.Message);
-            
-              const emailValues = JSON.stringify(data.Data);
-              console.log("emailValues", emailValues );
-             
-              const getvalues = data.Data[0].Usertype;
-          
-              console.log("ADDDD", getvalues);
-              if (getvalues === 1) {
-                window.sessionStorage.setItem("PatientToken",emailValues);
-                history.push("/Patientappionment");
+      try {
 
-              }
-              else if(getvalues === 2){
-               
-                window.sessionStorage.setItem("DoctorToken",emailValues);
-                history.push("/overview");
+        const { data } = await userLogin(values);
+        console.log("USERLOGIN", data);
+        alert(data.Message);
+      
+        // var item_value = sessionStorage.getItem("DoctorToken");
+        // console.log("ITEM-VALUE",item_value )
 
-              }
-              else if(getvalues === 3){
-              
-                window.sessionStorage.setItem("ReceptionToken",emailValues);
-                history.push("/Receptionoverview");
+        // const emailValues = JSON.stringify(data.Data[0]);
+         const emailValues = JSON.stringify(data.Data);
+        console.log("emailValues", emailValues);
 
-              }
-              else if(getvalues === 4){
-              
-                window.sessionStorage.setItem("AdminToken",emailValues);
-                history.push("/addreception");
+        const getvalues = data.Data[0].Usertype;
 
-              }
-              else{
-                alert(data.Message);
-              }
+        console.log("ADDDD", getvalues);
+        // sessionStorage.setItem("UserDetail", emailValues);
+        if (getvalues === 1) {
+          window.sessionStorage.setItem("PatientToken",emailValues);
+          history.push("/Patientappionment");
 
-              
+        }
+        else if (getvalues === 2) {
+
+          window.sessionStorage.setItem("DoctorToken",emailValues);
+          history.push("/overview");
+
+        }
+        else if (getvalues === 3) {
+
+          window.sessionStorage.setItem("ReceptionToken",emailValues);
+          history.push("/Receptionoverview");
+
+        }
+        else if (getvalues === 4) {
+
+          window.sessionStorage.setItem("AdminToken",emailValues);
+          history.push("/addreception");
+
+        }
+        else {
+          alert(data.Message);
+        }
 
 
-            }
-            catch (err){
-       console.log(error.message);
-            }
+
+      }
+      catch (err) {
+        
+        console.log(error.message);
+      }
 
     } else {
       console.log("error3124235", error)
