@@ -3,16 +3,14 @@ import Joi from "joi";
 
 export const userSchema = Joi.object({
 
-    Firstname: Joi.string().min(6).max(6).required().messages({
+    Firstname: Joi.string().required().messages({
         'string.empty': `"First name" should be a required`,
-        'string.min': ` "First name" must minmum 6 character`,
-        'string.max': ` "First name" must maximum 6 character`,
+       
 
     }),
-    Lastname: Joi.string().min(6).max(12).required().messages({
+    Lastname: Joi.string().required().messages({
         'string.empty': `"Last name" should be a required`,
-        'string.min': ` "Last name" must minmum 6 character`,
-        'string.max': ` "Last name" must maximum 12 character`,
+      
     }),
     Email: Joi.string()
         .email({ tlds: { allow: false } })
@@ -37,7 +35,7 @@ export const userSchema = Joi.object({
     }).required(),
 
 
-    Date: Joi.date().min("2001-01-01").required().messages({
+    Date: Joi.date().required().messages({
         'string.empty': `"Date" should be a required`,
 
     }),
