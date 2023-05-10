@@ -86,7 +86,7 @@ const INTIAL_FORM = {
     Address: "",
     City: "",
     Pincode: "",
-    toggle: "",
+   
 
 };
 
