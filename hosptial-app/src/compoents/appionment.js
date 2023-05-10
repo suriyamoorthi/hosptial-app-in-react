@@ -70,7 +70,7 @@ const userSchema = Joi.object({
 
 
 
-    toggle: Joi.boolean().default(false),
+   
 });
 
 const INTIAL_FORM = {
