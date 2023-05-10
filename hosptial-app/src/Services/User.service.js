@@ -1,14 +1,9 @@
 import axios from "axios";
 import { API_URL_APPIONMENT } from "../Stringconstant-reusecode";
-import { getDoctorProfiledetails } from "./Profiles.service";
+
 
 
 const currentDate = new Date().toJSON().slice(0, 10);
-//   console.log(currentDate); // "2022-06-17"
-// 
-// const item_value1 = JSON.parse(sessionStorage.getItem("DoctorToken"));
-// const seesindata = item_value1[0].Doctorfullname;
-// console.log("ITEM-VALUE1234", seesindata);
 const doctorsessiondata =()=>{
     const doctorsessionvalue =sessionStorage.getItem("DoctorToken");
 
@@ -21,8 +16,7 @@ const doctorsessiondata =()=>{
     else{
       return "";
     }
-    
-    
+        
 }
 
 
