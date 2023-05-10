@@ -329,7 +329,7 @@ function Addreception() {
                                                                     <Field type="checkbox" name="toggle" />
 
                                                                 </label>
-                                                                <label className="form-check-label ms-2" htmlFor="checkbox">Remembar me?</label>
+                                                                <label className="form-check-label ms-2" htmlFor="checkbox">Remember Me?</label>
                                                             </div>
                                                         </div>
 
