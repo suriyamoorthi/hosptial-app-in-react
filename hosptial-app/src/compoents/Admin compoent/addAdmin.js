@@ -320,7 +320,7 @@ function AddAdmin() {
                                                                     <Field type="checkbox" name="toggle" />
 
                                                                 </label>
-                                                                <label className="text ms-2" htmlFor="checkbox">Remembar me?</label>
+                                                                <label className="text ms-2" htmlFor="checkbox">Remember Me?</label>
                                                             </div>
                                                         </div>
 
