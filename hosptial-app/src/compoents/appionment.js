@@ -44,7 +44,7 @@ const userSchema = Joi.object({
     Gender: Joi.string().required(),
 
 
-    Dateofbirth: Joi.date().min("2001-01-01").required().messages({
+    Dateofbirth: Joi.date().required().messages({
         'string.empty': `"Date" should be a required`,
 
     }),
