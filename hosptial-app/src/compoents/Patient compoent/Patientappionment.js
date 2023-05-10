@@ -298,12 +298,12 @@ function Patientappionment() {
                                                     </div>
                                                     <hr />
 
-                                                    <div className="form-group ">
-                                                        <button type="reset" className="btn btn-primary ms-2"
-                                                        >reset</button>
-                                                        {" "}
-                                                        <button type="submit" className="btn btn-primary ms-1" >submit</button>
-                                                    </div>
+                                                    <div className="button">
+                                                            <div className="form-groups mb-3">
+
+                                                                <button type="submit" className="btn btn-primary " >submit</button>
+                                                            </div>
+                                                        </div>
                                                 </Form>
                                             )
                                         }

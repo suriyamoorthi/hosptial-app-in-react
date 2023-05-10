@@ -7,17 +7,11 @@ import { addAdminForm } from "../../Services/AdmimmodulesForms.service";
 import "../css/admin/adddoctor.css";
 
 const userSchema = Joi.object({
-    Adminfirstname: Joi.string().min(6).max(6).required().messages({
+    Adminfirstname: Joi.string().required().messages({
         'string.empty': `"Admin Firstname" should be a required`,
-        'string.min': ` "Admin Firstname" must minmum 6 character`,
-        'string.max': ` "Admin Firstname" must maximum 6 character`,
-
     }),
-    Adminlastname: Joi.string().min(6).max(6).required().messages({
+    Adminlastname: Joi.string().required().messages({
         'string.empty': `"Admin Lastname" should be a required`,
-        'string.min': ` "Admin lastname" must minmum 6 character`,
-        'string.max': ` "Admin Lastname" must maximum 6 character`,
-
     }),
 
 
@@ -326,8 +320,7 @@ function AddAdmin() {
                                                                     <Field type="checkbox" name="toggle" />
 
                                                                 </label>
-                                                                <label className="form-check-label ms-2" htmlFor="checkbox">Please
-                                                                    Confrom</label>
+                                                                <label className="text ms-2" htmlFor="checkbox">Remembar me?</label>
                                                             </div>
                                                         </div>
 

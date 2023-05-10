@@ -2,9 +2,15 @@
 import React, { useState } from 'react';
 import { HashLink as Link } from "react-router-hash-link";
 
+
 import "../css/admin/sidbaradmin.css";
 
 function Adminnav() {
+ 
+    function handleLogout() {
+      
+        sessionStorage.removeItem("AdminToken"); 
+      }
     const [isOpen, setIsopen] = useState(false);
     const [isOpen1, setIsopen1] = useState(false);
     const [isOpen2, setIsopen2] = useState(false);
@@ -61,7 +67,8 @@ function Adminnav() {
 
                             <div className="sidebar1">
 
-                                <Link to="/addreception" className="active">
+                                {/* <Link to="/addreception" className="active"> */}
+                                <Link to="/addreception" >
                                     <i className="fa-solid fa-layer-group"></i>
                                     <h3>Overview</h3>
                                 </Link>
@@ -195,7 +202,7 @@ function Adminnav() {
 
                                 <Link to="/index" >
                                     <i className="fa-solid fa-right-from-bracket"></i>
-                                    <h3>Logout</h3>
+                                    <h3><a  onClick={handleLogout}>Logout</a></h3>
                                 </Link>
 
 

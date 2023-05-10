@@ -12,7 +12,7 @@ import "../css/Reception/Assigndoctor.css";
 
 
 const userSchema = Joi.object({
-    Doctorfullname: Joi.string().required().messages({
+    Doctorfullname: Joi.string().min(1).required().messages({
         'string.empty': `" Doctorfirstname" should be a required`,
         'string.min': ` " Doctorfirstname" Atleast select one name`,
 
@@ -34,16 +34,13 @@ const userSchema = Joi.object({
         'string.empty': `"Height" should be a required`,
 
     }),
-    Firstname: Joi.string().min(6).max(6).required().messages({
+    Firstname: Joi.string().required().messages({
         'string.empty': `"First name" should be a required`,
-        'string.min': ` "First name" must minmum 6 character`,
-        'string.max': ` "First name" must maximum 6 character`,
-
+       
     }),
-    Lastname: Joi.string().min(6).max(12).required().messages({
+    Lastname: Joi.string().required().messages({
         'string.empty': `"Last name" should be a required`,
-        'string.min': ` "Last name" must minmum 6 character`,
-        'string.max': ` "Last name" must maximum 12 character`,
+        
     }),
     Email: Joi.string()
         .email({ tlds: { allow: false } })

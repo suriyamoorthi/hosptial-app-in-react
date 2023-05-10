@@ -8,8 +8,7 @@ import { useHistory } from "react-router-dom";
 import "../compoents/css/login.css";
 const userSchema = Joi.object({
 
-  //Set Item
-  //Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
+
   Email: Joi.string()
     .email({ tlds: { allow: false } })
     .required()
@@ -24,7 +23,9 @@ const userSchema = Joi.object({
       'string.min': ` "Password" must minmum 6 character`,
       'string.max': ` "Password" must maximum 10 character`,
     }),
-  toggle: Joi.boolean().default(false),
+  toggle: Joi.boolean().default(false).required().messages({
+    ' boolean.empty': `"Password" should be a required`,
+  })
 });
 
 const INTIAL_FORM = {
@@ -64,9 +65,7 @@ function Login() {
         console.log("USERLOGIN", data);
         alert(data.Message);
       
-        // var item_value = sessionStorage.getItem("DoctorToken");
-        // console.log("ITEM-VALUE",item_value )
-
+  
         // const emailValues = JSON.stringify(data.Data[0]);
          const emailValues = JSON.stringify(data.Data);
         console.log("emailValues", emailValues);
@@ -130,7 +129,7 @@ function Login() {
               <div className="card-body">
                 <h5 className="card-title mb-3">LOGIN</h5>
 
-                <div class="image">
+                <div className="image">
                   <img src="/image/login-icon.jpg" alt="..." />
                 </div>
                 <Formik
@@ -174,7 +173,9 @@ function Login() {
 
                             </label>
                             <label className="form-check-label ms-2" htmlFor="checkbox">Remembar me?</label>
+
                           </div>
+                          <ErrorMessage className="text-danger" name="toggle" />
                         </div>
 
                         {/* <label className="text-danger">{result12.data.Message}</label> */}
@@ -204,9 +205,6 @@ function Login() {
       </div>
 
     </div>
-
-
-
 
   );
 }

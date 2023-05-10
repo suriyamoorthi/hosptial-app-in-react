@@ -1,40 +1,31 @@
 import React, { useState, useEffect } from "react";
 import { HashLink as Link } from "react-router-hash-link";
+import { CurrentDayAppionmentDoctorModuleTable } from "../../Services/User.service";
 
 
 
 import "../css/Doctor/Doctordable.css"
 
-const first = {
-    fname: "",
-    lname: "",
-    username: "",
-    password: "",
-    email: "",
-    avatar: "",
-}
 
 function Doctordable() {
     const [isLoading, setIsloding] = useState(false);
     const [admintable, setAdmintable] = useState([]);
-    const [user, setUser] = useState(first)
-
+    const [search, setSearch] = useState('');
+   
 
     //GET USER
-    const getAdmintable = async () => {
-        setIsloding(true);
-        try {
-            let response = await fetch(" https://www.mecallapi.com/api/users");
+    const fecthdata = async () => {
 
-            if (!response.ok) {
-                throw new Error("Request failed");
-            }
-            response = await response.json();
+        try {
+            setIsloding(true);
+            const { data } = await CurrentDayAppionmentDoctorModuleTable();
+            console.log("CurrentDayAppionmentDoctorModuleTable", data);
             setIsloding(false);
-            setAdmintable(response);
+            setAdmintable(data);
+
         }
         catch (err) {
-            console.error(err.message);
+            console.log(err.Message);
         }
 
 
@@ -42,10 +33,7 @@ function Doctordable() {
 
     useEffect(() => {
         console.log("useEffect")
-        getAdmintable();
-
-
-
+        fecthdata();
     }, []);
 
     return (
@@ -56,18 +44,20 @@ function Doctordable() {
                     <div className="col-sm-12">
                         <div className="card">
                             <div className="card-body">
-                                <h5 className="card-title">Patient Day Appionment</h5>
+                                <h5 className="card-title">Patient Day Appionment12</h5>
                                 <hr />
 
                                 <form className="d-flex" role="search">
-                                    <input className="form-control me-2 "
-                                        type="text"
-                                        name="search"
+                                    <input
+                                        className="form-control me-2 "
+                                        type="search"
                                         placeholder="Search"
-                                    // onChange={(e) => setQuery(e.target.value)}
+                                        aria-label="Search"
+                                        onChange={(e) => { setSearch(e.target.value) }}
+
 
                                     />
-                                    <button className="btn btn-outline-success" type="submit">Search</button>
+                                    {/* <button className="btn btn-outline-success" type="submit">Search</button> */}
                                 </form>
 
                                 <div className="table">
@@ -77,7 +67,8 @@ function Doctordable() {
                                                 <th> Patient ID</th>
                                                 <th> Patient Name</th>
                                                 <th> Last Visit</th>
-                                                <th> spacialization</th>
+                                                {/* <th> spacialization</th> */}
+                                                <th>Gender</th>
                                                 <th>Porablem</th>
 
                                             </tr>
@@ -93,33 +84,35 @@ function Doctordable() {
                                                 </div>
                                             )}
 
-                                            {admintable.map((user) => {
-                                                return (
-                                                    <tr key={user.id}>
+                                            {admintable.filter((u) => {
+                                                return search.toLowerCase() === ''
+                                                    ? u
+                                                    : u.Fullname.toLowerCase().includes(search);
+
+                                            })
+                                                .map((user) => {
+                                                    return (
+                                                        <tr key={user._id}>
 
 
-                                                        <td>{user.id}</td>
-                                                        <td><Link to="/Patientvisitdatailsdoctor">{user.fname}</Link></td>
-                                                        <td>
-                                                            <img src={user.avatar}
-                                                                width="50"
-                                                                className="avatar" />
-                                                        </td>
-                                                        <td>{user.lname}</td>
+                                                            <td>{user._id}</td>
+                                                            <td><Link to="/Patientvisitdatailsdoctor">{user.Fullname}</Link></td>
+                                                            <td>{user.Date}</td>
+                                                            <td>{user.Gender}</td>
 
-                                                        {/* <td>{user.username}</td> */}
-                                                        <td>
+                                                            {/* <td>{user.username}</td> */}
+                                                            {/* <td>
                                                             <i className="fa-solid fa-pen-to-square text-primary fs-4 " onClick={() => setUser({ ...user, password: "", email: user.username })}
                                                             ></i>
                                                             <i className="fa-solid fa-trash text-danger fs-4 ms-3" ></i>
-                                                            {/* onClick={() => deleteUser(user)} */}
-                                                        </td>
+                                                             onClick={() => deleteUser(user)} 
+                                                        </td> */}
 
-                                                    </tr>
+                                                        </tr>
 
-                                                )
+                                                    )
 
-                                            })}
+                                                })}
 
                                         </tbody>
                                     </table>

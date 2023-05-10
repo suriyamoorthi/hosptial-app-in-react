@@ -7,16 +7,13 @@ import { addDoctorForm } from "../../Services/AdmimmodulesForms.service";
 import "../css/admin/adddoctor.css";
 
 const userSchema = Joi.object({
-    Doctorfirstname: Joi.string().min(6).max(6).required().messages({
+    Doctorfirstname: Joi.string().required().messages({
         'string.empty': `"Doctor Firstname" should be a required`,
-        'string.min': ` "Doctor Firstname" must minmum 6 character`,
-        'string.max': ` "Doctor Firstname" must maximum 6 character`,
 
     }),
-    Doctorlastname: Joi.string().min(6).max(6).required().messages({
+    Doctorlastname: Joi.string().required().messages({
         'string.empty': `"Doctor Lastname" should be a required`,
-        'string.min': ` "Doctor lastname" must minmum 6 character`,
-        'string.max': ` "Doctor Lastname" must maximum 6 character`,
+       
 
     }),
     Department: Joi.string().required().messages({
@@ -393,8 +390,7 @@ function Adddoctor() {
                                                                     <Field type="checkbox" name="toggle" />
 
                                                                 </label>
-                                                                <label className="form-check-label ms-2" htmlFor="checkbox">Please
-                                                                    Confrom</label>
+                                                                <label className="form-check-label ms-2" htmlFor="checkbox">Remembar me?</label>
                                                             </div>
                                                         </div>
 

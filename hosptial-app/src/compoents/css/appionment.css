@@ -15,11 +15,31 @@
     font-weight:700;
      text-align: center;
 }
- .section4 .buttion{
+ /* .section4 .buttion{
     text-align: center;
     width:90% ;
   
+} */
+.section4 .group{
+    text-align: center;
+    color: brown;
+   
 }
+.section4 .link{
+    text-decoration: none;
+    margin-left: 10px;
+    
+}
+.section4 button{
+    width: 40%;
+   margin-left: 30%;
+   
+  }
+  .section4 .footer{
+    color:black;
+    text-align: center;
+    font-weight: 300px;
+  }
 .section4 Form{
     color: red;
 }

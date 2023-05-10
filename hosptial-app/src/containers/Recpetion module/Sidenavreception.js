@@ -5,6 +5,9 @@ import { HashLink as Link } from "react-router-hash-link";
 // import "../Recpetion module/Recptionoverview";
 
 function Sidenavreception() {
+  function handleLogout(){
+    sessionStorage.removeItem("ReceptionToken");
+  }
     return (
         <div class="sidebaradmin">
             <nav className="navbar navbar-expand-lg navbar-light bg-primary fixed-top">
@@ -49,7 +52,8 @@ function Sidenavreception() {
 
                             <div className="sidebar1">
 
-                                <Link to="/Receptionoverview" className="active">
+                                {/* <Link to="/Receptionoverview" className="active"> */}
+                                <Link to="/Receptionoverview" >
                                     <i className="fa-solid fa-layer-group"></i>
                                     <h3>Overview</h3>
                                 </Link>
@@ -77,7 +81,7 @@ function Sidenavreception() {
 
                                 <Link to=""style={{marginTop: "200px"}} >
                                     <i className="fa-solid fa-right-from-bracket"></i>
-                                    <h3>Logout</h3>
+                                    <h3><a onClick={handleLogout}>Logout</a></h3>
                                 </Link>
 
 
