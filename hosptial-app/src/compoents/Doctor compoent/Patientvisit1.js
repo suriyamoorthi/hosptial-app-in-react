@@ -1,31 +1,56 @@
 import React, { useState, useEffect } from "react";
+import { useHistory, useLocation } from "react-router-dom";
 
 
 import "../css/Doctor/Patientvisit1.css"
 
-function Patientvisit1() {
+const TABLEDATAS = {
+    Firstname: "",
+    Lastname: "",
+    LastVisit: "",
+    Gender: "",
+    Address: "",
 
-    const [admintable, setAdmintable] = useState([])
+}
+
+function Patientvisit1() {
+    const location = useLocation();
+    const [admintable, setAdmintable] = useState(TABLEDATAS);
+
 
     //GET USER
-    const getAdmintable = async () => {
-        // setIsloding(true);
-        try {
-            let response = await fetch(" https://www.mecallapi.com/api/users");
+    const getAdmintable = () => {
 
-            if (!response.ok) {
-                throw new Error("Request failed");
-            }
-            response = await response.json();
-            // setIsloding(false);
-            setAdmintable(response);
-        }
-        catch (err) {
-            console.error(err.message);
+        const searchParams = new URLSearchParams(location.search);
+        const data = searchParams.get("data");
+        console.log("patientdatas", data);
+        if (data) {
+            const parsePatientData = JSON.parse(data);
+            console.log("parsePatientData", parsePatientData);
+            setAdmintable(parsePatientData);
         }
 
 
-    };
+
+    }
+    // const getAdmintable = async () => {
+    //     // setIsloding(true);
+    //     try {
+    //         let response = await fetch(" https://www.mecallapi.com/api/users");
+
+    //         if (!response.ok) {
+    //             throw new Error("Request failed");
+    //         }
+    //         response = await response.json();
+    //         // setIsloding(false);
+    //         setAdmintable(response);
+    //     }
+    //     catch (err) {
+    //         console.error(err.message);
+    //     }
+
+
+    // };
     useEffect(() => {
         console.log("useEffect")
         getAdmintable();
@@ -41,7 +66,7 @@ function Patientvisit1() {
                     <div className="col-sm-12">
                         <div className="card">
                             <div className="card-body">
-                                <h5 className="card-title">Patient Details</h5>
+                                <h5 className="card-title">Patient Details12</h5>
                                 <hr />
 
                                 <div className="row">
@@ -58,30 +83,32 @@ function Patientvisit1() {
                                             <table className="table table-bordered  table-striped">
 
                                                 <tbody>
+
                                                     <tr>
-                                                        <th scope="row">fname</th>
-                                                        <td>dsdsdsdsfsf</td>
-                                                        <th scope="row">lname</th>
-                                                        <td>dsdsdsdsfsf</td>
+                                                        <th scope="row">FirstName</th>
+                                                        <td>{admintable.Firstname}</td>
+                                                        <th scope="row">LastName</th>
+                                                        <td>{admintable.Lastname}</td>
 
                                                     </tr>
                                                     <tr>
                                                         <th scope="row">Last Visit</th>
-                                                        <td>dsdsdsdsfsf</td>
+                                                        <td>{admintable.Date}</td>
                                                         <th scope="row">Date Of Birth</th>
                                                         <td>dsdsdsdsfsf</td>
                                                     </tr>
 
                                                     <tr>
                                                         <th scope="row">Genter</th>
-                                                        <td>dsdsdsdsfsf</td>
+                                                        <td>{admintable.Gender}</td>
                                                         <th scope="row">Allergi</th>
                                                         <td>dsdsdsdsfsf</td>
                                                     </tr>
-                                                   
+
 
                                                     <tr>
                                                         <th scope="row">Address</th>
+                                                        <td>{admintable.Address}</td>
                                                     </tr>
                                                     {/* {table.map((u) => {
                                                      return (

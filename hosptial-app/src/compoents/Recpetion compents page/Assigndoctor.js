@@ -13,8 +13,8 @@ import "../css/Reception/Assigndoctor.css";
 
 const userSchema = Joi.object({
     Doctorfullname: Joi.string().min(1).required().messages({
-        'string.empty': `" Doctorfirstname" should be a required`,
-        'string.min': ` " Doctorfirstname" Atleast select one name`,
+        'string.empty': `" Doctorfullname" should be a required`,
+        'string.min': ` " Doctorfullname" Atleast select one name`,
 
     }),
     Temperature: Joi.string().required().messages({
@@ -111,7 +111,7 @@ const INTIAL_FORM = {
 
 function Assigndoctor() {
     const [options, setOptions] = useState([]);
-    const history = useHistory();
+    const history = useHistory( );
     const location = useLocation();
     const OnePageaData = () => {
 
@@ -144,9 +144,6 @@ function Assigndoctor() {
 
         const { data } = await assginDoctorlist();
         setOptions(data);
-        // const data1= data12[0].data;
-
-        // // const fname=`${data.Doctorfirstname}${data.Doctorlastname}`
         console.log("ASSGIN DOCTOR REACT", data);
 
 
@@ -179,7 +176,9 @@ function Assigndoctor() {
 
 
             try {
+                
                 const { data } = await assginDoctorForPostUser(values);
+                
                 console.log("ASSGIN DOCTOR FORM", data);
                 alert(data.Message);
 

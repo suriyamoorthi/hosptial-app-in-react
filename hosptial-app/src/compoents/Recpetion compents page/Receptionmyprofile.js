@@ -9,6 +9,7 @@ import { RecptionProfileUpdate } from "../../Services/Profiles.service";
 
 
 import "../css/Reception/Receptionmyprofile.css";
+import { useState } from "react";
 
 const prifileSchema = Joi.object({
     Receptionfirstname: Joi.string().min(6).max(6).required().messages({
@@ -98,24 +99,16 @@ const validate = (values) => {
 
 };
 function Receptionmyprofile() {
+
+    const [receptionData, SetreceptionData] = useState(INTIAL_VALUES)
     const GetSeesionData = async () => {
 
         var data = await getRecptionProfiledetails();
         console.log("DATAVALUES", data);
+        const ReceptionProfiledata = data[0]
 
-        //   if(data[0].Firstname)
-        //   {
-        //     INTIAL_FORM.Firstname =  data[0].Firstname;
-        //   }
-        INTIAL_VALUES.Receptionfirstname = data[0].Receptionfirstname;
-        INTIAL_VALUES.Receptionlastname = data[0].Receptionlastname;
-        INTIAL_VALUES.Email = data[0].Email;
-        INTIAL_VALUES.Age = data[0].Age;
-        INTIAL_VALUES.Gender = data[0].Gender;
-        INTIAL_VALUES.Phonenumber = data[0].Phonenumber;
-        INTIAL_VALUES.Dateofbirth = data[0].Dateofbirth;
-        INTIAL_VALUES.Address = data[0].Address;
-        // INTIAL_VALUES.File = data[0].File;
+        INTIAL_VALUES.Gender = ReceptionProfiledata.Gender;
+        SetreceptionData(ReceptionProfiledata);
 
     };
 
@@ -149,20 +142,6 @@ function Receptionmyprofile() {
         GetSeesionData();
 
     }, []);
-    // const INTIAL_VALUES = {
-    //     Receptionfirstname: "",
-    //     Receptionlastname: "",
-    //     Email: "",
-    //     // password: "",
-    //     Gender: "Male",
-    //     // age: "",
-    //     Phonenumber: "",
-    //     Dateofbirth: "",
-    //     File: "",
-    //     Address: "",
-
-    // }
-    // const MALIL_FORMAT = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
 
     return (
 
@@ -196,6 +175,7 @@ function Receptionmyprofile() {
                                                                     <Field
                                                                         className="form-control"
                                                                         name="Receptionfirstname"
+                                                                        value={receptionData.Receptionfirstname}
                                                                         placeholder="Enter Your Receptionfirstname"
                                                                     />
                                                                     <ErrorMessage className="text-danger" name="Receptionfirstname" />
@@ -210,6 +190,7 @@ function Receptionmyprofile() {
                                                                     <Field
                                                                         className="form-control"
                                                                         name="Receptionlastname"
+                                                                        value={receptionData.Receptionlastname}
                                                                         placeholder="Enter Your Last name"
                                                                     />
                                                                     <ErrorMessage className="text-danger" name="Receptionlastname" />
@@ -228,6 +209,7 @@ function Receptionmyprofile() {
                                                                     <Field
                                                                         className="form-control"
                                                                         name="Email"
+                                                                        value={receptionData.Email}
                                                                         type="email"
                                                                         placeholder="Enter Your Email"
                                                                     />
@@ -244,6 +226,7 @@ function Receptionmyprofile() {
                                                                         className="form-control"
                                                                         name="Age"
                                                                         type="number"
+                                                                        value={receptionData.Age}
                                                                         placeholder="Enter Your Age"
                                                                     />
                                                                     <ErrorMessage className="text-danger" name="Age" />
@@ -283,6 +266,7 @@ function Receptionmyprofile() {
                                                                         className="form-control"
                                                                         name="Phonenumber"
                                                                         type="tel"
+                                                                        value={receptionData.Phonenumber}
                                                                         placeholder="Enter Your Phonenumber"
                                                                     />
                                                                     <ErrorMessage className="text-danger" name="Phonenumber" />
@@ -297,6 +281,7 @@ function Receptionmyprofile() {
                                                                         className="form-control"
                                                                         name="Dateofbirth"
                                                                         type="date"
+                                                                        value={receptionData.Dateofbirth}
                                                                         placeholder="Enter Your Dateofbirth"
                                                                     />
                                                                     <ErrorMessage className="text-danger" name="Dateofbirth" />
@@ -330,6 +315,7 @@ function Receptionmyprofile() {
                                                                 <Field
                                                                     className="form-control"
                                                                     name="Address"
+                                                                    value={receptionData.Address}
                                                                     placeholder="Enter Your address"
                                                                 />
                                                                 <ErrorMessage className="text-danger" name="Address" />
@@ -338,16 +324,7 @@ function Receptionmyprofile() {
                                                         </div>
 
                                                         <hr />
-                                                        {/* 
-                                                        <div className="ckeckbox">
-                                                            <div className="form-group mb-3">
 
-                                                                <Field type="checkbox" name="toggle" />
-
-                                                                <label className="form-check-label ms-2" htmlFor="checkbox">Please
-                                                                    Confrom</label>
-                                                            </div>
-                                                        </div> */}
 
                                                         <div className="button">
                                                             <div className="form-groups mb-3">
