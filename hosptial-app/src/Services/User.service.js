@@ -20,6 +20,40 @@ const doctorsessiondata =()=>{
         
 }
 
+const patientsessiondata =()=>{
+   const doctorsessionvalue =sessionStorage.getItem("PatientToken");
+   console.log("doctorsessionvalue",doctorsessionvalue);
+
+   if(doctorsessionvalue.length >0){
+
+     const sessiondata = JSON.parse(sessionStorage.getItem("PatientToken"));
+     var Patientfullnamesession= sessiondata[0].Fullname;
+     console.log("Patientfullnamesession",Patientfullnamesession)
+     return Patientfullnamesession;
+   }
+   else{
+     return "";
+   }
+       
+}
+// const patientsessiondatadoctorname =()=>{
+//    const doctorsessionvalue =sessionStorage.getItem("PatientToken");
+//    console.log("doctorsessionvalue",doctorsessionvalue);
+
+//    if(doctorsessionvalue.length >0){
+
+//      const sessiondata = JSON.parse(sessionStorage.getItem("PatientToken"));
+//      var Patientfullnamesession= sessiondata[0].Doctorfullname;
+//      console.log("Patientfullnamesession",Patientfullnamesession)
+//      return Patientfullnamesession;
+//    }
+//    else{
+//      return "";
+//    }
+       
+// }
+
+
 
 export const getuserdetailfromsession = async () => {
    const emailValues = window.sessionStorage.getItem("PatientToken")
@@ -37,10 +71,10 @@ export const getuserdetailfromsession = async () => {
 }
 
 export const postUserappionmentvalidation = (appionmentUser) => axios.post(`${API_URL_APPIONMENT}/appionmentService`, appionmentUser);
-export const getPatientvisityhistory = (visityhistoryUser) => axios.get(`${API_URL_APPIONMENT}/getPatientVisityHistory`, visityhistoryUser);
+export const getPatientvisityhistory = (visityhistoryUser) => axios.get(`${API_URL_APPIONMENT}/getPatientVisityHistory?Fullname=${patientsessiondata()}`, visityhistoryUser);
 export const getCurrentDayAppionmentPatientList12 = (currentDayAppionmentUser) => axios.get(`${API_URL_APPIONMENT}/getCurrentDayAppionmentPatientList?Date=${currentDate}`, currentDayAppionmentUser);
 export const PatientListRecptionModuleUser = (PatientList) => axios.get(`${API_URL_APPIONMENT}/PatientListRecptionModuleT`, PatientList);
-export const DoctorListPatientModuleUser = (DoctorList) => axios.get(`${API_URL_APPIONMENT}/DoctorListPatientModule`, DoctorList);
+export const DoctorListPatientModuleUser = (DoctorList) => axios.get(`${API_URL_APPIONMENT}/DoctorListPatientModule?Fullname=${patientsessiondata()}`, DoctorList);
 
 export const assginDoctorlist = (assgnDoctorDatas) => axios.get(`${API_URL_APPIONMENT}/AssignDoctor`, assgnDoctorDatas);
 export const assginDoctorForPostUser = (PostUser12) => axios.post(`${API_URL_APPIONMENT}/patientVatilas12`, PostUser12);
