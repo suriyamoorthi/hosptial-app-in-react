@@ -51,7 +51,7 @@ function Patientvisityhistory() {
                         <div className="col-sm-12">
                             <div className="card">
                                 <div className="card-body">
-                                    <h5 className="card-title"> Patient Visity History</h5>
+                                    <h5 className="card-title"> Patient Visity History45</h5>
                                     <hr />
                                     <form className="d-flex" role="search">
                                     <input

@@ -1,5 +1,6 @@
 import React from "react";
 import Navigation from "./navigation";
+import { HashLink as Link } from "react-router-hash-link";
 
 
 import "../compoents/css/footor.css";
@@ -28,16 +29,16 @@ function contact() {
 
 
                             <div className="col-sm-6 " style={{ textAlign: "end" }} >
-                                <a href="" className="me-4 text-reset">
+                                <a href="https://www.facebook.com/" className="me-4 text-reset">
                                     <i className="fab fa-facebook-f"></i>
                                 </a>
-                                <a href="" className="me-4 text-reset">
+                                <a href="https://twitter.com/i/flow/login" className="me-4 text-reset">
                                     <i className="fab fa-twitter"></i>
                                 </a>
-                                <a href="" className="me-4 text-reset">
+                                <a href="https://www.google.com/" className="me-4 text-reset">
                                     <i className="fab fa-google"></i>
                                 </a>
-                                <a href="" className="me-4 text-reset">
+                                <a href="https://www.instagram.com/" className="me-4 text-reset">
                                     <i className="fab fa-instagram"></i>
                                 </a>
                             </div>
@@ -86,7 +87,7 @@ function contact() {
 
                                     <div className="email">
 
-                                        <p> <i class="fa-solid fa-envelope me-3"></i><a herf="">suriyamoorthie12@gmail.com</a>
+                                        <p> <i class="fa-solid fa-envelope me-3"></i><a herf="https://mail.google.com/">suriyamoorthie12@gmail.com</a>
                                         </p>
                                     </div>
                                 </div>
