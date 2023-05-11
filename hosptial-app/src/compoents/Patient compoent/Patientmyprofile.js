@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Formik, Field, ErrorMessage, Form } from "formik";
 import Joi from "joi";
 
@@ -100,23 +100,17 @@ export const prifileSchema =Joi.object({
 };
 
 function Patientmyprofile() {
+
+    const [patientdata ,SetpatientData] = useState(INTIAL_PROFILEVALUES);
     const GetSeesionData = async () => {
 
         var registerData = await getProfiledetails();
         console.log("DATAVALUES123", registerData);
+        const PatientProfileData =registerData[0] 
 
-
-        INTIAL_PROFILEVALUES.Firstname = registerData[0].Firstname;
-        INTIAL_PROFILEVALUES.Lastname = registerData[0].Lastname;
-        INTIAL_PROFILEVALUES.Email = registerData[0].Email;
-        INTIAL_PROFILEVALUES.Age = registerData[0].Age;
-        INTIAL_PROFILEVALUES.Gender = registerData[0].Gender;
-        INTIAL_PROFILEVALUES.Phonenumber = registerData[0].Phonenumber;
-        INTIAL_PROFILEVALUES.Dateofbirth = registerData[0].Dateofbirth;
-
-        console.log("NNNNNN", INTIAL_PROFILEVALUES.Dateofbirth);
-        INTIAL_PROFILEVALUES.Address = registerData[0].Address;
-        // INTIAL_PROFILEVALUES.File = registerData[0].File;
+        INTIAL_PROFILEVALUES.Gender =PatientProfileData.Gender;
+        SetpatientData(PatientProfileData);
+       
     };
 
     const handleSubmit = async (values) => {
@@ -180,6 +174,7 @@ function Patientmyprofile() {
                                                                     <Field
                                                                         className="form-control"
                                                                         name="Firstname"
+                                                                        value={patientdata.Firstname}
                                                                         placeholder="Enter Your Firstname"
                                                                     />
                                                                     <ErrorMessage className="text-danger" name="Firstname" />
@@ -194,6 +189,7 @@ function Patientmyprofile() {
                                                                     <Field
                                                                         className="form-control"
                                                                         name="Lastname"
+                                                                        value={patientdata.Lastname}
                                                                         placeholder="Enter Your Last name"
                                                                     />
                                                                     <ErrorMessage className="text-danger" name="Lastname" />
@@ -213,6 +209,7 @@ function Patientmyprofile() {
                                                                         className="form-control"
                                                                         name="Email"
                                                                         type="email"
+                                                                        value={patientdata.Email}
                                                                         readOnly={true}
                                                                         placeholder="Enter Your Email"
                                                                     />
@@ -229,6 +226,7 @@ function Patientmyprofile() {
                                                                         className="form-control"
                                                                         name="Age"
                                                                         type="number"
+                                                                        value={patientdata.Age}
                                                                         placeholder="Enter Your Age"
                                                                     />
                                                                     <ErrorMessage className="text-danger" name="Age" />
@@ -268,6 +266,7 @@ function Patientmyprofile() {
                                                                         className="form-control"
                                                                         name="Phonenumber"
                                                                         type="tel"
+                                                                        value={patientdata.Phonenumber}
                                                                         placeholder="Enter Your Phonenumber"
                                                                     />
                                                                     <ErrorMessage className="text-danger" name="Phonenumber" />
@@ -281,6 +280,7 @@ function Patientmyprofile() {
                                                                     <Field
                                                                         name="Dateofbirth"
                                                                         className="form-control"
+                                                                        value={patientdata.Dateofbirth}
                                                                         type="date"
 
                                                                     />
@@ -315,6 +315,7 @@ function Patientmyprofile() {
                                                                 <Field
                                                                     className="form-control"
                                                                     name="Address"
+                                                                    value={patientdata.Address}
                                                                     placeholder="Enter Your address"
                                                                 />
                                                                 <ErrorMessage className="text-danger" name="Address" />

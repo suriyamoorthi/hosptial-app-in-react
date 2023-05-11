@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Formik, Field, ErrorMessage, Form } from "formik";
 import { userSchema } from "./ddd";
 // import { INTIAL_FORM} from "./ddd";
@@ -29,27 +29,16 @@ const INTIAL_FORM = {
 
 
 function Patientappionment() {
+
+    const [appionmentdata ,SetAppionmentData] =useState(INTIAL_FORM);
     const GetSeesionData = async () => {
 
         var registerData = await getuserdetailfromsession();
         console.log("DATAVALUES", registerData);
+        const patientData =registerData[0];        
 
-        //   if(data[0].Firstname)
-        //   {
-        //     INTIAL_FORM.Firstname =  data[0].Firstname;
-        //   }
-        INTIAL_FORM.Firstname = registerData[0].Firstname;
-        INTIAL_FORM.Lastname = registerData[0].Lastname;
-        INTIAL_FORM.Email = registerData[0].Email;
-        INTIAL_FORM.Age = registerData[0].Age;
-        INTIAL_FORM.Gender = registerData[0].Gender;
-        INTIAL_FORM.Phonenumber = registerData[0].Phonenumber;
-        // INTIAL_FORM.Date = registerData[0].Date;
-        // INTIAL_FORM.File = registerData[0].File;
-        INTIAL_FORM.Address = registerData[0].Address;
-        INTIAL_FORM.City = registerData[0].City;
-        INTIAL_FORM.Pincode = registerData[0].Pincode;
-
+        INTIAL_FORM.Gender = patientData.Gender;
+        SetAppionmentData(patientData);
 
 
     };
@@ -122,6 +111,7 @@ function Patientappionment() {
                                                                 <Field
                                                                     className="form-control"
                                                                     name="Firstname"
+                                                                    value={appionmentdata.Firstname}
                                                                     placeholder="Ennter Your First Name"
                                                                 />
                                                                 <ErrorMessage className="text-danger" name="Firstname" />
@@ -136,6 +126,7 @@ function Patientappionment() {
                                                                 <Field
                                                                     className="form-control"
                                                                     name="Lastname"
+                                                                    value={appionmentdata.Lastname}
                                                                     placeholder="Enter Your Last Name"
                                                                 />
                                                                 <ErrorMessage className="text-danger" name="Lastname" />
@@ -152,6 +143,7 @@ function Patientappionment() {
                                                                 <Field
                                                                     className="form-control"
                                                                     name="Email"
+                                                                    value={appionmentdata.Email}
                                                                     readOnly={true}
                                                                     type="email"
                                                                     placeholder="Enter Your Email"
@@ -169,6 +161,7 @@ function Patientappionment() {
                                                                     className="form-control"
                                                                     name="Age"
                                                                     type="number"
+                                                                    value={appionmentdata.Age}
                                                                     placeholder="Enter Your Age"
                                                                 />
                                                                 <ErrorMessage className="text-danger" name="Age" />
@@ -178,13 +171,13 @@ function Patientappionment() {
 
                                                     <div className="row ">
 
-                                                        <label htmlFor="Gender" className="form-label">Gender
+                                                        <label htmlFor="Gender"  className="form-label">Gender
                                                             <span className="text-primary">*</span></label>
 
                                                         <div className="col-sm-6 ">
                                                             <div className="form-group mb-3">
 
-                                                                <Field className="form-check-input" type="radio" name="Gender" value="male" />
+                                                                <Field className="form-check-input" type="radio"  name="Gender" value="male" />
                                                                 <label className="form-check-label ms-2" htmlFor="male">
                                                                     Male
                                                                 </label>
@@ -211,6 +204,7 @@ function Patientappionment() {
                                                                     className="form-control"
                                                                     name="Phonenumber"
                                                                     type="tel"
+                                                                    value={appionmentdata.Phonenumber}
                                                                     placeholder="Ennter Your Phone Number"
                                                                 />
                                                                 <ErrorMessage className="text-danger" name="Phonenumber" />
@@ -243,6 +237,7 @@ function Patientappionment() {
                                                                     className="form-control"
                                                                     name="File"
                                                                     type="file"
+
                                                                     placeholder="Ennter Your File"
                                                                 />
                                                                 <ErrorMessage className="text-danger" name="File" />
@@ -258,6 +253,7 @@ function Patientappionment() {
                                                                 <Field
                                                                     className="form-control"
                                                                     name="Address"
+                                                                    value={appionmentdata.Address}
                                                                     placeholder="Enter Your Address"
                                                                 />
                                                                 <ErrorMessage className="sec1" name="Address" />
@@ -275,6 +271,7 @@ function Patientappionment() {
                                                                 <Field
                                                                     className="form-control"
                                                                     name="City"
+                                                                    value={appionmentdata.City}
                                                                     placeholder="Ennter Your City"
                                                                 />
                                                                 <ErrorMessage className="text-danger" name="City" />
@@ -290,6 +287,7 @@ function Patientappionment() {
                                                                     className="form-control"
                                                                     name="Pincode"
                                                                     type="pincode"
+                                                                    value={appionmentdata.Pincode}
                                                                     placeholder="Enter Your Pincode"
                                                                 />
                                                                 <ErrorMessage className="text-danger" name="Pincode" />

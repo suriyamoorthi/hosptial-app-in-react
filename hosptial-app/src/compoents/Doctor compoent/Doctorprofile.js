@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect ,useState} from "react";
 import { Formik, Field, ErrorMessage, Form } from "formik";
 import Joi from "joi";
 
@@ -102,25 +102,16 @@ const validate = (values) => {
 
 function Doctorprofile() {
 
+    const [doctorData , SetDoctorData] =useState(FORM_VLAUES)
+
     const GetSeesionDoctorData = async () => {
 
         var data = await getDoctorProfiledetails();
         console.log("DATAVALUES", data);
+       const DoctorProfiledata = data[0]
 
-        //   if(data[0].Firstname)
-        //   {
-        //     INTIAL_FORM.Firstname =  data[0].Firstname;
-        //   }
-       FORM_VLAUES.Doctorfirstname = data[0].Doctorfirstname;
-       FORM_VLAUES.Doctorlastname = data[0].Doctorlastname;
-       FORM_VLAUES.Email = data[0].Email;
-       FORM_VLAUES.Age = data[0].Age;
-       FORM_VLAUES.Gender = data[0].Gender;
-       FORM_VLAUES.Phonenumber = data[0].Phonenumber;
-       FORM_VLAUES.Dateofbirth = data[0].Dateofbirth;
-       FORM_VLAUES.Doctordetails = data[0].Doctordetails;
-       FORM_VLAUES.Address = data[0].Address;
-        // INTIAL_VALUES.File = data[0].File;
+       FORM_VLAUES.Gender = DoctorProfiledata.Gender;
+       SetDoctorData(DoctorProfiledata );
 
     };
  
@@ -186,6 +177,7 @@ function Doctorprofile() {
                                                                     <Field
                                                                         className="form-control"
                                                                         name="Doctorfirstname"
+                                                                        value={doctorData.Doctorfirstname}
                                                                         placeholder="Enter Your Doctorfirstname"
                                                                     />
                                                                     <ErrorMessage className="text-danger" name="Doctorfirstname" />
@@ -200,6 +192,7 @@ function Doctorprofile() {
                                                                     <Field
                                                                         className="form-control"
                                                                         name="Doctorlastname"
+                                                                        value={doctorData.Doctorlastname}
                                                                         placeholder="Enter Your Last name"
                                                                     />
                                                                     <ErrorMessage className="text-danger" name="Doctorlastname" />
@@ -219,6 +212,7 @@ function Doctorprofile() {
                                                                         className="form-control"
                                                                         name="Email"
                                                                         type="email"
+                                                                        value={doctorData.Email}
                                                                         readOnly={true}
                                                                         placeholder="Enter Your Email"
                                                                     />
@@ -235,6 +229,7 @@ function Doctorprofile() {
                                                                         className="form-control"
                                                                         name="Age"
                                                                         type="number"
+                                                                        value={doctorData.Age}
                                                                         placeholder="Enter Your Age"
                                                                     />
                                                                     <ErrorMessage className="text-danger" name="Age" />
@@ -303,6 +298,7 @@ function Doctorprofile() {
                                                                     <Field
                                                                         className="form-control"
                                                                         name="Phonenumber"
+                                                                        value={doctorData.Phonenumber}
                                                                         type="tel"
                                                                         placeholder="Enter Your Phonenumber"
                                                                     />
@@ -317,6 +313,7 @@ function Doctorprofile() {
                                                                     <Field
                                                                         className="form-control"
                                                                         name="Dateofbirth"
+                                                                        value={doctorData.Dateofbirth}
                                                                         type="date"
                                                                         placeholder="Enter Your Dateofbirth"
                                                                     />
@@ -349,6 +346,7 @@ function Doctorprofile() {
                                                                 <Field
                                                                     className="form-control"
                                                                     name="Doctordetails"
+                                                                    value={doctorData.Doctordetails}
                                                                     placeholder="Enter Your  Doctordetails"
                                                                 />
                                                                 <ErrorMessage className="text-danger" name="Doctordetails" />
@@ -364,6 +362,7 @@ function Doctorprofile() {
                                                                 <Field
                                                                     className="form-control"
                                                                     name="Address"
+                                                                    value={doctorData.Address}
                                                                     placeholder="Enter Your address"
                                                                 />
                                                                 <ErrorMessage className="text-danger" name="Address" />

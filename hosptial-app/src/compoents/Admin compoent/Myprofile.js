@@ -10,6 +10,7 @@ import{AdminProfileUpdate, getAdminDataDetails}from "../../Services/Profiles.ser
 
 
 import "../css/admin/Myprofile.css";
+import { useState } from "react";
 
 const INTIAL_PROFILEVALUES = {
     Adminfirstname: "",
@@ -96,22 +97,16 @@ const prifileSchema = Joi.object({
 };
 
 function Myprofile() {
+    const [admindata ,Setadmindata] =useState(INTIAL_PROFILEVALUES );
 
     const GetAdminSessionData =async()=>{
         const AdminData =await getAdminDataDetails();
-
         console.log("AdminData",AdminData);
-         INTIAL_PROFILEVALUES.Adminfirstname = AdminData[0].Adminfirstname;
-         INTIAL_PROFILEVALUES.Adminlastname = AdminData[0].Adminlastname;
-         INTIAL_PROFILEVALUES.Email = AdminData[0].Email;
-         INTIAL_PROFILEVALUES.Phonenumber = AdminData[0].Phonenumber;
+        const AdminProfileData = AdminData[0] 
+       
+       
          INTIAL_PROFILEVALUES.Gender = AdminData[0].Gender;
-        INTIAL_PROFILEVALUES.Age = AdminData[0].Age;
-         INTIAL_PROFILEVALUES.Dateofbirth = AdminData[0].Dateofbirth;
-        //  INTIAL_PROFILEVALUES.File = AdminData[0].File;
-
-        console.log("NNNNNN",  INTIAL_PROFILEVALUES.Dateofbirth);
-         INTIAL_PROFILEVALUES.Address = AdminData[0].Address;
+        Setadmindata(AdminProfileData);
 
     }
 
@@ -171,6 +166,7 @@ useEffect(()=>{
                                                                     <Field
                                                                         className="form-control"
                                                                         name="Adminfirstname"
+                                                                        value={admindata.Adminfirstname}
                                                                         placeholder="Enter Your Adminfirstname"
                                                                     />
                                                                     <ErrorMessage className="text-danger" name="Adminfirstname" />
@@ -185,6 +181,7 @@ useEffect(()=>{
                                                                     <Field
                                                                         className="form-control"
                                                                         name="Adminlastname"
+                                                                        value={admindata.Adminlastname}
                                                                         placeholder="Enter Your Last name"
                                                                     />
                                                                     <ErrorMessage className="text-danger" name="Adminlastname" />
@@ -203,6 +200,7 @@ useEffect(()=>{
                                                                         className="form-control"
                                                                         name="Email"
                                                                         type="Email"
+                                                                        value={admindata.Email}
                                                                         placeholder="Enter Your Email"
                                                                     />
                                                                     <ErrorMessage className="text-danger" name="email" />
@@ -216,6 +214,7 @@ useEffect(()=>{
                                                                         className="form-control"
                                                                         name="Phonenumber"
                                                                         type="tel"
+                                                                        value={admindata.Phonenumber}
                                                                         placeholder="Enter Your Phonenumber"
                                                                     />
                                                                     <ErrorMessage className="text-danger" name="Phonenumber" />
@@ -258,6 +257,7 @@ useEffect(()=>{
                                                                         className="form-control"
                                                                         name="Age"
                                                                         type="number"
+                                                                        value={admindata.Age}
                                                                         placeholder="Enter Your Age"
                                                                     />
                                                                     <ErrorMessage className="text-danger" name="Age" />
@@ -273,6 +273,7 @@ useEffect(()=>{
                                                                         className="form-control"
                                                                         name="Dateofbirth"
                                                                         type="date"
+                                                                        value={admindata.Dateofbirth}
                                                                         placeholder="Enter Your Date"
                                                                     />
                                                                     <ErrorMessage className="text-danger" name="Dateofbirth" />
@@ -306,6 +307,7 @@ useEffect(()=>{
                                                                 <Field
                                                                     className="form-control"
                                                                     name="Address"
+                                                                    value={admindata.Address}
                                                                     placeholder="Enter Your Address"
                                                                 />
                                                                 <ErrorMessage className="text-danger" name="Address" />
