@@ -415,6 +415,7 @@ function Assigndoctor() {
                                                                     type="Date"
                                                                     name="Date"
                                                                     className="form-control"
+                                                                    readOnly={true}
                                                                     // min="12-10-2022"
                                                                     // placeholder="yyyy-mm-dd"
 
