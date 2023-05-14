@@ -10,7 +10,7 @@
     margin-bottom: 100PX;
     border-radius: 10px;
     border-color: rgb(240, 227, 227);
-    box-shadow: 0 1rem 2rem var(--color--dark--varient);
+    /* box-shadow: 0 1rem 2rem var(--color--dark--varient); */
     overflow: hidden;
 
    

@@ -17,7 +17,7 @@ function Doctordable() {
 
     function handleclick(user){
 
-         const querPatientData =`?data=${JSON.stringify(user)}`;
+        const querPatientData =`?data=${JSON.stringify(user)}`;
         console.log("querPatientData",querPatientData);
         history.push(`/Patientvisitdatailsdoctor${querPatientData}`);
         // const query = `?data=${JSON.stringify(user)}`;

@@ -86,7 +86,7 @@ color: #363949;
 
 .allpatientcard .card
  {
-   box-shadow: 0 2rem 3rem var(--color-light);
+   /* box-shadow: 0 2rem 3rem var(--color-light); */
    border-radius: var(--cord-border-radius);
    letter-spacing: .5px;
  }

@@ -1,130 +1,130 @@
-import React, { useState } from 'react';
- function CollapseExample() {
-    const [isOpen, setIsopen] = useState(false);
+// import React, { useState } from 'react';
+//  function CollapseExample() {
+//     const [isOpen, setIsopen] = useState(false);
 
     
-    const handleCilck= ({}) => {
-        setIsopen(!isOpen)
-    };
+//     const handleCilck= ({}) => {
+//         setIsopen(!isOpen)
+//     };
 
-  return (
+//   return (
    
   
-    <div class="accordion" id="accordionExample">
-        <div class="card">
+//     <div class="accordion" id="accordionExample">
+//         <div class="card">
 
 
-            <div class="card-header" id="headingOne">
-                <h2 class="mb-0">
+//             <div class="card-header" id="headingOne">
+//                 <h2 class="mb-0">
                    
                    
-                    <button class="btn btn-link" type="button"
-                        data-target="#collapseOne"
-                        aria-expanded="true"
-                        aria-controls="collapseOne"
-                        onClick={() => setIsopen(!isOpen)}
-                        >
-                        Collapsible Item 1
+//                     <button class="btn btn-link" type="button"
+//                         data-target="#collapseOne"
+//                         aria-expanded="true"
+//                         aria-controls="collapseOne"
+//                         onClick={() => setIsopen(!isOpen)}
+//                         >
+//                         Collapsible Item 1
                         
-                    </button>
-                </h2>
-            </div>
+//                     </button>
+//                 </h2>
+//             </div>
           
           
 
-            {isOpen &&  <div id="collapseOne" class="collapse show"
-                aria-labelledby="headingOne"
-                data-parent="#accordionExample">
-                <div class="card-body">
-                    This is slot 1.
-                </div>
-            </div>}
-        </div>
-        <div class="card">
+//             {isOpen &&  <div id="collapseOne" class="collapse show"
+//                 aria-labelledby="headingOne"
+//                 data-parent="#accordionExample">
+//                 <div class="card-body">
+//                     This is slot 1.
+//                 </div>
+//             </div>}
+//         </div>
+//         <div class="card">
           
           
-            <div class="card-header" id="headingTwo">
-                <h2 class="mb-0">
+//             <div class="card-header" id="headingTwo">
+//                 <h2 class="mb-0">
                  
                  
-                    <button class="btn btn-link collapsed"
-                        type="button" data-target="#collapseTwo"
-                        aria-expanded="true"
-                        aria-controls="collapseTwo">
-                        Collapsible Item 2
-                    </button>
-                </h2>
-            </div>
+//                     <button class="btn btn-link collapsed"
+//                         type="button" data-target="#collapseTwo"
+//                         aria-expanded="true"
+//                         aria-controls="collapseTwo">
+//                         Collapsible Item 2
+//                     </button>
+//                 </h2>
+//             </div>
           
           
-            {isOpen && <div id="collapseTwo" class="collapse show"
-                aria-labelledby="headingTwo"
-                data-parent="#accordionExample">
-                <div class="card-body">
-                    This is slot 2.
-                </div>
-            </div>}
-        </div>
+//             {isOpen && <div id="collapseTwo" class="collapse show"
+//                 aria-labelledby="headingTwo"
+//                 data-parent="#accordionExample">
+//                 <div class="card-body">
+//                     This is slot 2.
+//                 </div>
+//             </div>}
+//         </div>
        
-        <div class="accordion" id="accordionExample1">
-            <div class="card">
+//         <div class="accordion" id="accordionExample1">
+//             <div class="card">
               
               
-                <div class="card-header" id="headingThree">
-                    <h2 class="mb-0">
-                        <button class="btn btn-link collapsed"
-                            type="button" data-toggle="collapse"
-                            data-target="#collapseThree"
-                            aria-expanded="false"
-                            aria-controls="collapseThree">
-                            Collapsible Item 3
-                        </button>
-                    </h2>
-                </div>
+//                 <div class="card-header" id="headingThree">
+//                     <h2 class="mb-0">
+//                         <button class="btn btn-link collapsed"
+//                             type="button" data-toggle="collapse"
+//                             data-target="#collapseThree"
+//                             aria-expanded="false"
+//                             aria-controls="collapseThree">
+//                             Collapsible Item 3
+//                         </button>
+//                     </h2>
+//                 </div>
               
               
-                <div id="collapseThree" class="collapse"
-                    aria-labelledby="headingThree"
-                    data-parent="#accordionExample1">
-                    <div class="card-body">
-                        This is slot 3.
-                    </div>
-                </div>
-            </div>
-            <div class="card">
+//                 <div id="collapseThree" class="collapse"
+//                     aria-labelledby="headingThree"
+//                     data-parent="#accordionExample1">
+//                     <div class="card-body">
+//                         This is slot 3.
+//                     </div>
+//                 </div>
+//             </div>
+//             <div class="card">
  
               
               
-                <div class="card-header" id="headingFour">
-                    <h2 class="mb-0">
-                        <button class="btn btn-link collapsed"
-                            type="button" data-toggle="collapse"
-                            data-target="#collapseFour"
-                            aria-expanded="false"
-                            aria-controls="collapseFour">
-                            Collapsible Item 4
-                        </button>
-                    </h2>
-                </div>
+//                 <div class="card-header" id="headingFour">
+//                     <h2 class="mb-0">
+//                         <button class="btn btn-link collapsed"
+//                             type="button" data-toggle="collapse"
+//                             data-target="#collapseFour"
+//                             aria-expanded="false"
+//                             aria-controls="collapseFour">
+//                             Collapsible Item 4
+//                         </button>
+//                     </h2>
+//                 </div>
  
                
-                <div id="collapseFour" class="collapse"
-                    aria-labelledby="headingFour"
-                    data-parent="#accordionExample1">
-                    <div class="card-body">
-                        This is slot 4.
-                    </div>
-                </div>
-            </div>
-        </div>
+//                 <div id="collapseFour" class="collapse"
+//                     aria-labelledby="headingFour"
+//                     data-parent="#accordionExample1">
+//                     <div class="card-body">
+//                         This is slot 4.
+//                     </div>
+//                 </div>
+//             </div>
+//         </div>
         
-    </div>
+//     </div>
 
     
-  );
-}
+//   );
+// }
 
-export default  CollapseExample;
+// export default  CollapseExample;
 
 
 // import React, { useState } from 'react';
