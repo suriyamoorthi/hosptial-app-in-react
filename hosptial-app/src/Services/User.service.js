@@ -4,6 +4,19 @@ import { API_URL_APPIONMENT } from "../Stringconstant-reusecode";
 
 
 const currentDate = new Date().toJSON().slice(0, 10);
+export const getemail ={
+  Email: "",
+  set Emailvalues(value) {
+    this.Email = value;
+  }
+};
+ const Graphemail ={
+  Email: "",
+  set Emailvalues(value) {
+    this.Email = value;
+  }
+};
+export default Graphemail;
 
 const doctorsessiondata =()=>{
     const doctorsessionvalue =sessionStorage.getItem("DoctorToken");
@@ -36,6 +49,7 @@ const patientsessiondata =()=>{
    }
        
 }
+
 // const patientsessiondatadoctorname =()=>{
 //    const doctorsessionvalue =sessionStorage.getItem("PatientToken");
 //    console.log("doctorsessionvalue",doctorsessionvalue);
@@ -80,3 +94,7 @@ export const assginDoctorlist = (assgnDoctorDatas) => axios.get(`${API_URL_APPIO
 export const assginDoctorForPostUser = (PostUser12) => axios.post(`${API_URL_APPIONMENT}/patientVatilas12`, PostUser12);
 export const allPaitentListDoctorModule = (allpatientList) => axios.get(`${API_URL_APPIONMENT}/doctormoduleallpatient?Doctorfullname=${doctorsessiondata()}`, allpatientList);
 export const CurrentDayAppionmentDoctorModuleTable=(tableUser)=>axios.get(`${API_URL_APPIONMENT}/doctorModuleCurrentPatientList?Doctorfullname=${doctorsessiondata()}&Date=${currentDate}`,tableUser);
+// console.log("GRap vvalue",graphemail);
+export const BpGraphDisplayData =(graphemailuser)=>axios.get(`${API_URL_APPIONMENT}/BPgeraphdata?Email=${Graphemail.Email}`,graphemailuser);
+export const WeightGerapDatas=(Datas)=>axios.get(`${API_URL_APPIONMENT}/Weightgraph?Email=${Graphemail.Email}`,Datas);
+export const DoctorAssginPrecription=(DatasUser)=>axios.post(`${API_URL_APPIONMENT}/Precription`,DatasUser);

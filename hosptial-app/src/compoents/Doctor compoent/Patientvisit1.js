@@ -19,7 +19,7 @@ function Patientvisit1() {
 
 
     //GET USER
-    const getAdmintable = () => {
+   const getAdmintable = () => {
 
         const searchParams = new URLSearchParams(location.search);
         const data = searchParams.get("data");

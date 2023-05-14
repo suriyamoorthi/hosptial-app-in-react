@@ -1,40 +1,75 @@
-
+import { useLocation } from "react-router-dom";
 import React, { useState } from "react";
+import { DoctorAssginPrecription } from "../../Services/User.service";
 
 
 import "../css/Doctor/prescriptionfrom.css";
+import { formToJSON } from "axios";
+import { useEffect } from "react";
 
 const FORM_VALUES = {
-    dabletename: "",
-    dablete: "Afterfood",
-    morning: false,
-    evening: false,
-    night: false
+    Dabletename: "",
+    Af:true,
+    Bf:false,
+    Morning: false,
+    Evening: false,
+    Night: false,
+    Count:"",
+    Email:"",
+    Date:""
 }
 
 
 
 function Prescriptionfrom() {
-
+    const location = useLocation();
     // const [select, setSelectchecked] = useState(FORM_VALUES);
     const [user, setUser] = useState(FORM_VALUES);
     const [error, setError] = useState(FORM_VALUES);
 
 
+   
+    const QueystringprecirptionData = () => {
+        
+        const searchParams = new URLSearchParams(location.search);
+        const data = searchParams.get("data");
+        
+        if (data) {
+            const parsedData = JSON.parse(data);
+            console.log("DOCTOR PERCRIPTION", parsedData);
+            FORM_VALUES.Email = parsedData.Email;
+            FORM_VALUES.Date = parsedData.Date;
+            console.log("Emailvalues", FORM_VALUES.Email);
+            console.log("Datevalues", FORM_VALUES.Date);
+          
+            //  return Emailvalues;
+            
+        }
+        else{
+            console.log("");
+        }
+    }
 
     const Errors = () => {
         const err = { ...error }
-        if (user.dabletename.length <= 0) {
+        if (user.Dabletename.length == 0) {
             err.message = "Dablete name is require";
             setError(err);
             return false;
 
         }
-        else if ((!user.morning) && (!user.evening) && (!user.night)) {
+        else if ((!user.Morning) && (!user.Evening) && (!user.Night)) {
             err.message = "Atleast select one checkbox";
             setError(err);
             return false;
-        } else {
+        } 
+        if (user.Count.length == 0) {
+            err.message = "Dablete Count is require";
+            setError(err);
+            return false;
+
+        }
+        else {
 
             err.message = "";
             setError(err);
@@ -50,19 +85,20 @@ function Prescriptionfrom() {
 
     const handleChangeSelect = ({ target: { name, checked, type, value } }) => {
 
-        if (name == "morning") {
-            user.morning = checked;
+        if (name == "Morning") {
+            
+            user.Morning = checked;
 
-        } else if (name == "evening") {
+        } else if (name == "Evening") {
 
-            user.evening = checked;
-        } else {
+            user.Evening = checked;
+        } else{
 
-            user.night = checked;
+            user.Night = checked;
         }
 
         setUser({ ...user, [name]: checked });
-        console.log(user.morning, user.evening, user.night);
+        console.log(user.Morning, user.Evening, user.Night);
 
         // Errors();
 
@@ -72,6 +108,18 @@ function Prescriptionfrom() {
 
     const handleChangeRadioButton = ({ target: { name, value } }) => {
 
+        console.log(name,value);
+        value = value == true ? false:true;
+        console.log(name,value);
+        if(name == "Af" )
+        {
+            user.Bf = false;
+            user.Af = value;
+        }else{
+            user.Bf = value;
+            user.Af = false;
+        }
+        
         setUser({ ...user, [name]: value })
     }
 
@@ -79,21 +127,32 @@ function Prescriptionfrom() {
     console.log("VALUES", user)
 
 
-    const handleSubmit = (evt) => {
+    const handleSubmit =async (evt) => {
         evt.preventDefault();
         // console.log("SUMBIT", select)
 
         // return Errors();
 
         let isError = Errors();
+        console.log("isError",isError);
         if (isError) {
+  
+            const { data } = await DoctorAssginPrecription(user);
+            console.log( " PostPrecriptionData",data);
+            alert(data.Message);
             console.log("adsfsfs")
         }
-        console.log("VALUE123", user)
+        else {
+        console.log("VALUE123",error.Message);
+        }
 
 
     }
 
+    useEffect (()=>{
+        console.log(" UseEffect QueystringprecirptionData")
+        QueystringprecirptionData();
+    },[]);
 
     return (
 
@@ -109,8 +168,8 @@ function Prescriptionfrom() {
                             <form className="d-flex" role="search">
                                 <input className="form-control me-2 "
                                     type="serch"
-                                    name="dabletename"
-                                    value={user.dabletename}
+                                    name="Dabletename"
+                                    value={user.Dabletename}
                                     placeholder="Search"
                                     onChange={handleChange}
 
@@ -129,10 +188,11 @@ function Prescriptionfrom() {
 
                                         <input className="form-check-input"
                                             type="radio"
-                                            name="dablete"
+                                            name="Af"
                                             // onBlur={handleBlur}
-                                            checked={user.dablete === 'Afterfood'}
-                                            value="Afterfood"
+                                            checked={user.Af}
+                                            value={user.Af}
+                                            
                                             onChange={handleChangeRadioButton}
                                         />
                                         <label className="form-check-label ms-2" htmlFor="Afterfood">
@@ -146,10 +206,11 @@ function Prescriptionfrom() {
 
                                         <input className="form-check-input"
                                             type="radio"
-                                            name="dablete"
+                                            name="Bf"
                                             // onBlur={handleBlur}
-                                            checked={user.dablete === 'Beforefood'}
-                                            value="Beforefood"
+                                            checked={user.Bf}
+                                            value={user.Bf}
+                                            
                                             onChange={handleChangeRadioButton}
                                         />
                                         <label className="form-check-label ms-2" htmlFor="Beforefood">
@@ -163,7 +224,8 @@ function Prescriptionfrom() {
                                         <input
                                             className="form-check-input"
                                             type="checkbox"
-                                            name="morning"
+                                            name="Morning"
+                                            value={user.Morning}
                                             onChange={handleChangeSelect}
                                         />
                                         <span className="text-danger">{error.terms}</span>
@@ -181,7 +243,8 @@ function Prescriptionfrom() {
                                         <input
                                             class="form-check-input"
                                             type="checkbox"
-                                            name="evening"
+                                            name="Evening"
+                                            value={user.Evening}
                                             onChange={handleChangeSelect}
                                         />
                                         <label htmlFor="evening" className="form-check-label" >
@@ -193,14 +256,14 @@ function Prescriptionfrom() {
                                 <div className="col-sm-2 ">
                                     <div className="form-check ">
                                         <input
-                                            class="form-check-input"
-                                            name="night"
-
+                                            className="form-check-input"
+                                            name="Night"
                                             type="checkbox"
+                                            value={user.Night}
 
                                             onChange={handleChangeSelect}
                                         />
-                                        <label htmlFor="night" className="form-check-label" >
+                                        <label htmlFor="Night" className="form-check-label" >
                                             Night
                                         </label>
                                     </div>
@@ -208,13 +271,16 @@ function Prescriptionfrom() {
 
                                 <div className="col-sm-2">
                                     <div className="form-group mb-3">
-
-                                        <input
+                                   
+                                        <input 
+                                        //  className="form-control"
+                                        // //  name="Height"
+                                        //  placeholder="Enter your Height"
                                             className="form-control"
-                                            name="count"
-
+                                            name="Count"
+                                            type="number"
                                             placeholder="Count"
-                                            value={user.count}
+                                            value={user.Count}
                                             onChange={handleChange}
 
                                         />
