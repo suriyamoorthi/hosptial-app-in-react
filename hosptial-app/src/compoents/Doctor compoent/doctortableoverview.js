@@ -10,22 +10,22 @@ import { useHistory } from "react-router-dom";
 
 
 function Doctordable() {
-    const history =useHistory();
+    const history = useHistory();
     const [isLoading, setIsloding] = useState(false);
     const [admintable, setAdmintable] = useState([]);
     const [search, setSearch] = useState('');
 
-    function handleclick(user){
+    function handleclick(user) {
 
-        const querPatientData =`?data=${JSON.stringify(user)}`;
-        console.log("querPatientData",querPatientData);
+        const querPatientData = `?data=${JSON.stringify(user)}`;
+        console.log("querPatientData", querPatientData);
         history.push(`/Patientvisitdatailsdoctor${querPatientData}`);
         // const query = `?data=${JSON.stringify(user)}`;
         // console.log("query stirng", query);
         // history.push(`/Assigndoctor${query}`);
 
     }
-   
+
 
     //GET USER
     const fecthdata = async () => {
@@ -110,8 +110,8 @@ function Doctordable() {
 
 
                                                             <td>{user._id}</td>
-                                                        
-                                                          <td>  <button className="handle"onClick={()=> handleclick(user)}><Link >{user.Fullname}</Link></button></td>
+
+                                                            <td>  <button className="handle" onClick={() => handleclick(user)}><Link >{user.Fullname}</Link></button></td>
                                                             <td>{user.Date}</td>
                                                             <td>{user.Gender}</td>
 
@@ -143,6 +143,8 @@ function Doctordable() {
                 </div>
 
             </div>
+
+           
 
         </main>
     )

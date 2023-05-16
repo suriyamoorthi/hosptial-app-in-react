@@ -19,7 +19,7 @@ function Patientvisit1() {
 
 
     //GET USER
-   const getAdmintable = () => {
+    const getAdmintable = () => {
 
         const searchParams = new URLSearchParams(location.search);
         const data = searchParams.get("data");
@@ -110,49 +110,7 @@ function Patientvisit1() {
                                                         <th scope="row">Address</th>
                                                         <td>{admintable.Address}</td>
                                                     </tr>
-                                                    {/* {table.map((u) => {
-                                                     return (
-<tr key={u.id}>
-
-
-<tr>
-<td>{u.id}</td>
-</tr>
-<tr>
-<td><Link to="">{u.fname}</Link></td>
-</tr>
-<tr>
-<td>
-<img src={u.avatar}
-width="50"
-className="avatar" />
-</td>
-</tr>
-<tr>
-<td>{u.lname}</td>
-</tr>
-<tr>
-
-<td>{u.username}</td>
-<td>
-<i className="fa-solid fa-pen-to-square text-primary fs-4 " onClick={() => setUser({ ...u, password: "", email: u.username })}
-></i>
-<i className="fa-solid fa-trash text-danger fs-4 ms-3" onClick={() => deleteUser(u)}></i>
-</td>
-
-<td>
-<button type="button" className="btn btn-danger me-2  mt-3" style={{ width: "20%" }} onClick={() => setUser({ ...u, password: "", email: u.username })}>
-
-<i className="fa-solid fa-trash" ></i>
-Edit Doctor   </button>
-<button type="button" className="btn btn-secondary mt-3 me-2" style={{ width: "20%" }} onClick={() => deleteUser(u)}>
-<i className="fa-solid fa-pen-to-square"></i>
-Delete Doctor</button>
-</td>
-</tr>
-</tr>
-);
-})} */}
+                                                   
 
                                                 </tbody>
                                             </table>
