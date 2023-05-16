@@ -30,7 +30,8 @@ function navigation() {
                         <Link  className="nav-link" smooth to="/#home">Home</Link>
                     </li>
                     <li className="nav-item">
-                        <Link  className="nav-link" smooth to="/#about">About</Link>
+                    <Link  className="nav-link" smooth to="/#about">Get Login Details To Check All Module</Link>
+                        {/* <Link  className="nav-link" smooth to="/#about">About</Link> */}
                     </li>
                     <li className="nav-item">
                         <Link className="nav-link" smooth to="/#appionment">Registration</Link>

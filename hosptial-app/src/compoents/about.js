@@ -9,7 +9,7 @@ function about() {
         <>
 
 
-            < div id='about' >
+            < div id="about" >
                 <div className="section2" >
                     <div className=" container-fluid">
                         <div className="row">
@@ -21,14 +21,55 @@ function about() {
 
                             <div className="col-sm-6" style={{ marigntop: "66px" }}>
                                 <div className="about">
-                                    <h3>ABOUT US</h3>
+                                    {/* <h3>ABOUT US</h3> */}
+                                    <h3>Hosptial-App Modules Login Details</h3>
                                     <h5>
-                                        What we are and our history</h5>
-                                    <p> Hospital is one of the leading hospital in Chennai.
+                                        For Demo Use The Below Login Details</h5>
+                                    {/* <h5>
+                                        What we are and our history</h5> */}
+                                    {/* <p> Hospital is one of the leading hospital in Chennai.
                                         The best healthcare professionals provide Comprehensive healthcare.
                                         It is located at West Mambalam. It provides advanced levels of care in over different specialties including
-                                        General Surgery, General Physician, Gynecology and Obstetrics, Pediatrics, Nephrology, Dentistry, Orthopedics.</p>
+                                        General Surgery, General Physician, Gynecology and Obstetrics, Pediatrics, Nephrology, Dentistry, Orthopedics.</p> */}
                                     {/* <button type="button" className="thm-btn">read more</button> */}
+                                    <div className="table">
+                                        <table className="table table-bordered  table-striped">
+
+                                            <tbody>
+
+                                                <tr>
+                                                    <th scope="row">Patient Email</th>
+                                                    <td>suriyamoorthie12@gmail.com</td>
+                                                    <th scope="row">Patient Password</th>
+                                                    <td>123456</td>
+
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Doctor Email</th>
+                                                    <td>sabari@gmail.com </td>
+                                                    <th scope="row">Doctor Password</th>
+                                                    <td>123456</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th scope="row">Reception Email</th>
+                                                    <td>elangovan@gmail.com</td>
+                                                    <th scope="row">Reception Password</th>
+                                                    <td>123456</td>
+                                                </tr>
+
+
+                                                <tr>
+                                                    <th scope="row">Admin Email</th>
+                                                    <td>adminsuriya@gmail.com </td>
+                                                    <th scope="row">Admin Password</th>
+                                                    <td>123456</td>
+                                                </tr>
+
+
+                                            </tbody>
+                                        </table>
+                                    </div>
                                     <hr />
 
 
