@@ -424,15 +424,15 @@ function Appionment() {
     );
 
 
-    // <div class="col-md-6 ">
-    //     <div class="card" style={{ border: "0px" }}>
-    //         <div class="card-body">
-    //             <div class="image">
-    //                 <img src="/image/appointment.png" alt="..." style={{ width: "100%", height: "100%" }} />
-    //             </div>
-    //         </div>
-    //     </div>
-    // </div>
+    <div class="col-md-6 ">
+        <div class="card" style={{ border: "0px" }}>
+            <div class="card-body">
+                <div class="image">
+                    <img src="/image/appointment.png" alt="..." style={{ width: "100%", height: "100%" }} />
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 

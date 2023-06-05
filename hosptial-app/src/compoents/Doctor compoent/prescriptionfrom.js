@@ -1,6 +1,7 @@
 import { useLocation } from "react-router-dom";
 import React, { useState } from "react";
 import { DoctorAssginPrecription } from "../../Services/User.service";
+import { GetPercriptiondata } from "../../Services/User.service";
 
 
 import "../css/Doctor/prescriptionfrom.css";
@@ -42,12 +43,22 @@ function Prescriptionfrom() {
             console.log("Emailvalues", FORM_VALUES.Email);
             console.log("Datevalues", FORM_VALUES.Date);
           
-            //  return Emailvalues;
+             return  parsedData  ;
             
         }
         else{
             console.log("");
         }
+    }
+    const GetData = async () => {
+        const data = QueystringprecirptionData ();
+        GetPercriptiondata.Email =data.Email
+        GetPercriptiondata.Date =data.Date
+
+        console.log("MEthod GetPercriptiondata",GetPercriptiondata.Email);
+        console.log("MEthod123 GetPercriptiondata",GetPercriptiondata.Date);
+       
+
     }
 
     const Errors = () => {
@@ -152,6 +163,7 @@ function Prescriptionfrom() {
     useEffect (()=>{
         console.log(" UseEffect QueystringprecirptionData")
         QueystringprecirptionData();
+        GetData();
     },[]);
 
     return (

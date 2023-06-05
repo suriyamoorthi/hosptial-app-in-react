@@ -2,6 +2,10 @@
 // import Joi from "joi";
 // import React from "react";
 
+
+async function name () {
+
+}
 // const userSchema = Joi.object({
 //     fname: Joi.string().min(6).max(12).required().messages({
 //         'string.empty': `"First name" should be a required`,

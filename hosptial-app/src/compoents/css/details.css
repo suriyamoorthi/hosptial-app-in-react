@@ -68,6 +68,10 @@
      font-weight: 100%;
      margin-bottom: 15px;
  }
+ 
+ .section2 .table{
+    overflow: hidden;
+ }
 
 
 
