@@ -1,25 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,800&display=swap');
 .section6 .footer{
     margin-top: 66px;
+    
 }
 .ap-text h5{
     font-weight: 300;
+    
 }
 .ap-text h3{
     font-weight: 600;
+    
 }
 .section6 footer{
     background-color:#323232;
      color:aliceblue;
+     overflow: hidden; 
 }
 .section6 .text i{
     font-size: 25px;
+   
 }
 .section6 .icon i{
     font-size: 20px;
     margin-bottom: 10px;
+    
 }
 
 .section6 .copyright{
     background-color: rgba(0, 0, 0, 0.05);
+    
 }

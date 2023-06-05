@@ -6,12 +6,19 @@ import { getPatientvisityhistory } from "../../Services/User.service";
 
 
 import "../css/Patient/Patientvisthistory.css";
+import { useHistory } from "react-router-dom";
 
 
 function Patientvisityhistory() {
+    const history =useHistory();
     const [isLoading, setIsloding] = useState(false);
     const [search, setSearch] = useState('');
     const [admintable, setAdmintable] = useState([]);
+    function handleclick(u) {
+    const QueryStingDatas =`?data=${JSON.stringify(u)}`;
+    console.log("querPatientData", QueryStingDatas);
+        history.push(`/Patientvisitdatails${QueryStingDatas}`);
+    }
 
     const fetchUser = async () => {
         setIsloding(true);
@@ -97,8 +104,8 @@ function Patientvisityhistory() {
                                                     return (
                                                         <tr key={u._id}>
                                                         <td>{u._id}</td>
-                                                        <td><Link to="/Patientvisitdatails">{u.Fullname}</Link></td>
-
+                                                        {/* <td><Link to="/Patientvisitdatails">{u.Fullname}</Link></td> */}
+                                                        <td><button className="chngeData" onClick={()=>handleclick(u)}><Link >{u.Fullname}</Link></button></td>
                                                             <td>{u.Doctorfullname}</td>
 
                                                             <td>{u.Date}</td>

@@ -3,7 +3,19 @@ import { API_URL_APPIONMENT } from "../Stringconstant-reusecode";
 
 
 
+
 const currentDate = new Date().toJSON().slice(0, 10);
+
+ 
+
+ export const GetPercriptiondata ={
+  Email: "",
+  Date:"",
+  set Emailvalues(value) {
+    this.Email = value;
+    this.Date = value;
+  }
+};
 
 export const getemail ={
   Email: "",
@@ -104,3 +116,4 @@ export const CurrentDayAppionmentDoctorModuleTable=(tableUser)=>axios.get(`${API
 export const BpGraphDisplayData =(graphemailuser)=>axios.get(`${API_URL_APPIONMENT}/BPgeraphdata?Email=${Graphemail.Email}`,graphemailuser);
 export const WeightGerapDatas=(Datas)=>axios.get(`${API_URL_APPIONMENT}/Weightgraph?Email=${Graphemail.Email}`,Datas);
 export const DoctorAssginPrecription=(DatasUser)=>axios.post(`${API_URL_APPIONMENT}/Precription`,DatasUser);
+export const GetPercriptiondataListDable =(PercriptiondataList)=>axios.get(`${API_URL_APPIONMENT}/Prescriptiondetailsdata?Email=${GetPercriptiondata.Email}&Date=${GetPercriptiondata.Date}`,PercriptiondataList);

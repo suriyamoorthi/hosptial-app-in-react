@@ -1,52 +1,110 @@
-import React,{useEffect , useState} from "react";
+import React, { useEffect, useState } from "react";
 import { HashLink as Link } from "react-router-hash-link";
-
+import GetPercriptiondata,{ GetPercriptiondataListDable } from "../../Services/User.service";
+import { useLocation } from "react-router-dom";
 
 
 import "../css/Patient/patientprescription.css";
 
 
 function Patientprescription() {
-    const [isLoading, setIsloding] = useState(false);
-    const [admintable, setAdmintable] = useState([]);
-  
+    const location = useLocation();
+    const [isLoading, serisLoading] = useState();
+    const [prescriptionData, SetPrescriptionData] = useState([]);
+    const QueryStringWeightGraph = () => {
 
-
-    //GET USER
-    const getAdmintable = async () => {
-        setIsloding(true);
-        try {
-            let response = await fetch(" https://www.mecallapi.com/api/users");
-
-            if (!response.ok) {
-                throw new Error("Request failed");
-            }
-            response = await response.json();
-            setIsloding(false);
-            setAdmintable(response);
+        const searchParams = new URLSearchParams(location.search);
+        const WGrapnData = searchParams.get("data");
+        if (WGrapnData) {
+            const GeraphParsingData = JSON.parse(WGrapnData);
+            console.log("WeightGeraphParsingData", GeraphParsingData);
+            const WeightGeraphEmail = GeraphParsingData.Email
+            console.log(" WeightGeraphEmail(Patien .Email)", WeightGeraphEmail);
+            return GeraphParsingData ;
         }
-        catch (err) {
-            console.error(err.message);
+        else {
+            console.log("");
         }
+    }
 
+    // const GetData = async () => {
+    //     Graphemail.Email = QueryStringWeightGraph();
+    //     console.log("MEthod Graphemail",Graphemail.Email);
+    //     const {data}= await WeightGerapDatas();
+    //     SetGraph(data);
+    //     console.log("GetData",data);
 
-    };
+    // }
 
+    const getDatas = async () => {
+        const functionData = QueryStringWeightGraph();
+        GetPercriptiondata.Email=functionData.Email;
+        GetPercriptiondata.Date =functionData.Date;
+        console.log(" GetPercriptiondata.Email", GetPercriptiondata.Email);
+        console.log(" GetPercriptiondata.Date", GetPercriptiondata.Date);
+        const { data } = await GetPercriptiondataListDable();
+        SetPrescriptionData(data);
+        console.log("GetPercriptiondataListDable(patienr====)", data);
 
-
-
+    }
 
     useEffect(() => {
-        console.log("useEffect")
+        console.log("Prescriptiontable123 == useEffect")
+        QueryStringWeightGraph();
+        getDatas();
         getAdmintable();
+        getAdmintable1();
+        getAdmintable2();
+        getAdmintable3();
+        getAdmintable4();
+    }, [])
+
+
+    const getAdmintable = async () => {
+        console.log("async1")
+    }
+    const getAdmintable1 = async () => {
+        console.log("async2")
+    }
+    const getAdmintable2 = async () => {
+        console.log("async3")
+    }
+    const getAdmintable3 =  () => {
+        console.log("sync1")
+    }
+    const getAdmintable4 =  () => {
+        console.log("sync2")
+    }
+
+    //GET USER
+    // const getAdmintable = async () => {
+    //     setIsloding(true);
+    //     try {
+    //         let response = await fetch(" https://www.mecallapi.com/api/users");
+
+    //         if (!response.ok) {
+    //             throw new Error("Request failed");
+    //         }
+    //         response = await response.json();
+    //         setIsloding(false);
+    //         setAdmintable(response);
+    //     }
+    //     catch (err) {
+    //         console.error(err.message);
+    //     }
+
+
+    // };
 
 
 
-    }, []);
+
+
+
     return (
 
         <main className="Patientprescription">
-            <div className="container-fluid"style={{marginTop:"100px",marginBottom:"50px"}}>
+            <div className="container-fluid" style={{ marginTop: "100px", marginBottom: "50px" }}>
                 <div className="row">
                     <div className="col-sm-12">
                         <div className="card">
@@ -86,27 +144,69 @@ function Patientprescription() {
                                                 </div>
                                             )}
 
-                                            {admintable.map((u) => {
+                                            {prescriptionData.map((user) => {
                                                 return (
-                                                    <tr key={u.id}>
+                                                    <tr key={user._id}>
+                                                        <td>{user._id}</td>
+
+                                                        <td>{user.Dabletename}</td>
+
+                                                        <td> <input className="form-check-input"
+                                                            type="radio"
+                                                            name="Af"
+                                                            // onBlur={handleBlur}
+                                                            checked={user.Af}
+                                                            value={user.Af}
 
 
-                                                        <td>{u.id}</td>
-
-
-                                                        <td><Link to="/appiontmentdetails">{u.fname}</Link></td>
+                                                        /></td>
                                                         <td>
-                                                            <img src={u.avatar}
-                                                                width="50"
-                                                                className="avatar" />
+                                                            <input className="form-check-input"
+                                                                type="radio"
+                                                                name="Bf"
+
+                                                                checked={user.Bf}
+                                                                value={user.Bf}
+
+
+                                                            />
                                                         </td>
-                                                        <td>{u.lname}</td>
+                                                        <td>
+                                                            <input
+                                                                className="form-check-input"
+                                                                type="checkbox"
+                                                                name="Morning"
+                                                                checked={user.Morning}
+                                                                value={user.Morning}
 
-                                                        {/* <td>{u.username}</td> */}
+                                                            />
+                                                        </td>
+                                                        <td>
+                                                            <input
+                                                                class="form-check-input"
+                                                                type="checkbox"
+                                                                name="Evening"
+                                                                checked={user.Evening}
+                                                                value={user.Evening}
 
+                                                            />
+                                                        </td>
+                                                        <td>
+                                                            <input
+                                                                className="form-check-input"
+                                                                name="Night"
+                                                                type="checkbox"
+                                                                checked={user.Night}
+                                                                value={user.Night}
+
+
+                                                            />
+                                                        </td>
+                                                        <td>{user.Count}</td>
 
                                                     </tr>
-                                                );
+                                                )
+
                                             })}
 
                                         </tbody>
@@ -121,7 +221,7 @@ function Patientprescription() {
 
 
         </main>
-      
+
     )
 }
 

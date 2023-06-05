@@ -9,7 +9,7 @@ function about() {
         <>
 
 
-            < div id="about" >
+            < div id='about' >
                 <div className="section2" >
                     <div className=" container-fluid">
                         <div className="row">
@@ -23,10 +23,10 @@ function about() {
                                 <div className="about">
                                     {/* <h3>ABOUT US</h3> */}
                                     <h3>Hosptial-App Modules Login Details</h3>
-                                    <h5>
-                                        For Demo Use The Below Login Details</h5>
                                     {/* <h5>
                                         What we are and our history</h5> */}
+                                    <h5>
+                                        For Demo Use The Below Login Details</h5>
                                     {/* <p> Hospital is one of the leading hospital in Chennai.
                                         The best healthcare professionals provide Comprehensive healthcare.
                                         It is located at West Mambalam. It provides advanced levels of care in over different specialties including

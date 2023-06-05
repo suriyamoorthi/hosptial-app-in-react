@@ -97,7 +97,7 @@ function Patientdoctorlist() {
                                                                 <td>
                                                                     {u.Exprience}
                                                                 </td>
-                                                                <td>{u.Dateofbirth}</td>
+                                                                <td>{u.Date}</td>
                                                                 <td>{u.Department}</td>
 
                                                             </tr>
