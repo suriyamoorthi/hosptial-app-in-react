@@ -150,7 +150,7 @@ function Appionment() {
                         <div className="col-sm-6">
                             <div className="card">
                                 <div className="card-body">
-                                    <h4 className="card-title mb-3" > Appointment Regisation From </h4>
+                                    <h4 className="card-title mb-3" > Appointment Registration From </h4>
                                     <hr />
                                     <Formik
                                         initialValues={INTIAL_FORM}
