@@ -105,4 +105,12 @@
  .login .image{
   text-align: center;
  }
+ .login .link2 p{
+  color: black;
+  text-align: center;
+
+ }
+ .login .linked2{
+  text-decoration: none;
+ }
 

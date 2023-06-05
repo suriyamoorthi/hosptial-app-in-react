@@ -190,6 +190,11 @@ function Login() {
 
                         <div className="link" >
                           <Link to="/Resetpassword" className="linked">Forgot Password?</Link>
+                          
+                        </div>
+                        <div className="link2" >
+                         <p>Don't have an account? <Link to="/#appionment" className="linked2">Registration</Link></p>
+                          
                         </div>
                       </Form>
                     );
