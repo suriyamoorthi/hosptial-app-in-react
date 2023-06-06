@@ -58,7 +58,7 @@ function Doctordable() {
                     <div className="col-sm-12">
                         <div className="card">
                             <div className="card-body">
-                                <h5 className="card-title">Patient Day Appionment12</h5>
+                                <h5 className="card-title">Patient Day Appionment</h5>
                                 <hr />
 
                                 <form className="d-flex" role="search">

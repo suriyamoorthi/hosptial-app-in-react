@@ -45,3 +45,8 @@ color: blue;
    text-decoration: none;
    
   }
+  .doctordable button{
+   border:none; 
+   background-color: transparent;
+     cursor: pointer;
+  }

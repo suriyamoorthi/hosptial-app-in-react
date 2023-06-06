@@ -182,7 +182,7 @@ function Prescriptionfrom() {
                                     type="serch"
                                     name="Dabletename"
                                     value={user.Dabletename}
-                                    placeholder="Search"
+                                    placeholder="Search Dablete Name"
                                     onChange={handleChange}
 
                                 />
