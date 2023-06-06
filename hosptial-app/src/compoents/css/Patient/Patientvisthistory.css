@@ -45,3 +45,9 @@ color: blue;
    text-decoration: none;
    
   }
+
+.Patientvisityhistory .chngeData{
+   border:none; 
+   background-color: transparent;
+     cursor: pointer;
+}
