@@ -17,8 +17,10 @@ function Patientdoctorlist() {
     //GET USER
     const DoctorListData = async () => {
         try {
+            setIsloding(true);
             const { data } = await DoctorListPatientModuleUser();
             setAdmintable(data);
+            setIsloding(false);
             console.log("DOCTOR MODULE LIST", data);
         }
         catch (error) {
