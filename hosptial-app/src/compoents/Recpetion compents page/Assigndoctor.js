@@ -13,8 +13,13 @@ import "../css/Reception/Assigndoctor.css";
 
 const userSchema = Joi.object({
     Doctorfullname: Joi.string().min(1).required().messages({
-        'string.empty': `" Doctorfullname" should be a required`,
+        'string.empty': `" Doctorfullname" Atleast select one name`,
         'string.min': ` " Doctorfullname" Atleast select one name`,
+
+    }),
+    Department: Joi.string().min(1).required().messages({
+        'string.empty': `" Department" should be a required`,
+
 
     }),
     Temperature: Joi.string().required().messages({
@@ -36,11 +41,11 @@ const userSchema = Joi.object({
     }),
     Firstname: Joi.string().required().messages({
         'string.empty': `"First name" should be a required`,
-       
+
     }),
     Lastname: Joi.string().required().messages({
         'string.empty': `"Last name" should be a required`,
-        
+
     }),
     Email: Joi.string()
         .email({ tlds: { allow: false } })
@@ -85,11 +90,12 @@ const userSchema = Joi.object({
 
 
 
-   
+
 });
 
 const INTIAL_FORM = {
     Doctorfullname: "",
+    // Department: "",
     Temperature: "",
     Bp: "",
     Weight: "",
@@ -97,21 +103,21 @@ const INTIAL_FORM = {
     Firstname: "",
     Lastname: "",
     Email: "",
-    Date:"",
+    Date: "",
     Phonenumber: "",
     Gender: "male",
     Date: "",
     Address: "",
     City: "",
     Pincode: "",
-   
+
 };
 
 
 
 function Assigndoctor() {
     const [options, setOptions] = useState([]);
-    const history = useHistory( );
+    const history = useHistory();
     const location = useLocation();
     const OnePageaData = () => {
 
@@ -130,7 +136,7 @@ function Assigndoctor() {
             INTIAL_FORM.Address = parsedData.Address;
             INTIAL_FORM.City = parsedData.City;
             INTIAL_FORM.Pincode = parsedData.Pincode;
-          
+
             console.log("ok");
         }
         else {
@@ -143,6 +149,10 @@ function Assigndoctor() {
     const GetAssginDoctorData = async () => {
 
         const { data } = await assginDoctorlist();
+        INTIAL_FORM.Department = data.Department
+        ;
+        console.log("INTIAL_FORM.Department", INTIAL_FORM.Department);
+
         setOptions(data);
         console.log("ASSGIN DOCTOR REACT", data);
 
@@ -176,9 +186,9 @@ function Assigndoctor() {
 
 
             try {
-                
+
                 const { data } = await assginDoctorForPostUser(values);
-                
+
                 console.log("ASSGIN DOCTOR FORM", data);
                 alert(data.Message);
 
@@ -242,11 +252,26 @@ function Assigndoctor() {
                                                                     {options.map((option) => (
                                                                         <option value={option.Doctorfullname}>{option.Doctorfullname}</option>
                                                                     ))}
+
                                                                 </Field>
-                                                                <ErrorMessage className="text-danger" name=" Doctorfullname" />
+                                                                <ErrorMessage className="text-primary" name="Doctorfullname"></ErrorMessage>
 
                                                             </div>
                                                         </div>
+                                                        {/* <div className="col-sm-6"></div>
+                                                        <div className="col-sm-6">
+                                                            <div className="form-group mb-3">
+                                                                <label htmlFor="Department" className="form-label">
+                                                                    Department <span className="text-primary">*</span>
+                                                                </label>
+                                                                <Field
+                                                                    className="form-control"
+                                                                    name="Department"
+                                                                    placeholder="Enter your Department"
+                                                                />
+                                                                <ErrorMessage className="text-primary" name="Department" />
+                                                            </div>
+                                                        </div> */}
                                                         <hr />
 
                                                         <h5 className="card-title mb-3 mt-1"> Patient Vatils</h5>
@@ -266,6 +291,7 @@ function Assigndoctor() {
                                                             </div>
 
                                                         </div>
+                                                       
                                                         <div className="col-sm-6 ">
                                                             <div className="form-group mb-3">
                                                                 <label htmlFor="Bp" className="form-label">
@@ -415,8 +441,8 @@ function Assigndoctor() {
                                                                     name="Date"
                                                                     className="form-control"
                                                                     readOnly={true}
-                                                                    // min="12-10-2022"
-                                                                    // placeholder="yyyy-mm-dd"
+                                                                // min="12-10-2022"
+                                                                // placeholder="yyyy-mm-dd"
 
                                                                 />
                                                                 <ErrorMessage className="sec1" name="Date" />
