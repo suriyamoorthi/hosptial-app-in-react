@@ -17,11 +17,11 @@ const userSchema = Joi.object({
         'string.min': ` " Doctorfullname" Atleast select one name`,
 
     }),
-    Department: Joi.string().min(1).required().messages({
-        'string.empty': `" Department" should be a required`,
+    // Department: Joi.string().min(1).required().messages({
+    //     'string.empty': `" Department" should be a required`,
 
 
-    }),
+    // }),
     Temperature: Joi.string().required().messages({
         'string.empty': `"Temperature" should be a required`,
 
