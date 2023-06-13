@@ -149,10 +149,6 @@ function Assigndoctor() {
     const GetAssginDoctorData = async () => {
 
         const { data } = await assginDoctorlist();
-        INTIAL_FORM.Department = data.Department
-        ;
-        console.log("INTIAL_FORM.Department", INTIAL_FORM.Department);
-
         setOptions(data);
         console.log("ASSGIN DOCTOR REACT", data);
 
