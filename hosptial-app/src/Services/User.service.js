@@ -6,7 +6,6 @@ import { API_URL_APPIONMENT } from "../Stringconstant-reusecode";
 
 const currentDate = new Date().toJSON().slice(0, 10);
 
- 
 
  export const GetPercriptiondata ={
   Email: "",
@@ -16,7 +15,6 @@ const currentDate = new Date().toJSON().slice(0, 10);
     this.Date = value;
   }
 };
-
 export const getemail ={
   Email: "",
   set Emailvalues(value) {
@@ -30,11 +28,6 @@ export const getemail ={
   }
 };
 export default Graphemail;
-
-
-
-
-
 
 const doctorsessiondata =()=>{
     const doctorsessionvalue =sessionStorage.getItem("DoctorToken");
