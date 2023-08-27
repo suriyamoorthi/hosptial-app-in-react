@@ -30,14 +30,14 @@ const FORM_VLAUES = {
 const prifileSchema = Joi.object({
     Doctorfirstname: Joi.string().min(6).max(6).required().messages({
         'string.empty': `"First name" should be a required`,
-        'string.min': ` "First name" must minmum 6 character`,
-        'string.max': ` "First name" must maximum 6 character`,
+        // 'string.min': ` "First name" must minmum 6 character`,
+        // 'string.max': ` "First name" must maximum 6 character`,
 
     }),
     Doctorlastname: Joi.string().min(6).max(12).required().messages({
         'string.empty': `" Doctor lastname" should be a required`,
-        'string.min': ` " Doctor lastname" must minmum 6 character`,
-        'string.max': ` " Doctor lastname" must maximum 12 character`,
+        // 'string.min': ` " Doctor lastname" must minmum 6 character`,
+        // 'string.max': ` " Doctor lastname" must maximum 12 character`,
     }),
 
 
@@ -109,8 +109,19 @@ function Doctorprofile() {
         var data = await getDoctorProfiledetails();
         console.log("DATAVALUES", data);
        const DoctorProfiledata = data[0]
-
-       FORM_VLAUES.Gender = DoctorProfiledata.Gender;
+        
+       doctorData.Doctorfirstname = DoctorProfiledata.Doctorfirstname;
+       doctorData.Doctorlastname = DoctorProfiledata.Doctorlastname;
+       doctorData.Email = DoctorProfiledata.Email;
+       doctorData.Age = DoctorProfiledata.Age;
+       doctorData.Gender = DoctorProfiledata.Gender;
+       doctorData.Phonenumber = DoctorProfiledata.Phonenumber;
+       doctorData.Dateofbirth = DoctorProfiledata.Dateofbirth;
+       doctorData.Doctordetails = DoctorProfiledata.Doctordetails;
+       doctorData.Address = DoctorProfiledata.Address;
+      
+       
+    //    FORM_VLAUES.Gender = DoctorProfiledata.Gender;
        SetDoctorData(DoctorProfiledata );
 
     };
@@ -177,7 +188,7 @@ function Doctorprofile() {
                                                                     <Field
                                                                         className="form-control"
                                                                         name="Doctorfirstname"
-                                                                        value={doctorData.Doctorfirstname}
+                                                                        // value={doctorData.Doctorfirstname}
                                                                         placeholder="Enter Your Doctorfirstname"
                                                                     />
                                                                     <ErrorMessage className="text-danger" name="Doctorfirstname" />
@@ -192,7 +203,7 @@ function Doctorprofile() {
                                                                     <Field
                                                                         className="form-control"
                                                                         name="Doctorlastname"
-                                                                        value={doctorData.Doctorlastname}
+                                                                        // value={doctorData.Doctorlastname}
                                                                         placeholder="Enter Your Last name"
                                                                     />
                                                                     <ErrorMessage className="text-danger" name="Doctorlastname" />
@@ -212,7 +223,7 @@ function Doctorprofile() {
                                                                         className="form-control"
                                                                         name="Email"
                                                                         type="email"
-                                                                        value={doctorData.Email}
+                                                                        // value={doctorData.Email}
                                                                         readOnly={true}
                                                                         placeholder="Enter Your Email"
                                                                     />
@@ -229,7 +240,7 @@ function Doctorprofile() {
                                                                         className="form-control"
                                                                         name="Age"
                                                                         type="number"
-                                                                        value={doctorData.Age}
+                                                                        // value={doctorData.Age}
                                                                         placeholder="Enter Your Age"
                                                                     />
                                                                     <ErrorMessage className="text-danger" name="Age" />
@@ -298,7 +309,7 @@ function Doctorprofile() {
                                                                     <Field
                                                                         className="form-control"
                                                                         name="Phonenumber"
-                                                                        value={doctorData.Phonenumber}
+                                                                        // value={doctorData.Phonenumber}
                                                                         type="tel"
                                                                         placeholder="Enter Your Phonenumber"
                                                                     />
@@ -313,7 +324,7 @@ function Doctorprofile() {
                                                                     <Field
                                                                         className="form-control"
                                                                         name="Dateofbirth"
-                                                                        value={doctorData.Dateofbirth}
+                                                                        // value={doctorData.Dateofbirth}
                                                                         type="date"
                                                                         placeholder="Enter Your Dateofbirth"
                                                                     />
@@ -346,7 +357,7 @@ function Doctorprofile() {
                                                                 <Field
                                                                     className="form-control"
                                                                     name="Doctordetails"
-                                                                    value={doctorData.Doctordetails}
+                                                                    // value={doctorData.Doctordetails}
                                                                     placeholder="Enter Your  Doctordetails"
                                                                 />
                                                                 <ErrorMessage className="text-danger" name="Doctordetails" />
@@ -362,7 +373,7 @@ function Doctorprofile() {
                                                                 <Field
                                                                     className="form-control"
                                                                     name="Address"
-                                                                    value={doctorData.Address}
+                                                                    // value={doctorData.Address}
                                                                     placeholder="Enter Your address"
                                                                 />
                                                                 <ErrorMessage className="text-danger" name="Address" />

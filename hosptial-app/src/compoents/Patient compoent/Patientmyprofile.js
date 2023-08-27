@@ -14,14 +14,14 @@ import "../css/Patient/Patientmyprofile.css"
 export const prifileSchema =Joi.object({
     Firstname: Joi.string().min(6).max(6).required().messages({
         'string.empty': `"First name" should be a required`,
-        'string.min': ` "First name" must minmum 6 character`,
-        'string.max': ` "First name" must maximum 6 character`,
+        // 'string.min': ` "First name" must minmum 6 character`,
+        // 'string.max': ` "First name" must maximum 6 character`,
 
     }),
     Lastname: Joi.string().min(6).max(12).required().messages({
         'string.empty': `"Last name" should be a required`,
-        'string.min': ` "Last name" must minmum 6 character`,
-        'string.max': ` "Last name" must maximum 12 character`,
+        // 'string.min': ` "Last name" must minmum 6 character`,
+        // 'string.max': ` "Last name" must maximum 12 character`,
     }),
 
 
@@ -46,7 +46,7 @@ export const prifileSchema =Joi.object({
         'string.pattern.base': `Phone number must have 10 digits.`
     }).required(),
    
-    Dateofbirth: Joi.date().min("2001-01-01").required().messages({
+    Dateofbirth: Joi.date().required().messages({
         'string.empty': `"Date" should be a required`,
 
     }),
@@ -108,7 +108,17 @@ function Patientmyprofile() {
         console.log("DATAVALUES123", registerData);
         const PatientProfileData =registerData[0] 
 
-        INTIAL_PROFILEVALUES.Gender =PatientProfileData.Gender;
+       patientdata.Firstname = PatientProfileData.Firstname;
+       patientdata.Lastname = PatientProfileData.Lastname;
+       patientdata.Email = PatientProfileData.Email;
+       
+       patientdata.Age = PatientProfileData.Age;
+       patientdata.Gender = PatientProfileData.Gender;
+       patientdata.Phonenumber = PatientProfileData.Phonenumber;
+       patientdata.Dateofbirth = PatientProfileData.Dateofbirth;
+       patientdata.Address = PatientProfileData.Address;
+    //    patientdata.City = PatientProfileData.City;
+    //    patientdata.Pincode = PatientProfileData.Pincode;      
         SetpatientData(PatientProfileData);
        
     };
@@ -174,7 +184,7 @@ function Patientmyprofile() {
                                                                     <Field
                                                                         className="form-control"
                                                                         name="Firstname"
-                                                                        value={patientdata.Firstname}
+                                                                        // value={PatientProfileData.Firstname}
                                                                         placeholder="Enter Your Firstname"
                                                                     />
                                                                     <ErrorMessage className="text-danger" name="Firstname" />
@@ -189,7 +199,7 @@ function Patientmyprofile() {
                                                                     <Field
                                                                         className="form-control"
                                                                         name="Lastname"
-                                                                        value={patientdata.Lastname}
+                                                                        // value={patientdata.Lastname}
                                                                         placeholder="Enter Your Last name"
                                                                     />
                                                                     <ErrorMessage className="text-danger" name="Lastname" />
@@ -209,7 +219,7 @@ function Patientmyprofile() {
                                                                         className="form-control"
                                                                         name="Email"
                                                                         type="email"
-                                                                        value={patientdata.Email}
+                                                                        // value={patientdata.Email}
                                                                         readOnly={true}
                                                                         placeholder="Enter Your Email"
                                                                     />
@@ -226,7 +236,7 @@ function Patientmyprofile() {
                                                                         className="form-control"
                                                                         name="Age"
                                                                         type="number"
-                                                                        value={patientdata.Age}
+                                                                        // value={patientdata.Age}
                                                                         placeholder="Enter Your Age"
                                                                     />
                                                                     <ErrorMessage className="text-danger" name="Age" />
@@ -266,7 +276,7 @@ function Patientmyprofile() {
                                                                         className="form-control"
                                                                         name="Phonenumber"
                                                                         type="tel"
-                                                                        value={patientdata.Phonenumber}
+                                                                        // value={patientdata.Phonenumber}
                                                                         placeholder="Enter Your Phonenumber"
                                                                     />
                                                                     <ErrorMessage className="text-danger" name="Phonenumber" />
@@ -280,7 +290,7 @@ function Patientmyprofile() {
                                                                     <Field
                                                                         name="Dateofbirth"
                                                                         className="form-control"
-                                                                        value={patientdata.Dateofbirth}
+                                                                        // value={patientdata.Dateofbirth}
                                                                         type="date"
 
                                                                     />
@@ -315,7 +325,7 @@ function Patientmyprofile() {
                                                                 <Field
                                                                     className="form-control"
                                                                     name="Address"
-                                                                    value={patientdata.Address}
+                                                                    // value={patientdata.Address}
                                                                     placeholder="Enter Your address"
                                                                 />
                                                                 <ErrorMessage className="text-danger" name="Address" />

@@ -12,16 +12,16 @@ import "../css/Reception/Receptionmyprofile.css";
 import { useState } from "react";
 
 const prifileSchema = Joi.object({
-    Receptionfirstname: Joi.string().min(6).max(6).required().messages({
+    Receptionfirstname: Joi.string().required().messages({
         'string.empty': `"First name" should be a required`,
-        'string.min': ` "First name" must minmum 6 character`,
-        'string.max': ` "First name" must maximum 6 character`,
+        // 'string.min': ` "First name" must minmum 6 character`,
+        // 'string.max': ` "First name" must maximum 6 character`,
 
     }),
-    Receptionlastname: Joi.string().min(6).max(12).required().messages({
+    Receptionlastname: Joi.string().required().messages({
         'string.empty': `"Last name" should be a required`,
-        'string.min': ` "Last name" must minmum 6 character`,
-        'string.max': ` "Last name" must maximum 12 character`,
+        // 'string.min': ` "Last name" must minmum 6 character`,
+        // 'string.max': ` "Last name" must maximum 12 character`,
     }),
 
 
@@ -106,8 +106,16 @@ function Receptionmyprofile() {
         var data = await getRecptionProfiledetails();
         console.log("DATAVALUES", data);
         const ReceptionProfiledata = data[0]
-
-        INTIAL_VALUES.Gender = ReceptionProfiledata.Gender;
+        receptionData.Receptionfirstname = ReceptionProfiledata.Receptionfirstname;
+        receptionData.Receptionlastname = ReceptionProfiledata.Receptionlastname;
+        receptionData.Email = ReceptionProfiledata.Email;
+        receptionData.Age = ReceptionProfiledata.Age;
+        receptionData.Gender = ReceptionProfiledata.Gender;
+        receptionData.Phonenumber = ReceptionProfiledata.Phonenumber;
+        receptionData.Dateofbirth = ReceptionProfiledata.Dateofbirth;
+        receptionData.Address = ReceptionProfiledata.Address;
+       
+       
         SetreceptionData(ReceptionProfiledata);
 
     };
@@ -175,7 +183,7 @@ function Receptionmyprofile() {
                                                                     <Field
                                                                         className="form-control"
                                                                         name="Receptionfirstname"
-                                                                        value={receptionData.Receptionfirstname}
+                                                                        // value={receptionData.Receptionfirstname}
                                                                         placeholder="Enter Your Receptionfirstname"
                                                                     />
                                                                     <ErrorMessage className="text-danger" name="Receptionfirstname" />
@@ -190,7 +198,7 @@ function Receptionmyprofile() {
                                                                     <Field
                                                                         className="form-control"
                                                                         name="Receptionlastname"
-                                                                        value={receptionData.Receptionlastname}
+                                                                        // value={receptionData.Receptionlastname}
                                                                         placeholder="Enter Your Last name"
                                                                     />
                                                                     <ErrorMessage className="text-danger" name="Receptionlastname" />
@@ -209,7 +217,7 @@ function Receptionmyprofile() {
                                                                     <Field
                                                                         className="form-control"
                                                                         name="Email"
-                                                                        value={receptionData.Email}
+                                                                        // value={receptionData.Email}
                                                                         type="email"
                                                                         placeholder="Enter Your Email"
                                                                     />
@@ -226,7 +234,7 @@ function Receptionmyprofile() {
                                                                         className="form-control"
                                                                         name="Age"
                                                                         type="number"
-                                                                        value={receptionData.Age}
+                                                                        // value={receptionData.Age}
                                                                         placeholder="Enter Your Age"
                                                                     />
                                                                     <ErrorMessage className="text-danger" name="Age" />
@@ -266,7 +274,7 @@ function Receptionmyprofile() {
                                                                         className="form-control"
                                                                         name="Phonenumber"
                                                                         type="tel"
-                                                                        value={receptionData.Phonenumber}
+                                                                        // value={receptionData.Phonenumber}
                                                                         placeholder="Enter Your Phonenumber"
                                                                     />
                                                                     <ErrorMessage className="text-danger" name="Phonenumber" />
@@ -281,7 +289,7 @@ function Receptionmyprofile() {
                                                                         className="form-control"
                                                                         name="Dateofbirth"
                                                                         type="date"
-                                                                        value={receptionData.Dateofbirth}
+                                                                        // value={receptionData.Dateofbirth}
                                                                         placeholder="Enter Your Dateofbirth"
                                                                     />
                                                                     <ErrorMessage className="text-danger" name="Dateofbirth" />
@@ -315,7 +323,7 @@ function Receptionmyprofile() {
                                                                 <Field
                                                                     className="form-control"
                                                                     name="Address"
-                                                                    value={receptionData.Address}
+                                                                    // value={receptionData.Address}
                                                                     placeholder="Enter Your address"
                                                                 />
                                                                 <ErrorMessage className="text-danger" name="Address" />
